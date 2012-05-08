@@ -24,8 +24,8 @@ package com.grapefrukt.games.juicy.gameobjects {
 		
 		override public function update(timeDelta:Number = 1):void {
 			super.update(timeDelta);
-			x += velocityX;
-			y += velocityY;
+			x += velocityX * timeDelta;
+			y += velocityY * timeDelta;
 		}
 		
 		public function bounce(multiplierX:Number, multiplierY:Number):void {
