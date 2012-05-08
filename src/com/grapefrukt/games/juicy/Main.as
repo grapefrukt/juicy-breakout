@@ -50,6 +50,13 @@ package com.grapefrukt.games.juicy {
 			_timestep.tick();
 			_balls.update(_timestep.timeDelta);
 			_blocks.update(_timestep.timeDelta);
+			
+			for each(var ball:Ball in _balls.collection) {
+				if (ball.x < 0 && ball.velocityX < 0) ball.bounce(-1, 1);
+				if (ball.x > Settings.STAGE_W && ball.velocityX > 0) ball.bounce( -1, 1);
+				if (ball.y < 0 && ball.velocityY < 0) ball.bounce(1, -1);
+				if (ball.y > Settings.STAGE_H && ball.velocityY > 0) ball.bounce(1, -1);
+			}
 		}
 		
 		
