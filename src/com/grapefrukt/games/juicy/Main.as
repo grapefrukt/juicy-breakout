@@ -31,6 +31,7 @@ package com.grapefrukt.games.juicy {
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, handleKeyDown);
 			
 			_timestep = new Timestep();
+			//_timestep.gameSpeed = .1;
 			reset();
 		}
 		
@@ -38,7 +39,7 @@ package com.grapefrukt.games.juicy {
 			_blocks.clear();
 			_balls.clear();			
 			
-			_balls.add(new Ball(Settings.STAGE_W / 2, Settings.STAGE_H - 100));
+			_balls.add(new Ball(Settings.STAGE_W / 2, Settings.STAGE_H / 2));
 			
 			for (var i:int = 0; i < 80; i++) {
 				var block:Block = new Block( 82.5 + (i % 10) * Settings.BLOCK_W * 1.3, 47.5 + int(i / 10) * Settings.BLOCK_H * 1.3);
@@ -64,21 +65,33 @@ package com.grapefrukt.games.juicy {
 						
 							// back the ball out of the block
 							var v:Point = new Point(ball.velocityX, ball.velocityY);
-							v.normalize(1);
+							v.normalize(2);
 							while (isColliding(ball, block)) {
 								ball.x -= v.x;
 								ball.y -= v.y;
 							}
 							
 							// figure out which way to bounce
-							if (ball.y > block.y - Settings.BLOCK_H / 2) ball.bounce( 1, -1);
-							else if (ball.y < block.y - Settings.BLOCK_H / 2) ball.bounce( 1, -1);
-							else if (ball.x > block.x - Settings.BLOCK_W / 2) ball.bounce( -1, 1);
-							else if (ball.x < block.x + Settings.BLOCK_W / 2) ball.bounce( -1, 1);
+							if (ball.y < block.y - Settings.BLOCK_H / 2) {
+								// top
+								ball.bounce( 1, -1);
+							} else if (ball.y > block.y + Settings.BLOCK_H / 2) {
+								// bottom
+								ball.bounce( 1, -1);
+							} else if (ball.x < block.x - Settings.BLOCK_W / 2) {
+								// left
+								ball.bounce( -1, 1);
+							} else if (ball.x > block.x + Settings.BLOCK_W / 2) {
+								// right
+								ball.bounce( -1, 1);
+							} else {
+								// wtf!
+								ball.bounce( -1, -1);
+							}
 							
 							block.remove();
 							
-							break; // only collide with one brick per update
+							break; // only collide with one block per update
 						}
 				}
 			}
