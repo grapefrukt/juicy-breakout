@@ -23,6 +23,13 @@ package com.grapefrukt.games.juicy {
 			static public var EFFECT_BLOCK_DARKEN:Boolean = true;
 			
 		static public const EFFECT_STRETCH_BALL:Boolean = true;
+		
+		static public const BALL_MAX_VELOCITY:Number = 6;
+		static public const BALL_MIN_VELOCITY:Number = 4;
+		
+		static public const MOUSE_GRAVITY_POWER:Number = .001;
+		static public const MOUSE_GRAVITY_MAX:Number = .05;
+		static public const BALL_VELOCITY_LOSS:Number = .01;
 	}
 
 }

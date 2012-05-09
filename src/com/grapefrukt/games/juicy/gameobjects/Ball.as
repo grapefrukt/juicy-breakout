@@ -9,7 +9,7 @@ package com.grapefrukt.games.juicy.gameobjects {
 	 */
 	public class Ball extends GameObject {
 		
-		private static const SIZE:Number = 20;
+		private static const SIZE:Number = 15;
 		private var _bounce:Number = 0;
 		private var _bounceVelocity:Number = 0;
 		
@@ -33,8 +33,8 @@ package com.grapefrukt.games.juicy.gameobjects {
 				_bounceVelocity -= _bounceVelocity * .2 * timeDelta; // drag
 				_bounce += _bounceVelocity * timeDelta;
 				
-				scaleX = 1 + _bounce;
-				scaleY = 1 - scaleX * .25;
+				scaleX = 1 + (velocity - Settings.BALL_MIN_VELOCITY) / (Settings.BALL_MAX_VELOCITY - Settings.BALL_MIN_VELOCITY) * .3;
+				scaleY = 1 - (velocity - Settings.BALL_MIN_VELOCITY) / (Settings.BALL_MAX_VELOCITY - Settings.BALL_MIN_VELOCITY) * .2;
 			} else {
 				scaleX = scaleY = 1;
 			}

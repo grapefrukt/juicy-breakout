@@ -53,6 +53,12 @@
 		public function get velocity():Number {
 			return Math.sqrt(velocityX * velocityX + velocityY * velocityY);
 		}
+		
+		public function set velocity(value:Number):void {
+			var ratio:Number = value / velocity;
+			velocityX = velocityX * ratio;
+			velocityY = velocityY * ratio;
+		}
 	}
 	
 }

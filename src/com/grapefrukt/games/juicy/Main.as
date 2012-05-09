@@ -8,6 +8,7 @@ package com.grapefrukt.games.juicy {
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
+	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.ui.Keyboard;
 	
@@ -24,6 +25,10 @@ package com.grapefrukt.games.juicy {
 		
 		private var _paddle		:Paddle;
 		
+		private var _mouseDown	:Boolean;
+		private var _mouseVector:Point;
+
+		
 		public function Main() {
 			_blocks = new GameObjectCollection();
 			_blocks.addEventListener(JuicyEvent.BLOCK_DESTROYED, handleBlockDestroyed, true);
@@ -35,9 +40,13 @@ package com.grapefrukt.games.juicy {
 			
 			addEventListener(Event.ENTER_FRAME, handleEnterFrame);
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, handleKeyDown);
+			stage.addEventListener(MouseEvent.MOUSE_DOWN, handleMouseToggle);
+			stage.addEventListener(MouseEvent.MOUSE_UP, handleMouseToggle);
 			
 			_timestep = new Timestep();
 			_timestep.gameSpeed = 1;
+			
+			_mouseVector = new Point;
 			
 			_screenshake = new Shaker(this);
 			
@@ -76,6 +85,24 @@ package com.grapefrukt.games.juicy {
 				if (ball.y < 0 && ball.velocityY < 0) ball.collide(1, -1);
 				if (ball.y > Settings.STAGE_H && ball.velocityY > 0) ball.collide(1, -1);
 				
+				if (_mouseDown) {
+					_mouseVector.x = (ball.x - mouseX) * Settings.MOUSE_GRAVITY_POWER * _timestep.timeDelta;
+					_mouseVector.y = (ball.y - mouseY) * Settings.MOUSE_GRAVITY_POWER * _timestep.timeDelta;
+					if (_mouseVector.length > Settings.MOUSE_GRAVITY_MAX) _mouseVector.normalize(Settings.MOUSE_GRAVITY_MAX);
+					
+					ball.velocityX -= _mouseVector.x;
+					ball.velocityY -= _mouseVector.y;
+				}
+				
+				// hard limit for min vel
+				if (ball.velocity < Settings.BALL_MIN_VELOCITY) {
+					ball.velocity = Settings.BALL_MIN_VELOCITY;
+				}
+				
+				// soft limit for max vel
+				if (ball.velocity > Settings.BALL_MAX_VELOCITY) {
+					ball.velocity -= ball.velocity * Settings.BALL_VELOCITY_LOSS * _timestep.timeDelta;
+				}
 				
 				for each ( var block:Block in _blocks.collection) {
 					// check for collisions
@@ -126,6 +153,10 @@ package com.grapefrukt.games.juicy {
 		private function handleKeyDown(e:KeyboardEvent):void {
 			if (e.keyCode == Keyboard.SPACE) reset();
 			if (e.keyCode == Keyboard.S) _screenshake.shakeRandom(4);
+		}
+		
+		private function handleMouseToggle(e:MouseEvent):void {
+			_mouseDown = e.type == MouseEvent.MOUSE_DOWN;
 		}
 		
 	}
