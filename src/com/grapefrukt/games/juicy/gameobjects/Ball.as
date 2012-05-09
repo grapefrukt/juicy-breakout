@@ -9,7 +9,9 @@ package com.grapefrukt.games.juicy.gameobjects {
 	 */
 	public class Ball extends GameObject {
 		
-		private static const SIZE:Number = 10;
+		private static const SIZE:Number = 20;
+		private var _bounce:Number = 0;
+		private var _bounceVelocity:Number = 0;
 		
 		public function Ball(x:Number, y:Number) {
 			this.x = x;
@@ -27,13 +29,21 @@ package com.grapefrukt.games.juicy.gameobjects {
 			super.update(timeDelta);
 			if (Settings.EFFECT_STRETCH_BALL) {
 				rotation = Math.atan2(velocityY, velocityX) / Math.PI * 180;
-				scaleX = velocity / 3;
+				_bounceVelocity += ( 0 - _bounce) * .05 * timeDelta;
+				_bounceVelocity -= _bounceVelocity * .2 * timeDelta; // drag
+				_bounce += _bounceVelocity * timeDelta;
+				
+				scaleX = 1 + _bounce;
+				scaleY = 1 - scaleX * .25;
 			} else {
 				scaleX = scaleY = 1;
 			}
 		}
 		
 		public function collide(velocityMultiplierX:Number, velocityMultiplierY:Number, block:Block = null):void {
+			_bounce = -.75;
+			_bounceVelocity = 0;
+			
 			velocityX *= velocityMultiplierX;
 			velocityY *= velocityMultiplierY;
 			dispatchEvent(new JuicyEvent(JuicyEvent.BALL_COLLIDE, this, block));
