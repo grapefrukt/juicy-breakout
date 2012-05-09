@@ -16,7 +16,8 @@ package com.grapefrukt.games.juicy {
 		static public var EFFECT_TWEEN_BLOCK_DESTRUCTION:Boolean = true;
 			static public var EFFECT_BLOCK_PUSH:Boolean = true;
 			static public var EFFECT_BLOCK_ROTATE:Boolean = true;
-		
+			
+		static public const EFFECT_STRETCH_BALL:Boolean = true;
 	}
 
 }

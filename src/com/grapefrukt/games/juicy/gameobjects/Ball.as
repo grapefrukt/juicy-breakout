@@ -1,6 +1,7 @@
 package com.grapefrukt.games.juicy.gameobjects {
 	import com.grapefrukt.games.general.gameobjects.GameObject;
 	import com.grapefrukt.games.juicy.events.JuicyEvent;
+	import com.grapefrukt.games.juicy.Settings;
 	import flash.geom.Point;
 	/**
 	 * ...
@@ -18,6 +19,16 @@ package com.grapefrukt.games.juicy.gameobjects {
 			var v:Point = Point.polar(5, Math.random() * Math.PI * 2);
 			velocityX = v.x;
 			velocityY = v.y;
+		}
+		
+		override public function update(timeDelta:Number = 1):void {
+			super.update(timeDelta);
+			if (Settings.EFFECT_STRETCH_BALL) {
+				rotation = Math.atan2(velocityY, velocityX) / Math.PI * 180;
+				scaleX = velocity / 3;
+			} else {
+				scaleX = scaleY = 1;
+			}
 		}
 		
 		public function collide(velocityMultiplierX:Number, velocityMultiplierY:Number, block:Block = null):void {
