@@ -15,6 +15,9 @@
 	
 	public class GameObject extends Sprite {
 		
+		public var velocityX:Number = 0;
+		public var velocityY:Number = 0;
+		
 		protected var _flagged_for_removal	:Boolean = false;
 		protected var _auto_remove			:Boolean = true;
 		
@@ -23,7 +26,8 @@
 		}
 
 		public function update(timeDelta:Number = 1):void {
-		
+			x += velocityX * timeDelta;
+			y += velocityY * timeDelta;
 		}
 		
 		public function get flaggedForRemoval():Boolean { return _flagged_for_removal; }
@@ -44,6 +48,10 @@
 		
 		public function getDistance(other:GameObject):Number {
 			return Math.sqrt((this.x - other.x) * (this.x - other.x) + (this.y - other.y) * (this.y - other.y));
+		}
+		
+		public function get velocity():Number {
+			return Math.sqrt(velocityX * velocityX + velocityY * velocityY);
 		}
 	}
 	

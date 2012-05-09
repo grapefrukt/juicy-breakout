@@ -62,7 +62,7 @@
 			var go:GameObject = _collection[pos];
 			_collection.splice(pos, 1)
 			go.handleDetach(this);
-			removeChild(go);
+			//removeChild(go);
 			if (doRemove) go.remove();
 			return go;
 		}
@@ -72,7 +72,7 @@
 			if (_collection[i] && GameObject(_collection[i]) == go) {
 				_collection.splice(i, 1);
 				go.handleDetach(this);
-				removeChild(go);
+				//removeChild(go);
 				if (doRemove) go.remove();
 				return go;
 			}

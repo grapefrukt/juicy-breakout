@@ -8,9 +8,6 @@ package com.grapefrukt.games.juicy.gameobjects {
 	 */
 	public class Ball extends GameObject {
 		
-		public var velocityX:Number = 0;
-		public var velocityY:Number = 0;
-		
 		public function Ball(x:Number, y:Number) {
 			this.x = x;
 			this.y = y;
@@ -23,17 +20,12 @@ package com.grapefrukt.games.juicy.gameobjects {
 			velocityY = v.y;
 		}
 		
-		override public function update(timeDelta:Number = 1):void {
-			super.update(timeDelta);
-			x += velocityX * timeDelta;
-			y += velocityY * timeDelta;
-		}
-		
 		public function collide(velocityMultiplierX:Number, velocityMultiplierY:Number, block:Block = null):void {
 			velocityX *= velocityMultiplierX;
 			velocityY *= velocityMultiplierY;
 			dispatchEvent(new JuicyEvent(JuicyEvent.BALL_COLLIDE, this, block));
 		}
+		
 	}
 
 }

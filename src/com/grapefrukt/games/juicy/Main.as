@@ -71,7 +71,7 @@ package com.grapefrukt.games.juicy {
 				
 				for each ( var block:Block in _blocks.collection) {
 					// check for collisions
-					if (isColliding(ball, block)) {
+					if (block.collidable && isColliding(ball, block)) {
 						
 							// back the ball out of the block
 							var v:Point = new Point(ball.velocityX, ball.velocityY);
