@@ -11,6 +11,9 @@ package com.grapefrukt.games.juicy {
 		static public const BLOCK_W:Number = 50;
 		static public const BLOCK_H:Number = 50;
 		
+		
+		static public var EFFECT_SCREEN_SHAKE_POWER:Number = .5;
+		
 	}
 
 }

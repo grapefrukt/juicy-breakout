@@ -1,5 +1,6 @@
 package com.grapefrukt.games.juicy.gameobjects {
 	import com.grapefrukt.games.general.gameobjects.GameObject;
+	import com.grapefrukt.games.juicy.events.JuicyEvent;
 	import com.grapefrukt.games.juicy.Settings;
 	/**
 	 * ...
@@ -14,6 +15,11 @@ package com.grapefrukt.games.juicy.gameobjects {
 			// 0,0 is at center of block to make effects easier
 			graphics.beginFill(0xff0000);
 			graphics.drawRect(-Settings.BLOCK_W / 2, -Settings.BLOCK_H / 2, Settings.BLOCK_W, Settings.BLOCK_H);
+		}
+		
+		public function collide(ball:Ball):void {
+			dispatchEvent(new JuicyEvent(JuicyEvent.BLOCK_DESTROYED));
+			remove();
 		}
 		
 	}
