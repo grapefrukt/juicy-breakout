@@ -9,7 +9,10 @@ package com.grapefrukt.games.juicy {
 		public static const STAGE_H:int = 600;
 		
 		static public const BLOCK_W:Number = 50;
-		static public const BLOCK_H:Number = 50;
+		static public const BLOCK_H:Number = 20;
+		
+		static public const PADDLE_W:Number = 100;
+		static public const PADDLE_H:Number = 100;
 		
 		static public var EFFECT_SCREEN_SHAKE_POWER:Number = 0;
 		

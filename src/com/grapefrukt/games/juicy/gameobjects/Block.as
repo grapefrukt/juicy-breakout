@@ -14,7 +14,10 @@ package com.grapefrukt.games.juicy.gameobjects {
 	 */
 	public class Block extends GameObject {
 		
-		private var _collidable:Boolean = true;
+		protected var _collisionW:Number = Settings.BLOCK_W;
+		protected var _collisionH:Number = Settings.BLOCK_H;
+		
+		protected var _collidable:Boolean = true;
 		
 		public function Block(x:Number, y:Number) {
 			this.x = x;
@@ -30,7 +33,7 @@ package com.grapefrukt.games.juicy.gameobjects {
 			
 			if (Settings.EFFECT_TWEEN_BLOCK_DESTRUCTION) {
 				
-				new GTween(this, .5, { scaleY : 0, scaleX : 0  }, { ease : Quadratic.easeOut } );
+				new GTween(this, .5, { scaleY : 0, scaleX : 0  }, { ease : Quadratic.easeOut, onComplete : handleRemoveTweenComplete } );
 				
 				if (Settings.EFFECT_BLOCK_ROTATE) new GTween(this, .5, { rotation : Math.random() > .5 ? 90 : -90 }, { ease : Quadratic.easeIn } );
 				
@@ -63,7 +66,7 @@ package com.grapefrukt.games.juicy.gameobjects {
 			remove();
 		}
 		
-		private function render(color:uint):void {
+		protected function render(color:uint):void {
 			graphics.beginFill(color);
 			// 0,0 is at center of block to make effects easier
 			graphics.drawRect(-Settings.BLOCK_W / 2, -Settings.BLOCK_H / 2, Settings.BLOCK_W, Settings.BLOCK_H);
@@ -71,6 +74,14 @@ package com.grapefrukt.games.juicy.gameobjects {
 		
 		public function get collidable():Boolean {
 			return _collidable;
+		}
+		
+		public function get collisionW():Number {
+			return _collisionW;
+		}
+		
+		public function get collisionH():Number {
+			return _collisionH;
 		}
 		
 	}

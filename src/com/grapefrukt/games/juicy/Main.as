@@ -3,6 +3,7 @@ package com.grapefrukt.games.juicy {
 	import com.grapefrukt.games.juicy.events.JuicyEvent;
 	import com.grapefrukt.games.juicy.gameobjects.Ball;
 	import com.grapefrukt.games.juicy.gameobjects.Block;
+	import com.grapefrukt.games.juicy.gameobjects.Paddle;
 	import com.grapefrukt.Timestep;
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -20,6 +21,8 @@ package com.grapefrukt.games.juicy {
 		private var _balls		:GameObjectCollection;
 		private var _timestep	:Timestep;
 		private var _screenshake:Shaker;
+		
+		private var _paddle		:Paddle;
 		
 		public function Main() {
 			_blocks = new GameObjectCollection();
@@ -43,7 +46,7 @@ package com.grapefrukt.games.juicy {
 		
 		public function reset():void {
 			_blocks.clear();
-			_balls.clear();			
+			_balls.clear();
 			
 			_balls.add(new Ball(Settings.STAGE_W / 2, Settings.STAGE_H / 2));
 			
@@ -51,6 +54,9 @@ package com.grapefrukt.games.juicy {
 				var block:Block = new Block( 82.5 + (i % 10) * Settings.BLOCK_W * 1.3, 47.5 + int(i / 10) * Settings.BLOCK_H * 1.3);
 				_blocks.add(block);
 			}
+			
+			_paddle = new Paddle();
+			_blocks.add(_paddle);
 			
 			// remove the center block
 			_blocks.collection[45].remove();
@@ -61,6 +67,8 @@ package com.grapefrukt.games.juicy {
 			_balls.update(_timestep.timeDelta);
 			_blocks.update(_timestep.timeDelta);
 			_screenshake.update(_timestep.timeDelta);
+			
+			_paddle.x = mouseX;
 			
 			for each(var ball:Ball in _balls.collection) {
 				if (ball.x < 0 && ball.velocityX < 0) ball.collide(-1, 1);
@@ -84,13 +92,13 @@ package com.grapefrukt.games.juicy {
 							// figure out which way to bounce
 							
 							// top
-							if (ball.y <= block.y - Settings.BLOCK_H / 2 && ball.velocityY > 0) ball.collide(1, -1, block);
+							if (ball.y <= block.y - block.collisionH / 2 && ball.velocityY > 0) ball.collide(1, -1, block);
 							// bottom
-							else if (ball.y >= block.y + Settings.BLOCK_H / 2 && ball.velocityY < 0) ball.collide(1, -1, block);
+							else if (ball.y >= block.y + block.collisionH / 2 && ball.velocityY < 0) ball.collide(1, -1, block);
 							// left
-							else if (ball.x <= block.x - Settings.BLOCK_W / 2) ball.collide(-1, 1, block);
+							else if (ball.x <= block.x - block.collisionW / 2) ball.collide(-1, 1, block);
 							// right
-							else if (ball.x >= block.x + Settings.BLOCK_W / 2) ball.collide(-1, 1, block);
+							else if (ball.x >= block.x + block.collisionW / 2) ball.collide(-1, 1, block);
 							// wtf!
 							else ball.collide(-1, -1, block);
 							
@@ -103,8 +111,8 @@ package com.grapefrukt.games.juicy {
 		}
 		
 		private function isColliding(ball:Ball, block:Block):Boolean {
-			return 	ball.x > block.x - Settings.BLOCK_W / 2 && ball.x < block.x + Settings.BLOCK_W / 2 &&
-					ball.y > block.y - Settings.BLOCK_H / 2 && ball.y < block.y + Settings.BLOCK_H / 2
+			return 	ball.x > block.x - block.collisionW / 2 && ball.x < block.x + block.collisionW / 2 &&
+					ball.y > block.y - block.collisionH / 2 && ball.y < block.y + block.collisionH / 2
 		}
 		
 		private function handleBallCollide(e:JuicyEvent):void {
