@@ -19,7 +19,7 @@ package com.grapefrukt.games.juicy.gameobjects {
 			this.y = y;
 			
 			// 0,0 is at center of block to make effects easier
-			graphics.beginFill(0xff0000);
+			graphics.beginFill(0xff6b6b);
 			graphics.drawRect(-Settings.BLOCK_W / 2, -Settings.BLOCK_H / 2, Settings.BLOCK_W, Settings.BLOCK_H);
 		}
 		

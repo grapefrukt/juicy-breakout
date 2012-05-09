@@ -9,12 +9,14 @@ package com.grapefrukt.games.juicy.gameobjects {
 	 */
 	public class Ball extends GameObject {
 		
+		private static const SIZE:Number = 10;
+		
 		public function Ball(x:Number, y:Number) {
 			this.x = x;
 			this.y = y;
 			
-			graphics.beginFill(0x000000);
-			graphics.drawCircle(0, 0, 5);
+			graphics.beginFill(0x4ecdc4);
+			graphics.drawRect(-SIZE/2, -SIZE/2, SIZE, SIZE);
 			
 			var v:Point = Point.polar(5, Math.random() * Math.PI * 2);
 			velocityX = v.x;
