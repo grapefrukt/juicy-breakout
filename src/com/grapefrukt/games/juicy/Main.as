@@ -67,12 +67,11 @@ package com.grapefrukt.games.juicy {
 			_paddle = new Paddle();
 			_blocks.add(_paddle);
 			
-			// remove the center block
-			_blocks.collection[45].remove();
 		}
 		
 		private function handleEnterFrame(e:Event):void {
 			_timestep.tick();
+			
 			_balls.update(_timestep.timeDelta);
 			_blocks.update(_timestep.timeDelta);
 			_screenshake.update(_timestep.timeDelta);
@@ -134,6 +133,8 @@ package com.grapefrukt.games.juicy {
 							break; // only collide with one block per update
 						}
 				}
+				
+				ball.updateTrail();
 			}
 		}
 		
