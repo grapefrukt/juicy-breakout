@@ -41,7 +41,7 @@ package com.grapefrukt.games.juicy.gameobjects {
 		}
 		
 		public function collide(velocityMultiplierX:Number, velocityMultiplierY:Number, block:Block = null):void {
-			_bounce = -.75;
+			_bounce = -.25;
 			_bounceVelocity = 0;
 			
 			velocityX *= velocityMultiplierX;
