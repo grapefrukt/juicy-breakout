@@ -35,8 +35,14 @@ package com.grapefrukt.games.juicy.gameobjects {
 		
 		override public function update(timeDelta:Number = 1):void {
 			super.update(timeDelta);
-			if (Settings.EFFECT_BALL_STRETCH) {
+			
+			if (Settings.EFFECT_BALL_ROTATE) {
 				_gfx.rotation = Math.atan2(velocityY, velocityX) / Math.PI * 180;
+			} else {
+				_gfx.rotation = 0;
+			}
+			
+			if (Settings.EFFECT_BALL_STRETCH) {
 				_gfx.scaleX = 1 + (velocity - Settings.BALL_MIN_VELOCITY) / (Settings.BALL_MAX_VELOCITY - Settings.BALL_MIN_VELOCITY) * .3;
 				_gfx.scaleY = 1 - (velocity - Settings.BALL_MIN_VELOCITY) / (Settings.BALL_MAX_VELOCITY - Settings.BALL_MIN_VELOCITY) * .2;
 			} else {

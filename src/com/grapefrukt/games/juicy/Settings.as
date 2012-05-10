@@ -14,14 +14,16 @@ package com.grapefrukt.games.juicy {
 		static public const PADDLE_W:Number = 100;
 		static public const PADDLE_H:Number = 100;
 		
-		static public var EFFECT_SCREEN_SHAKE_POWER:Number = 0;
+		[min("0")] [max("1")]
+		static public var EFFECT_SCREEN_SHAKE_POWER	:Number = 0;
 		
-		static public var EFFECT_BLOCK_TWEEN_DESTRUCTION:Boolean = true;
-			static public var EFFECT_BLOCK_PUSH		:Boolean = true;
-			static public var EFFECT_BLOCK_ROTATE	:Boolean = true;
-			static public var EFFECT_BLOCK_GRAVITY	:Boolean = true;
-			static public var EFFECT_BLOCK_DARKEN	:Boolean = true;
+		static public var EFFECT_BLOCK_TWEEN_SCALE	:Boolean = true;
+		static public var EFFECT_BLOCK_PUSH			:Boolean = true;
+		static public var EFFECT_BLOCK_ROTATE		:Boolean = true;
+		static public var EFFECT_BLOCK_GRAVITY		:Boolean = true;
+		static public var EFFECT_BLOCK_DARKEN		:Boolean = true;
 			
+		static public var EFFECT_BALL_ROTATE		:Boolean = true;
 		static public var EFFECT_BALL_STRETCH		:Boolean = true;
 		static public var EFFECT_BALL_DRAW_TRAILS	:Boolean = true;
 		

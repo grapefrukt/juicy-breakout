@@ -1,4 +1,5 @@
 package com.grapefrukt.games.juicy.gameobjects {
+	import com.grapefrukt.display.utilities.DrawGeometry;
 	import com.grapefrukt.games.general.gameobjects.GameObject;
 	import com.grapefrukt.games.juicy.events.JuicyEvent;
 	import com.grapefrukt.games.juicy.Settings;
@@ -29,27 +30,40 @@ package com.grapefrukt.games.juicy.gameobjects {
 		public function collide(ball:Ball):void {
 			_collidable = false;
 			
+			var delayDestruction:Boolean = false;
+			
 			if (Settings.EFFECT_BLOCK_DARKEN) transform.colorTransform = new ColorTransform(.7, .7, .8);
 			
-			if (Settings.EFFECT_BLOCK_TWEEN_DESTRUCTION) {
+			if (Settings.EFFECT_BLOCK_PUSH) {
+				var v:Point = new Point(this.x - ball.x, this.y - ball.y);
+				v.normalize( ball.velocity * 1);
 				
-				new GTween(this, .5, { scaleY : 0, scaleX : 0  }, { ease : Quadratic.easeOut, onComplete : handleRemoveTweenComplete } );
-				
-				if (Settings.EFFECT_BLOCK_ROTATE) new GTween(this, .5, { rotation : Math.random() > .5 ? 90 : -90 }, { ease : Quadratic.easeIn } );
-				
-				if (Settings.EFFECT_BLOCK_PUSH) {
-					var v:Point = new Point(this.x - ball.x, this.y - ball.y);
-					v.normalize( ball.velocity * 1);
-					
-					velocityX += v.x;
-					velocityY += v.y;
-				}
-				
-				// move block in front
-				parent.setChildIndex(this, parent.numChildren - 1);
-				
-			} else {	
+				velocityX += v.x;
+				velocityY += v.y;
+				delayDestruction = true;
+			}
+			
+			// move block in front
+			parent.setChildIndex(this, parent.numChildren - 1);
+			
+			// little hack to get the animation complete callback for all cominations of rotation/scaling
+			var completeCallback:Function = handleRemoveTweenComplete;
+			
+			if (Settings.EFFECT_BLOCK_ROTATE) {
+				new GTween(this, .5, { rotation : Math.random() > .5 ? 90 : -90 }, { ease : Quadratic.easeIn } );
+				delayDestruction = true;
+			}
+			
+			if (Settings.EFFECT_BLOCK_TWEEN_SCALE) {
+				new GTween(this, .5, { scaleY : 0, scaleX : 0  }, { ease : Quadratic.easeOut } );
+				delayDestruction = true;
+			}
+			
+			// if no animation is used, remove instantly
+			if (!delayDestruction) {
 				remove();
+			} else {
+				new GTween(this, .5, null, { onComplete : handleRemoveTweenComplete } );
 			}
 			
 			dispatchEvent(new JuicyEvent(JuicyEvent.BLOCK_DESTROYED));
