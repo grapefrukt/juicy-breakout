@@ -23,7 +23,7 @@ package com.grapefrukt.games.juicy {
 			static public var EFFECT_BLOCK_DARKEN:Boolean = true;
 			
 		static public var EFFECT_BALL_STRETCH:Boolean = true;
-		static public var EFFECT_BALL_DRAW_TRAILS:Boolean = false;
+		static public var EFFECT_BALL_DRAW_TRAILS:Boolean = true;
 		
 		static public const BALL_MAX_VELOCITY:Number = 5;
 		static public const BALL_MIN_VELOCITY:Number = 4;

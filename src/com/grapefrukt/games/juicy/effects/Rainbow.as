@@ -13,7 +13,7 @@
 	 */
 	public class Rainbow extends Shape {
 		
-		private var maxLen		:Number = 	50;
+		private var maxLen		:Number = 	8;
 		private var _segments	:Vector.<Segment>;
 		
 		private var _colorCount	:uint = 	1;
