@@ -6,6 +6,7 @@ package com.grapefrukt.games.juicy {
 	import com.bit101.components.Label;
 	import com.bit101.components.Panel;
 	import com.bit101.components.VBox;
+	import com.bit101.components.Window;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.utils.describeType;
@@ -49,7 +50,7 @@ package com.grapefrukt.games.juicy {
 				properties.push(property);
 			}
 			
-			var panel:Panel = new Panel(this, 10, 10);
+			var panel:Window = new Window(this, 10, 10);
 			panel.width = 250;
 			panel.height = 240;
 			var container:VBox = new VBox(panel, 10, 10);
