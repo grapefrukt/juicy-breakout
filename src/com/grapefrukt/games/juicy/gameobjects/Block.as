@@ -23,7 +23,7 @@ package com.grapefrukt.games.juicy.gameobjects {
 			this.x = x;
 			this.y = y;
 			
-			render(0xff6b6b);
+			render(Settings.COLOR_BLOCK);
 		}
 		
 		public function collide(ball:Ball):void {
@@ -67,6 +67,7 @@ package com.grapefrukt.games.juicy.gameobjects {
 		}
 		
 		protected function render(color:uint):void {
+			graphics.clear();
 			graphics.beginFill(color);
 			// 0,0 is at center of block to make effects easier
 			graphics.drawRect(-Settings.BLOCK_W / 2, -Settings.BLOCK_H / 2, Settings.BLOCK_W, Settings.BLOCK_H);

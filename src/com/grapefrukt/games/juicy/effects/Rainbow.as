@@ -6,6 +6,8 @@
 	import de.polygonal.core.ObjectPool;
 	import flash.display.Shape;
 	import flash.geom.Point;
+	import flash.display.CapsStyle;
+	import flash.display.LineScaleMode;
 	
 	/**
 	 * ...
@@ -13,7 +15,7 @@
 	 */
 	public class Rainbow extends Shape {
 		
-		private var maxLen		:Number = 	50;
+		private var maxLen		:Number = 	8;
 		private var _segments	:Vector.<Segment>;
 		
 		private var _colorCount	:uint = 	1;
@@ -58,7 +60,7 @@
 			var offset	:Number = 0.0;
 						
 			for (var i:uint = 0; i < _colorCount; ++i) {
-				graphics.lineStyle(5, getColor(i / _colorCount));
+				graphics.lineStyle(5, getColor(i / _colorCount), 1, false, LineScaleMode.NORMAL, CapsStyle.SQUARE);
 				step = 0;
 				offset = 2.0 * (i - _colorCount * .5);
 				for (var j:int = _segments.length - 1; j >= 0; j -= 1 ) {
@@ -79,7 +81,8 @@
 		}
 		
 		private function getColor(percent:Number):uint {	
-			return ColorConverter.HSBtoUINT(percent + _colorOffset, 1, 1);
+			return Settings.COLOR_TRAIL;
+			//return ColorConverter.HSBtoUINT(percent + _colorOffset, 1, 1);
 		}
 		
 		private function get head():Segment {

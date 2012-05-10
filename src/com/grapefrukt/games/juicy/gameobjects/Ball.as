@@ -20,17 +20,17 @@ package com.grapefrukt.games.juicy.gameobjects {
 			this.x = x;
 			this.y = y;
 			
+			_trail = new Rainbow(1);
+			addChild(_trail);
+			
 			_gfx = new Shape;
-			_gfx.graphics.beginFill(0x4ecdc4);
+			_gfx.graphics.beginFill(Settings.COLOR_BALL);
 			_gfx.graphics.drawRect( -SIZE / 2, -SIZE / 2, SIZE, SIZE);
 			addChild(_gfx);
 			
 			var v:Point = Point.polar(5, Math.random() * Math.PI * 2);
 			velocityX = v.x;
 			velocityY = v.y;
-			
-			_trail = new Rainbow(1);
-			addChild(_trail);
 		}
 		
 		override public function update(timeDelta:Number = 1):void {

@@ -54,6 +54,10 @@ package com.grapefrukt.games.juicy {
 		}
 		
 		public function reset():void {
+			graphics.clear();
+			graphics.beginFill(Settings.COLOR_BACKGROUND);
+			graphics.drawRect(0, 0, Settings.STAGE_W, Settings.STAGE_H);
+			
 			_blocks.clear();
 			_balls.clear();
 			
@@ -66,7 +70,6 @@ package com.grapefrukt.games.juicy {
 			
 			_paddle = new Paddle();
 			_blocks.add(_paddle);
-			
 		}
 		
 		private function handleEnterFrame(e:Event):void {

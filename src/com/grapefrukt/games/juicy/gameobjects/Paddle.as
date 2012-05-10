@@ -11,6 +11,7 @@ package com.grapefrukt.games.juicy.gameobjects {
 			super(Settings.STAGE_W / 2, Settings.STAGE_H + Settings.PADDLE_H / 2 - 50);
 			_collisionW = Settings.PADDLE_W;
 			_collisionH = Settings.PADDLE_H;
+			render(Settings.COLOR_PADDLE);
 		}
 		
 		override public function collide(ball:Ball):void {
@@ -18,7 +19,8 @@ package com.grapefrukt.games.juicy.gameobjects {
 		}
 		
 		override protected function render(color:uint):void {
-			graphics.beginFill(0xff00ff);
+			graphics.clear();
+			graphics.beginFill(color);
 			// 0,0 is at center of block to make effects easier
 			graphics.drawRect(-Settings.PADDLE_W / 2, -Settings.PADDLE_H / 2, Settings.PADDLE_W, Settings.PADDLE_H);
 		}
