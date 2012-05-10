@@ -28,6 +28,7 @@ package com.grapefrukt.games.juicy {
 		private var _mouseDown	:Boolean;
 		private var _mouseVector:Point;
 
+		private var _toggler	:Toggler;
 		
 		public function Main() {
 			_blocks = new GameObjectCollection();
@@ -49,6 +50,9 @@ package com.grapefrukt.games.juicy {
 			_mouseVector = new Point;
 			
 			_screenshake = new Shaker(this);
+			
+			_toggler = new Toggler(Settings);
+			parent.addChild(_toggler);
 			
 			reset();
 		}
