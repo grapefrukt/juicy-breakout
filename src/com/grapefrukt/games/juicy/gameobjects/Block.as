@@ -31,7 +31,7 @@ package com.grapefrukt.games.juicy.gameobjects {
 			
 			if (Settings.EFFECT_BLOCK_DARKEN) transform.colorTransform = new ColorTransform(.7, .7, .8);
 			
-			if (Settings.EFFECT_TWEEN_BLOCK_DESTRUCTION) {
+			if (Settings.EFFECT_BLOCK_TWEEN_DESTRUCTION) {
 				
 				new GTween(this, .5, { scaleY : 0, scaleX : 0  }, { ease : Quadratic.easeOut, onComplete : handleRemoveTweenComplete } );
 				

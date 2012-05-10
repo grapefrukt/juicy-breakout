@@ -16,7 +16,7 @@ package com.grapefrukt.games.juicy {
 		
 		static public var EFFECT_SCREEN_SHAKE_POWER:Number = 0;
 		
-		static public var EFFECT_TWEEN_BLOCK_DESTRUCTION:Boolean = true;
+		static public var EFFECT_BLOCK_TWEEN_DESTRUCTION:Boolean = true;
 			static public var EFFECT_BLOCK_PUSH		:Boolean = true;
 			static public var EFFECT_BLOCK_ROTATE	:Boolean = true;
 			static public var EFFECT_BLOCK_GRAVITY	:Boolean = true;
