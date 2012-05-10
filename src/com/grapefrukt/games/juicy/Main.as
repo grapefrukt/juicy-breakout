@@ -60,7 +60,7 @@ package com.grapefrukt.games.juicy {
 			_balls.add(new Ball(Settings.STAGE_W / 2, Settings.STAGE_H / 2));
 			
 			for (var i:int = 0; i < 80; i++) {
-				var block:Block = new Block( 82.5 + (i % 10) * Settings.BLOCK_W * 1.3, 47.5 + int(i / 10) * Settings.BLOCK_H * 1.3);
+				var block:Block = new Block( 120 + (i % 10) * (Settings.BLOCK_W + 10), 47.5 + int(i / 10) * (Settings.BLOCK_H + 10));
 				_blocks.add(block);
 			}
 			
