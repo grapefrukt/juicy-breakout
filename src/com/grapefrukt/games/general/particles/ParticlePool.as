@@ -20,8 +20,16 @@
 			addEventListener(ParticleEvent.DIE, handleParticleDeath, true);
 		}
 		
+		public function clear():void {
+			while (numChildren) {
+				var p:Particle = Particle(getChildAt(0));
+				removeChild(p);
+				_pool.object = p;
+			}
+		}
+		
 		private function handleParticleDeath(e:ParticleEvent):void {
-			var p:Particle = e.target as Particle;
+			var p:Particle = Particle(e.target);
 			removeChild(p);
 			_pool.object = p;
 		}

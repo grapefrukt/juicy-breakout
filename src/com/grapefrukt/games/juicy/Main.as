@@ -1,5 +1,8 @@
 package com.grapefrukt.games.juicy {
 	import com.grapefrukt.games.general.collections.GameObjectCollection;
+	import com.grapefrukt.games.general.particles.ParticlePool;
+	import com.grapefrukt.games.general.particles.ParticleSpawn;
+	import com.grapefrukt.games.juicy.effects.particles.BallImpactParticle;
 	import com.grapefrukt.games.juicy.events.JuicyEvent;
 	import com.grapefrukt.games.juicy.gameobjects.Ball;
 	import com.grapefrukt.games.juicy.gameobjects.Block;
@@ -25,6 +28,8 @@ package com.grapefrukt.games.juicy {
 		
 		private var _paddle		:Paddle;
 		
+		private var _particles_impact:ParticlePool;
+		
 		private var _mouseDown	:Boolean;
 		private var _mouseVector:Point;
 
@@ -34,6 +39,9 @@ package com.grapefrukt.games.juicy {
 			_blocks = new GameObjectCollection();
 			_blocks.addEventListener(JuicyEvent.BLOCK_DESTROYED, handleBlockDestroyed, true);
 			addChild(_blocks);
+			
+			_particles_impact = new ParticlePool(BallImpactParticle, 20);
+			addChild(_particles_impact);
 			
 			_balls = new GameObjectCollection();
 			_balls.addEventListener(JuicyEvent.BALL_COLLIDE, handleBallCollide, true);
@@ -64,6 +72,8 @@ package com.grapefrukt.games.juicy {
 			
 			_blocks.clear();
 			_balls.clear();
+			
+			_particles_impact.clear();
 			
 			_balls.add(new Ball(Settings.STAGE_W / 2, Settings.STAGE_H / 2));
 			
@@ -151,6 +161,16 @@ package com.grapefrukt.games.juicy {
 		}
 		
 		private function handleBallCollide(e:JuicyEvent):void {
+			ParticleSpawn.burst(	e.ball.x, 
+									e.ball.y, 
+									5, 
+									35, 
+									-Math.atan2(e.ball.velocityX, e.ball.velocityY) * 180 / Math.PI, 
+									e.ball.velocity * 5, 
+									.5,
+									_particles_impact
+								);
+								
 			_screenshake.shake(-e.ball.velocityX * Settings.EFFECT_SCREEN_SHAKE_POWER, -e.ball.velocityY * Settings.EFFECT_SCREEN_SHAKE_POWER);
 		}
 		

@@ -22,9 +22,8 @@
 		 * @param	collection		The ParticleCollection to add them to
 		 * @param	vector			A directional vector that will be added to the particles own vector
 		 */
-		public static function burst(spawnX:Number, spawnY:Number, count:uint, spread:Number, baseAngle:Number, speed:Number, pool:ParticlePool, vector:Point = null):void {
-			if (vector == null) vector = new Point(0, 0);
-			
+		public static function burst(spawnX:Number, spawnY:Number, count:uint, spread:Number, baseAngle:Number, speed:Number, speedVariance:Number, pool:ParticlePool):void {
+			var speedRnd:Number;
 			var angleVector:Point = new Point();
 			var spreadRnd:Number = 0;
 			
@@ -34,9 +33,11 @@
 				particle.x = spawnX; 
 				particle.y = spawnY;
 				
+				speedRnd = Math.random() * speedVariance - speedVariance / 2
 				spreadRnd = Math.random() * spread - spread / 2;
-				angleVector.x = Math.sin((-baseAngle + spreadRnd) / 180 * 3.1415);
-				angleVector.y = Math.cos((-baseAngle + spreadRnd) / 180 * 3.1415);
+				
+				angleVector.x = Math.sin((-baseAngle + spreadRnd) / 180 * Math.PI) * speed * (1 + speedRnd);
+				angleVector.y = Math.cos((-baseAngle + spreadRnd) / 180 * Math.PI) * speed * (1 + speedRnd);
 				
 				particle.init(spawnX, spawnY, angleVector.x, angleVector.y);
 			}
