@@ -40,12 +40,12 @@ package com.grapefrukt.games.juicy {
 			_blocks.addEventListener(JuicyEvent.BLOCK_DESTROYED, handleBlockDestroyed, true);
 			addChild(_blocks);
 			
-			_particles_impact = new ParticlePool(BallImpactParticle, 20);
-			addChild(_particles_impact);
-			
 			_balls = new GameObjectCollection();
 			_balls.addEventListener(JuicyEvent.BALL_COLLIDE, handleBallCollide, true);
 			addChild(_balls);
+			
+			_particles_impact = new ParticlePool(BallImpactParticle, 20);
+			addChild(_particles_impact);
 			
 			addEventListener(Event.ENTER_FRAME, handleEnterFrame);
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, handleKeyDown);
@@ -164,7 +164,7 @@ package com.grapefrukt.games.juicy {
 			ParticleSpawn.burst(	e.ball.x, 
 									e.ball.y, 
 									5, 
-									35, 
+									90, 
 									-Math.atan2(e.ball.velocityX, e.ball.velocityY) * 180 / Math.PI, 
 									e.ball.velocity * 5, 
 									.5,
