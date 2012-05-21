@@ -9,6 +9,8 @@ package com.grapefrukt.games.juicy {
 	import com.bit101.components.Window;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.KeyboardEvent;
+	import flash.ui.Keyboard;
 	import flash.utils.describeType;
 	
 	/**
@@ -19,9 +21,11 @@ package com.grapefrukt.games.juicy {
 		
 		private var _targetClass:Class;
 		
-		public function Toggler(targetClass:Class) {
+		public function Toggler(targetClass:Class, visible:Boolean = false) {
 			_targetClass = targetClass;
+			this.visible = visible;
 			reset();
+			addEventListener(Event.ADDED_TO_STAGE, handleAddedToStage);
 		}
 		
 		private function reset():void {
@@ -91,6 +95,15 @@ package com.grapefrukt.games.juicy {
 			return function(e:Event):void {
 				_targetClass[field] = HSlider(e.target).value;
 			}
+		}
+		
+		private function handleAddedToStage(e:Event):void {
+			removeEventListener(Event.ADDED_TO_STAGE, handleAddedToStage);
+			stage.addEventListener(KeyboardEvent.KEY_DOWN, handleKeyDown);
+		}
+		
+		private function handleKeyDown(e:KeyboardEvent):void {
+			if (e.keyCode == 220) visible = !visible;
 		}
 	}
 
