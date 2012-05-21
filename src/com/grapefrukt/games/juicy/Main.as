@@ -8,6 +8,7 @@ package com.grapefrukt.games.juicy {
 	import com.grapefrukt.games.juicy.gameobjects.Ball;
 	import com.grapefrukt.games.juicy.gameobjects.Block;
 	import com.grapefrukt.games.juicy.gameobjects.Paddle;
+	import com.grapefrukt.math.MathUtil;
 	import com.grapefrukt.Timestep;
 	import com.gskinner.motion.plugins.ColorAdjustPlugin;
 	import flash.display.Sprite;
@@ -84,7 +85,7 @@ package com.grapefrukt.games.juicy {
 			_particles_impact.clear();
 			
 			for (var j:int = 0; j < Settings.NUM_BALLS; j++) {
-				_balls.add(new Ball(Settings.STAGE_W / 2, Settings.STAGE_H / 2));				
+				addBall();
 			}
 			
 			for (var i:int = 0; i < 80; i++) {
@@ -201,6 +202,15 @@ package com.grapefrukt.games.juicy {
 			
 			_screenshake.shake( -e.ball.velocityX * Settings.EFFECT_SCREEN_SHAKE_POWER, -e.ball.velocityY * Settings.EFFECT_SCREEN_SHAKE_POWER);
 			
+			if (Settings.EFFECT_BLOCK_JELLY) {
+				for each (var block:Block in _blocks.collection) {
+					//var dist:Number = block.getDistance(e.ball);
+					//dist = dist / Settings.STAGE_W;
+					//dist = MathUtil.clamp(dist, 1, 0) * .2;
+					block.jellyEffect(.2, Math.random() * .02);
+				}
+			}
+			
 			e.ball.velocity = Settings.BALL_MAX_VELOCITY;
 		}
 		
@@ -210,11 +220,16 @@ package com.grapefrukt.games.juicy {
 		
 		private function handleKeyDown(e:KeyboardEvent):void {
 			if (e.keyCode == Keyboard.SPACE) reset();
+			if (e.keyCode == Keyboard.B) addBall();
 			if (e.keyCode == Keyboard.S) _screenshake.shakeRandom(4);
 		}
 		
 		private function handleMouseToggle(e:MouseEvent):void {
 			_mouseDown = e.type == MouseEvent.MOUSE_DOWN;
+		}
+		
+		private function addBall():void {
+			_balls.add(new Ball(Settings.STAGE_W / 2, Settings.STAGE_H / 2));
 		}
 		
 	}

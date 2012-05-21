@@ -4,13 +4,19 @@ package com.grapefrukt.games.juicy.gameobjects {
 	import com.grapefrukt.games.juicy.effects.SliceEffect;
 	import com.grapefrukt.games.juicy.events.JuicyEvent;
 	import com.grapefrukt.games.juicy.Settings;
+	import com.grapefrukt.Timestep;
 	import com.gskinner.motion.easing.Back;
+	import com.gskinner.motion.easing.Elastic;
 	import com.gskinner.motion.easing.Quadratic;
 	import com.gskinner.motion.GTween;
 	import com.gskinner.motion.plugins.ColorTransformPlugin;
 	import flash.display.Shape;
+	import flash.events.Event;
+	import flash.events.TimerEvent;
 	import flash.geom.ColorTransform;
 	import flash.geom.Point;
+	import flash.utils.Timer;
+	
 	/**
 	 * ...
 	 * @author Martin Jonasson, m@grapefrukt.com
@@ -88,6 +94,16 @@ package com.grapefrukt.games.juicy.gameobjects {
 			}
 			
 			dispatchEvent(new JuicyEvent(JuicyEvent.BLOCK_DESTROYED));
+		}
+		
+		public function jellyEffect(strength:Number = .2, delay:Number = 0):void {
+			new GTween(this, .05, { scaleX : 1 + strength }, { delay : delay, ease : Quadratic.easeInOut, onComplete : function(gt:GTween ):void {
+				new GTween(gt.target, .6, { scaleX : 1 }, { ease : Elastic.easeOut } );
+			}} );
+			
+			new GTween(this, .05, { scaleY : 1 + strength }, { delay : delay + .05, ease : Quadratic.easeInOut, onComplete : function(gt:GTween ):void {
+				new GTween(gt.target, .6, { scaleY : 1 }, { ease : Elastic.easeOut } );
+			}} );
 		}
 		
 		override public function update(timeDelta:Number = 1):void {

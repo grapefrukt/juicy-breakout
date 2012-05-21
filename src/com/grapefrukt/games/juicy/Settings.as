@@ -25,6 +25,7 @@ package com.grapefrukt.games.juicy {
 		static public var EFFECT_BLOCK_GRAVITY		:Boolean = false;
 		static public var EFFECT_BLOCK_DARKEN		:Boolean = false;
 		static public var EFFECT_BLOCK_SHATTER		:Boolean = false;
+		static public var EFFECT_BLOCK_JELLY		:Boolean = false;
 		
 		[min("0")] [max("20")]
 		static public var EFFECT_BLOCK_SHATTER_ROTATION:Number = 5;
