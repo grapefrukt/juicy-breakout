@@ -9,6 +9,7 @@ package com.grapefrukt.games.juicy {
 	import com.grapefrukt.games.juicy.gameobjects.Block;
 	import com.grapefrukt.games.juicy.gameobjects.Paddle;
 	import com.grapefrukt.Timestep;
+	import com.gskinner.motion.plugins.ColorAdjustPlugin;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
@@ -38,6 +39,7 @@ package com.grapefrukt.games.juicy {
 		private var _toggler	:Toggler;
 		
 		public function Main() {
+			ColorAdjustPlugin.install();
 			_blocks = new GameObjectCollection();
 			_blocks.addEventListener(JuicyEvent.BLOCK_DESTROYED, handleBlockDestroyed, true);
 			addChild(_blocks);
