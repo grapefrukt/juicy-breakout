@@ -3,6 +3,8 @@ package com.grapefrukt.games.juicy.effects
 	import com.bit101.charts.BarChart;
 	import com.grapefrukt.games.general.gameobjects.GameObject;
 	import com.grapefrukt.games.juicy.gameobjects.Ball;
+	import com.grapefrukt.games.juicy.Settings;
+	import flash.display.CapsStyle;
 	import flash.display.Shape;
 	import flash.geom.Point;
 	/**
@@ -36,7 +38,7 @@ package com.grapefrukt.games.juicy.effects
 			pos_middle = pos1.clone();
 			pos_middle = pos_middle.add( delta );
 			
-			wobble_middle.y = 500;
+			// wobble_middle.y = 500;
 		}
 		
 		// wobble pos is the new position of the anchor, that is going to be wobbled to the middle
@@ -76,9 +78,9 @@ package com.grapefrukt.games.juicy.effects
 				paddle_middle_velocity.y *= bounciness;
 			}*/
 
-			/*if ( Math.abs( wobble_middle.x ) > 0 ) {
-				wobble_middle.x *= bounciness;
-			}*/
+			if ( Math.abs( wobble_middle.x ) > 0 ) {
+				wobble_middle.x *= 0.95;
+			}
 			
 			wobble_middle = wobble_middle.add( wobble_velocity );
 			
@@ -91,7 +93,7 @@ package com.grapefrukt.games.juicy.effects
 			*/
 			
 			graphics.clear();
-			graphics.lineStyle( 3, 0xffffff, 1 );
+			graphics.lineStyle( 20, Settings.COLOR_BLOCK, 1, false, "normal", CapsStyle.SQUARE  );
 			
 			graphics.moveTo( pos1.x, pos1.y );
 			var m:Point = middle;

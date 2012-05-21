@@ -90,7 +90,7 @@ package com.grapefrukt.games.juicy {
 				_blocks.add(block);
 			}
 			
-			var buffer:Number = 30;
+			var buffer:Number = 5;
 			_lines.add( new BouncyLine( buffer, buffer, 						Settings.STAGE_W - buffer, buffer ) );
 			_lines.add( new BouncyLine( buffer, buffer, 						buffer, Settings.STAGE_H ) );
 			_lines.add( new BouncyLine( Settings.STAGE_W - buffer, 	buffer, 	Settings.STAGE_W - buffer, Settings.STAGE_H ) );
