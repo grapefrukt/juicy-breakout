@@ -134,6 +134,8 @@ package com.grapefrukt.games.juicy {
 								ball.y -= v.y;
 							}
 							
+							block.collide(ball);
+							
 							// figure out which way to bounce
 							
 							// slicer powerup
@@ -149,8 +151,6 @@ package com.grapefrukt.games.juicy {
 							else if (ball.x >= block.x + block.collisionW / 2) ball.collide(-1, 1, block);
 							// wtf!
 							else ball.collide(-1, -1, block);
-							
-							block.collide(ball);
 							
 							break; // only collide with one block per update
 						}
