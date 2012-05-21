@@ -54,9 +54,11 @@ package com.grapefrukt.games.juicy {
 				properties.push(property);
 			}
 			
+			properties.sort(_sort);
+			
 			var panel:Window = new Window(this, 10, 10);
 			panel.width = 250;
-			panel.height = 240;
+			panel.height = properties.length * 28;
 			var container:VBox = new VBox(panel, 10, 10);
 			for each (property in properties) {
 				var row:HBox = new HBox(container);
@@ -69,6 +71,7 @@ package com.grapefrukt.games.juicy {
 						checkbox.selected = property.value;
 						break;
 					case "Number" : 
+					case "int" :
 						var slider:HSlider = new HSlider(row, 0, 0, getSliderClosure(property.name));
 						slider.minimum = property.min;
 						slider.maximum = property.max;
@@ -104,6 +107,12 @@ package com.grapefrukt.games.juicy {
 		
 		private function handleKeyDown(e:KeyboardEvent):void {
 			if (e.keyCode == 220) visible = !visible;
+		}
+		
+		private function _sort(p1:Property, p2:Property):Number {
+			if (p1.name < p2.name) return -1;
+			if (p1.name > p2.name) return 1;
+			return 0;
 		}
 	}
 
