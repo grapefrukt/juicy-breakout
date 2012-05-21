@@ -15,25 +15,23 @@
 	 */
 	public class Rainbow extends Shape {
 		
-		private var maxLen		:Number = 	8;
+		private var maxLen		:Number = 	30;
 		private var _segments	:Vector.<Segment>;
 		
-		private var _colorCount	:uint = 	1;
-		private var _colorOffset:Number = 	0.0;
-		
 		private static var _objectPool:ObjectPool;
-		private var tmpPoint:Point;
+		
+		private var _verts:Vector.<Number>;
+		private var _indices:Vector.<int>;
 		
 		public static function init():void { 
 			_objectPool = new ObjectPool(true);
 			_objectPool.allocate(Segment, 100);
 		}
 		
-		public function Rainbow(size:uint = 2) {
-			tmpPoint = new Point;
-			_colorOffset = Math.random();
+		public function Rainbow() {
 			_segments = new Vector.<Segment>;
-			_colorCount = size;
+			_verts = new Vector.<Number>();
+			_indices = new Vector.<int>();
 			
 			if (!_objectPool) init();
 		}
@@ -50,7 +48,7 @@
 		}
 		
 		public function redrawSegments(offsetX:Number = 0, offsetY:Number = 0):void {
-			graphics.clear();		
+			graphics.clear();
 			if (!Settings.EFFECT_BALL_DRAW_TRAILS) return;
 			
 			var ang		:Number;
@@ -58,26 +56,55 @@
 			var s2		:Segment;	// current segment
 			var step	:int 	= 0;
 			var offset	:Number = 0.0;
-						
-			for (var i:uint = 0; i < _colorCount; ++i) {
-				graphics.lineStyle(1, Settings.COLOR_TRAIL, 1, false, LineScaleMode.NORMAL, CapsStyle.SQUARE);
-				step = 0;
-				offset = (-.5 + i / (_colorCount - 1)) * 9.0;
-				for (var j:int = _segments.length - 1; j >= 0; j -= 1 ) {
-					s1 = Segment(_segments[j]);
-					if(s2){
-						ang = Math.atan2(s1.y - s2.y, s1.x - s2.x) + 1.57079633;
-						tmpPoint.x = Math.cos(ang) * offset;
-						tmpPoint.y = Math.sin(ang) * offset;
-						
-						if (step == 1) graphics.moveTo(s1.x + tmpPoint.x - offsetX, s1.y + tmpPoint.y - offsetY);
-						graphics.lineTo(s1.x + tmpPoint.x - offsetX, s1.y + tmpPoint.y - offsetY);
+			var sin		:Number = 0;
+			var cos		:Number = 0;
+			
+			
+			step = 0;
+			
+			for (var j:int = 0; j < _segments.length; ++j) {
+				s1 = Segment(_segments[j]);
+				
+				if (s2) {
+					ang = Math.atan2(s1.y - s2.y, s1.x - s2.x) + 1.57079633;
+					sin = Math.sin(ang);
+					cos = Math.cos(ang);
+					
+					for (var i:uint = 0; i < 2; ++i) {
+						offset = (-.5 + i / 1) * 9.0;
+						_verts[step++] = s1.x + cos * offset - offsetX;
+						_verts[step++] = s1.y + sin * offset - offsetY;
 					}
-					step++;
-					s2 = s1;
+					
 				}
-				s2 = null;
+				s2 = s1;
+				
 			}
+			
+			if (_verts.length >= 8) {
+				
+				for (var k:int = 0; k < _verts.length / 2; k++) {
+					_indices[k * 6 + 0] = k * 2 + 0;
+					_indices[k * 6 + 1] = k * 2 + 1;
+					_indices[k * 6 + 2] = k * 2 + 2;
+					
+					_indices[k * 6 + 3] = k * 2 + 1;
+					_indices[k * 6 + 4] = k * 2 + 2;
+					_indices[k * 6 + 5] = k * 2 + 3;
+				}
+				
+				
+				//graphics.lineStyle(1, Settings.COLOR_TRAIL, 1, false, LineScaleMode.NORMAL, CapsStyle.SQUARE);
+				graphics.beginFill(Settings.COLOR_TRAIL);
+				graphics.drawTriangles(_verts, _indices);
+				
+				//graphics.moveTo(_verts[0], _verts[1]);
+				//for (var k:int = 0; k < _verts.length; k += 2) {
+					//graphics.lineTo(_verts[k + 0], _verts[k + 1]);
+				//}
+				
+			}
+			
 		}
 		
 		private function get head():Segment {
