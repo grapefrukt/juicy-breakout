@@ -62,9 +62,13 @@ package com.grapefrukt.games.juicy.gameobjects {
 			super.update(timeDelta);
 			
 			if (Settings.EFFECT_BALL_ROTATE) {
+				
 				var target_rotation:Number = Math.atan2(velocityY, velocityX) / Math.PI * 180;
 				_ball_rotation += ( target_rotation - _ball_rotation ) * 0.5;
-				// _ball_rotation = target_rotation;
+				
+				if ( Settings.EFFECT_BALL_ROTATE_ANIMATED == false ) 
+					_ball_rotation = target_rotation;
+
 				_gfx.rotation = _ball_rotation;
 			} else {
 				_gfx.rotation = 0;
@@ -79,21 +83,27 @@ package com.grapefrukt.games.juicy.gameobjects {
 
 			
 			if (Settings.EFFECT_BALL_STRETCH) {
-				// _gfx.scaleX = 1 + (velocity - Settings.BALL_MIN_VELOCITY) / (Settings.BALL_MAX_VELOCITY - Settings.BALL_MIN_VELOCITY) * .3;
-				// _gfx.scaleY = 1 - (velocity - Settings.BALL_MIN_VELOCITY) / (Settings.BALL_MAX_VELOCITY - Settings.BALL_MIN_VELOCITY) * .2;
 				
-				var relative:Number = 1.0 + ( velocity / (2 * Settings.BALL_MAX_VELOCITY ) );
-				relative = MathUtil.clamp( relative, 2.5, 1.0 );
-				_gfx.scaleX = 1.0 * relative;
-				_gfx.scaleY = 1.0 / relative;
-				
-				_gfx.scaleX -= _ball_shakiness;
-				_gfx.scaleY += _ball_shakiness;
-				
-				// _gfx.scaleX = MathUtil.clamp( _gfx.scaleX, 1.5, 0.5 );
-				// _gfx.scaleY = MathUtil.clamp( _gfx.scaleY, 2.5, 0.5 );
-				_gfx.scaleX = MathUtil.clamp( _gfx.scaleX, 1.35, 0.85 );
-				_gfx.scaleY = MathUtil.clamp( _gfx.scaleY, 1.35, 0.85 );
+				if ( Settings.EFFECT_BALL_STRETCH_ANIMATED == false )
+				{
+					_gfx.scaleX = 1 + (velocity - Settings.BALL_MIN_VELOCITY) / (Settings.BALL_MAX_VELOCITY - Settings.BALL_MIN_VELOCITY) * .3;
+					_gfx.scaleY = 1 - (velocity - Settings.BALL_MIN_VELOCITY) / (Settings.BALL_MAX_VELOCITY - Settings.BALL_MIN_VELOCITY) * .2;
+				}
+				else if( Settings.EFFECT_BALL_STRETCH_ANIMATED )
+				{
+					var relative:Number = 1.0 + ( velocity / (2 * Settings.BALL_MAX_VELOCITY ) );
+					relative = MathUtil.clamp( relative, 2.5, 1.0 );
+					_gfx.scaleX = 1.0 * relative;
+					_gfx.scaleY = 1.0 / relative;
+					
+					_gfx.scaleX -= _ball_shakiness;
+					_gfx.scaleY += _ball_shakiness;
+					
+					// _gfx.scaleX = MathUtil.clamp( _gfx.scaleX, 1.5, 0.5 );
+					// _gfx.scaleY = MathUtil.clamp( _gfx.scaleY, 2.5, 0.5 );
+					_gfx.scaleX = MathUtil.clamp( _gfx.scaleX, 1.35, 0.85 );
+					_gfx.scaleY = MathUtil.clamp( _gfx.scaleY, 1.35, 0.85 );
+				}
 				
 			} else {
 				_gfx.scaleX = scaleY = 1;
@@ -110,9 +120,11 @@ package com.grapefrukt.games.juicy.gameobjects {
 			_ball_shakiness = 0.1;
 			_ball_shakiness_vel = 2.5;
 			
-			
-			new GTween( this, 0.01, { brightness:255 } );
-			new GTween( this, 0.7, { brightness:0 }, { ease:Back.easeOut } );
+			if ( Settings.EFFECT_BALL_GLOW )
+			{
+				new GTween( this, 0.01, { brightness:255 } );
+				new GTween( this, 0.7, { brightness:0 }, { ease:Back.easeOut } );
+			}
 			
 		}
 		

@@ -32,8 +32,11 @@ package com.grapefrukt.games.juicy {
 		[min("0")] [max("5")]
 		static public var EFFECT_BLOCK_SHATTER_FORCE:Number = 2;
 			
-		static public var EFFECT_BALL_ROTATE		:Boolean = false;
-		static public var EFFECT_BALL_STRETCH		:Boolean = false;
+		static public var EFFECT_BALL_ROTATE				:Boolean = false;
+		static public var EFFECT_BALL_ROTATE_ANIMATED		:Boolean = false;
+		static public var EFFECT_BALL_STRETCH				:Boolean = false;
+		static public var EFFECT_BALL_STRETCH_ANIMATED		:Boolean = false;
+		static public var EFFECT_BALL_GLOW					:Boolean = false;
 		
 		[min("0")] [max("100")]
 		static public var EFFECT_BALL_TRAIL_LENGTH	:int = 0;
@@ -57,6 +60,7 @@ package com.grapefrukt.games.juicy {
 		static public const COLOR_PADDLE		:uint = 0xf8ca00;
 		static public const COLOR_TRAIL			:uint = 0x8a9b0f;
 		static public const COLOR_SPARK			:uint = 0xffffff;
+		static public const EFFECTS_BALL_GLOW:String = "effectsBallGlow";
 
 	}
 
