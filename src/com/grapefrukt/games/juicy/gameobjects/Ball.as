@@ -16,6 +16,9 @@ package com.grapefrukt.games.juicy.gameobjects {
 		private var _trail:Rainbow;
 		private var _gfx:Shape;
 		
+		public var exX:Number;
+		public var exY:Number;
+		
 		public function Ball(x:Number, y:Number) {
 			this.x = x;
 			this.y = y;
@@ -34,6 +37,8 @@ package com.grapefrukt.games.juicy.gameobjects {
 		}
 		
 		override public function update(timeDelta:Number = 1):void {
+			exX = x;
+			exY = y;
 			super.update(timeDelta);
 			
 			if (Settings.EFFECT_BALL_ROTATE) {
@@ -58,6 +63,12 @@ package com.grapefrukt.games.juicy.gameobjects {
 		public function collide(velocityMultiplierX:Number, velocityMultiplierY:Number, block:Block = null):void {
 			velocityX *= velocityMultiplierX;
 			velocityY *= velocityMultiplierY;
+			dispatchEvent(new JuicyEvent(JuicyEvent.BALL_COLLIDE, this, block));
+		}
+		
+		public function collideSet( newVelocityX:Number, newVelocityY:Number, block:Block = null ):void {
+			velocityX = newVelocityX;
+			velocityY = newVelocityY;
 			dispatchEvent(new JuicyEvent(JuicyEvent.BALL_COLLIDE, this, block));
 		}
 		
