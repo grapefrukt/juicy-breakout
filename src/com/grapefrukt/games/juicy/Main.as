@@ -8,6 +8,7 @@ package com.grapefrukt.games.juicy {
 	import com.grapefrukt.games.juicy.gameobjects.Ball;
 	import com.grapefrukt.games.juicy.gameobjects.Block;
 	import com.grapefrukt.games.juicy.gameobjects.Paddle;
+	import com.grapefrukt.math.MathUtil;
 	import com.grapefrukt.Timestep;
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -198,6 +199,15 @@ package com.grapefrukt.games.juicy {
 			}
 			
 			_screenshake.shake( -e.ball.velocityX * Settings.EFFECT_SCREEN_SHAKE_POWER, -e.ball.velocityY * Settings.EFFECT_SCREEN_SHAKE_POWER);
+			
+			if (Settings.EFFECT_BLOCK_JELLY) {
+				for each (var block:Block in _blocks.collection) {
+					//var dist:Number = block.getDistance(e.ball);
+					//dist = dist / Settings.STAGE_W;
+					//dist = MathUtil.clamp(dist, 1, 0) * .2;
+					block.jellyEffect(.2, Math.random() * .02);
+				}
+			}
 			
 			e.ball.velocity = Settings.BALL_MAX_VELOCITY;
 		}
