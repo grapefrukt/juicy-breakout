@@ -3,6 +3,7 @@ package com.grapefrukt.games.juicy {
 	import com.grapefrukt.games.general.particles.ParticlePool;
 	import com.grapefrukt.games.general.particles.ParticleSpawn;
 	import com.grapefrukt.games.juicy.effects.particles.BallImpactParticle;
+	import com.grapefrukt.games.juicy.effects.BouncyLine;
 	import com.grapefrukt.games.juicy.events.JuicyEvent;
 	import com.grapefrukt.games.juicy.gameobjects.Ball;
 	import com.grapefrukt.games.juicy.gameobjects.Block;
@@ -23,6 +24,7 @@ package com.grapefrukt.games.juicy {
 		
 		private var _blocks		:GameObjectCollection;
 		private var _balls		:GameObjectCollection;
+		private var _lines		:GameObjectCollection;
 		private var _timestep	:Timestep;
 		private var _screenshake:Shaker;
 		
@@ -43,6 +45,9 @@ package com.grapefrukt.games.juicy {
 			_balls = new GameObjectCollection();
 			_balls.addEventListener(JuicyEvent.BALL_COLLIDE, handleBallCollide, true);
 			addChild(_balls);
+			
+			_lines = new GameObjectCollection();
+			addChild( _lines );
 			
 			_particles_impact = new ParticlePool(BallImpactParticle, 20);
 			addChild(_particles_impact);
@@ -72,6 +77,7 @@ package com.grapefrukt.games.juicy {
 			
 			_blocks.clear();
 			_balls.clear();
+			_lines.clear();
 			
 			_particles_impact.clear();
 			
@@ -80,9 +86,14 @@ package com.grapefrukt.games.juicy {
 			}
 			
 			for (var i:int = 0; i < 80; i++) {
-				var block:Block = new Block( 120 + (i % 10) * (Settings.BLOCK_W + 10), 47.5 + int(i / 10) * (Settings.BLOCK_H + 10));
+				var block:Block = new Block( 120 + (i % 10) * (Settings.BLOCK_W + 10), 30 + 47.5 + int(i / 10) * (Settings.BLOCK_H + 10));
 				_blocks.add(block);
 			}
+			
+			var buffer:Number = 30;
+			_lines.add( new BouncyLine( buffer, buffer, 						Settings.STAGE_W - buffer, buffer ) );
+			_lines.add( new BouncyLine( buffer, buffer, 						buffer, Settings.STAGE_H ) );
+			_lines.add( new BouncyLine( Settings.STAGE_W - buffer, 	buffer, 	Settings.STAGE_W - buffer, Settings.STAGE_H ) );
 			
 			_paddle = new Paddle();
 			_blocks.add(_paddle);
@@ -93,6 +104,7 @@ package com.grapefrukt.games.juicy {
 			
 			_balls.update(_timestep.timeDelta);
 			_blocks.update(_timestep.timeDelta);
+			_lines.update(_timestep.timeDelta);
 			_screenshake.update(_timestep.timeDelta);
 			
 			_paddle.x = mouseX;
@@ -102,6 +114,12 @@ package com.grapefrukt.games.juicy {
 				if (ball.x > Settings.STAGE_W && ball.velocityX > 0) ball.collide( -1, 1);
 				if (ball.y < 0 && ball.velocityY < 0) ball.collide(1, -1);
 				if (ball.y > Settings.STAGE_H && ball.velocityY > 0) ball.collide(1, -1);
+				
+				// line ball collision
+				for each ( var line:BouncyLine in _lines.collection) {
+					line.checkCollision( ball );
+				}
+				
 				
 				if (_mouseDown) {
 					_mouseVector.x = (ball.x - mouseX) * Settings.MOUSE_GRAVITY_POWER * _timestep.timeDelta;

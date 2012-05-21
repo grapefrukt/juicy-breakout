@@ -9,12 +9,12 @@ package com.grapefrukt.games.juicy.effects
 	 * ...
 	 * @author gummikana
 	 */
-	public class BouncyLine extends Shape
+	public class BouncyLine extends GameObject
 	{
 		
-		public function BouncyLine() 
+		public function BouncyLine( x1:Number = 0, y1:Number = 0, x2:Number = 0, y2:Number = 0 ) 
 		{
-			
+			set( x1, y1, x2, y2 );
 		}
 		
 		public function set( x1:Number, y1:Number, x2:Number, y2:Number ):void {
@@ -64,7 +64,7 @@ package com.grapefrukt.games.juicy.effects
 
 		}
 		
-		public function update(imeDelta:Number = 1):void {
+		override public function update(imeDelta:Number = 1):void {
 			
 			if ( Math.abs( wobble_middle.y ) > 0 ) {
 				wobble_velocity.y += -bounce_speed * wobble_middle.y;
