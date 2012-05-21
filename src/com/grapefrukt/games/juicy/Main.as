@@ -82,7 +82,7 @@ package com.grapefrukt.games.juicy {
 			_particles_impact.clear();
 			
 			for (var j:int = 0; j < Settings.NUM_BALLS; j++) {
-				_balls.add(new Ball(Settings.STAGE_W / 2, Settings.STAGE_H / 2));				
+				addBall();
 			}
 			
 			for (var i:int = 0; i < 80; i++) {
@@ -208,11 +208,16 @@ package com.grapefrukt.games.juicy {
 		
 		private function handleKeyDown(e:KeyboardEvent):void {
 			if (e.keyCode == Keyboard.SPACE) reset();
+			if (e.keyCode == Keyboard.B) addBall();
 			if (e.keyCode == Keyboard.S) _screenshake.shakeRandom(4);
 		}
 		
 		private function handleMouseToggle(e:MouseEvent):void {
 			_mouseDown = e.type == MouseEvent.MOUSE_DOWN;
+		}
+		
+		private function addBall():void {
+			_balls.add(new Ball(Settings.STAGE_W / 2, Settings.STAGE_H / 2));
 		}
 		
 	}
