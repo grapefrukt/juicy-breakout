@@ -8,6 +8,7 @@ package com.grapefrukt.games.juicy.gameobjects {
 	import com.gskinner.motion.easing.Quadratic;
 	import com.gskinner.motion.GTween;
 	import flash.display.Shape;
+	import flash.geom.ColorTransform;
 	import flash.geom.Point;
 	/**
 	 * ...
@@ -25,6 +26,7 @@ package com.grapefrukt.games.juicy.gameobjects {
 		private var _ball_rotation:Number;
 		
 		private var _ball_color:uint;
+		private var _tween_brightness:GTween;
 		
 		public var exX:Number;
 		public var exY:Number;
@@ -122,8 +124,9 @@ package com.grapefrukt.games.juicy.gameobjects {
 			
 			if ( Settings.EFFECT_BALL_GLOW )
 			{
-				new GTween( this, 0.01, { brightness:255 } );
-				new GTween( this, 0.7, { brightness:0 }, { ease:Back.easeOut } );
+				if (!_tween_brightness) _tween_brightness = new GTween( this, 0.7, null, { ease : Back.easeOut } );
+				transform.colorTransform = new ColorTransform(1, 1, 1, 1, 255, 255, 255);
+				_tween_brightness.proxy.redOffset = _tween_brightness.proxy.greenOffset = _tween_brightness.proxy.blueOffset = 1;
 			}
 			
 		}

@@ -2,15 +2,14 @@ package com.grapefrukt.games.juicy {
 	import com.grapefrukt.games.general.collections.GameObjectCollection;
 	import com.grapefrukt.games.general.particles.ParticlePool;
 	import com.grapefrukt.games.general.particles.ParticleSpawn;
-	import com.grapefrukt.games.juicy.effects.particles.BallImpactParticle;
 	import com.grapefrukt.games.juicy.effects.BouncyLine;
+	import com.grapefrukt.games.juicy.effects.particles.BallImpactParticle;
 	import com.grapefrukt.games.juicy.events.JuicyEvent;
 	import com.grapefrukt.games.juicy.gameobjects.Ball;
 	import com.grapefrukt.games.juicy.gameobjects.Block;
 	import com.grapefrukt.games.juicy.gameobjects.Paddle;
-	import com.grapefrukt.math.MathUtil;
 	import com.grapefrukt.Timestep;
-	import com.gskinner.motion.plugins.ColorAdjustPlugin;
+	import com.gskinner.motion.plugins.ColorTransformPlugin;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
@@ -40,7 +39,8 @@ package com.grapefrukt.games.juicy {
 		private var _toggler	:Toggler;
 		
 		public function Main() {
-			ColorAdjustPlugin.install();
+			ColorTransformPlugin.install();
+			
 			_blocks = new GameObjectCollection();
 			_blocks.addEventListener(JuicyEvent.BLOCK_DESTROYED, handleBlockDestroyed, true);
 			addChild(_blocks);
