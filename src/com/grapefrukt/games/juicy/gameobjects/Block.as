@@ -55,25 +55,28 @@ package com.grapefrukt.games.juicy.gameobjects {
 			// move block in front
 			parent.setChildIndex(this, parent.numChildren - 1);
 			
+			_sliceEffect = new SliceEffect(_gfx, null);
+			addChild(_sliceEffect);
+			_gfx.visible = false;
+			
+			if (Settings.EFFECT_BLOCK_ROTATE && !Settings.EFFECT_BLOCK_SHATTER) {
+				_sliceEffect.slices[0].velocityR = Math.random() > .5 ? Settings.EFFECT_BLOCK_SHATTER_ROTATION : -Settings.EFFECT_BLOCK_SHATTER_ROTATION;
+				delayDestruction = true;
+			}
+			
 			if (Settings.EFFECT_BLOCK_SHATTER) {
-				_sliceEffect = new SliceEffect(_gfx, null);
 				_sliceEffect.slice(
-					new Point(ball.x - this.x - ball.velocityX * 10, ball.y - this.y - ball.velocityY * 10), 
-					new Point(ball.x - this.x + ball.velocityX * 10, ball.y - this.y + ball.velocityY * 10)
+					new Point(ball.x - this.x + ball.velocityX * 10, ball.y - this.y + ball.velocityY * 10),
+					new Point(ball.x - this.x - ball.velocityX * 10, ball.y - this.y - ball.velocityY * 10) 
 				);
-				addChild(_sliceEffect);
-				_gfx.visible = false;
+				delayDestruction = true;
+			}
+			
+			if (Settings.EFFECT_BLOCK_SCALE) {
+				for each (var slice:Shape in _sliceEffect.slices) {
+					new GTween(slice, Settings.EFFECT_BLOCK_DESTRUCTION_DURATION, { scaleY : 0, scaleX : 0  }, { ease : Quadratic.easeOut } );
+				}
 				
-				delayDestruction = true;
-			}
-			
-			if (Settings.EFFECT_BLOCK_ROTATE) {
-				new GTween(this, .5, { rotation : Math.random() > .5 ? 90 : -90 }, { ease : Quadratic.easeIn } );
-				delayDestruction = true;
-			}
-			
-			if (Settings.EFFECT_BLOCK_TWEEN_SCALE) {
-				new GTween(this, .5, { scaleY : 0, scaleX : 0  }, { ease : Quadratic.easeOut } );
 				delayDestruction = true;
 			}
 			
@@ -81,7 +84,7 @@ package com.grapefrukt.games.juicy.gameobjects {
 			if (!delayDestruction) {
 				remove();
 			} else {
-				new GTween(this, .5, null, { onComplete : handleRemoveTweenComplete } );
+				new GTween(this, Settings.EFFECT_BLOCK_DESTRUCTION_DURATION, null, { onComplete : handleRemoveTweenComplete } );
 			}
 			
 			dispatchEvent(new JuicyEvent(JuicyEvent.BLOCK_DESTROYED));

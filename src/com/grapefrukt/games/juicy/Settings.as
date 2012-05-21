@@ -17,7 +17,9 @@ package com.grapefrukt.games.juicy {
 		[min("0")] [max("1")]
 		static public var EFFECT_SCREEN_SHAKE_POWER	:Number = 0;
 		
-		static public var EFFECT_BLOCK_TWEEN_SCALE	:Boolean = false;
+		[min("0")] [max("3")]
+		static public var EFFECT_BLOCK_DESTRUCTION_DURATION:Number = .5;
+		static public var EFFECT_BLOCK_SCALE		:Boolean = false;
 		static public var EFFECT_BLOCK_PUSH			:Boolean = false;
 		static public var EFFECT_BLOCK_ROTATE		:Boolean = false;
 		static public var EFFECT_BLOCK_GRAVITY		:Boolean = false;
@@ -25,9 +27,9 @@ package com.grapefrukt.games.juicy {
 		static public var EFFECT_BLOCK_SHATTER		:Boolean = false;
 		
 		[min("0")] [max("20")]
-		static public var EFFECT_BLOCK_SHATTER_ROTATION:Number = 0;
+		static public var EFFECT_BLOCK_SHATTER_ROTATION:Number = 5;
 		[min("0")] [max("5")]
-		static public var EFFECT_BLOCK_SHATTER_FORCE:Number = 0;
+		static public var EFFECT_BLOCK_SHATTER_FORCE:Number = 2;
 			
 		static public var EFFECT_BALL_ROTATE		:Boolean = false;
 		static public var EFFECT_BALL_STRETCH		:Boolean = false;

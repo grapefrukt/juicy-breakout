@@ -75,7 +75,7 @@ package com.grapefrukt.games.juicy.effects {
 				
 				slice.velocity.x *= 0.99;
 				slice.velocity.y *= 0.99;
-				slice.velocityR *= 0.99;
+				slice.velocityR *= 0.95;
 			}
 		}
 		
@@ -95,16 +95,21 @@ package com.grapefrukt.games.juicy.effects {
 			if (!(e.target is LineSliceObject)) return;
 			_slices.splice(_slices.indexOf(e.target), 1);
 		}
+		
+		public function get slices():Vector.<LineSliceObject> {
+			return _slices;
+		}
 	}
 }
 
 import com.grapefrukt.games.juicy.Settings;
 import flash.display.BitmapData;
+import flash.display.Shape;
 import flash.display.Sprite;
 import flash.geom.Matrix;
 import flash.geom.Point;
 
-class LineSliceObject extends Sprite {
+class LineSliceObject extends Shape {
 	private var _points:Vector.<Point>;
 	private var _point1:Point;
 	private var _point2:Point;
