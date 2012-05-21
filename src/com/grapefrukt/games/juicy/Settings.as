@@ -22,14 +22,25 @@ package com.grapefrukt.games.juicy {
 		static public var EFFECT_BLOCK_ROTATE		:Boolean = false;
 		static public var EFFECT_BLOCK_GRAVITY		:Boolean = false;
 		static public var EFFECT_BLOCK_DARKEN		:Boolean = false;
+		static public var EFFECT_BLOCK_SHATTER		:Boolean = false;
+		
+		[min("0")] [max("20")]
+		static public var EFFECT_BLOCK_SHATTER_ROTATION:Number = 0;
+		[min("0")] [max("5")]
+		static public var EFFECT_BLOCK_SHATTER_FORCE:Number = 0;
 			
-		static public var EFFECT_BALL_ROTATE		:Boolean = true;
-		static public var EFFECT_BALL_STRETCH		:Boolean = true;
+		static public var EFFECT_BALL_ROTATE		:Boolean = false;
+		static public var EFFECT_BALL_STRETCH		:Boolean = false;
 		
 		[min("0")] [max("100")]
 		static public var EFFECT_BALL_TRAIL_LENGTH	:int = 0;
 		static public var EFFECT_BALL_TRAIL_SCALE	:Boolean = false;
 		
+		static public var EFFECT_PARTICLE_BALL_COLLISION:Boolean = false
+		
+		static public var POWERUP_SLICER_BALL 		:Boolean = false;
+		
+		static public const NUM_BALLS				:uint = 1;
 		static public const BALL_MAX_VELOCITY		:Number = 5;
 		static public const BALL_MIN_VELOCITY		:Number = 4;
 		
@@ -43,6 +54,7 @@ package com.grapefrukt.games.juicy {
 		static public const COLOR_PADDLE		:uint = 0xf8ca00;
 		static public const COLOR_TRAIL			:uint = 0x8a9b0f;
 		static public const COLOR_SPARK			:uint = 0xffffff;
+
 	}
 
 }
