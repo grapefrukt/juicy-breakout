@@ -20,7 +20,7 @@ package com.grapefrukt.games.juicy.gameobjects {
 			this.x = x;
 			this.y = y;
 			
-			_trail = new Rainbow(1);
+			_trail = new Rainbow();
 			addChild(_trail);
 			
 			_gfx = new Shape;

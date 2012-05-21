@@ -29,7 +29,7 @@
 			_objectPool.allocate(Segment, 100);
 		}
 		
-		public function Rainbow(size:uint = 1) {
+		public function Rainbow(size:uint = 2) {
 			tmpPoint = new Point;
 			_colorOffset = Math.random();
 			_segments = new Vector.<Segment>;
@@ -60,9 +60,9 @@
 			var offset	:Number = 0.0;
 						
 			for (var i:uint = 0; i < _colorCount; ++i) {
-				graphics.lineStyle(5, getColor(i / _colorCount), 1, false, LineScaleMode.NORMAL, CapsStyle.SQUARE);
+				graphics.lineStyle(1, Settings.COLOR_TRAIL, 1, false, LineScaleMode.NORMAL, CapsStyle.SQUARE);
 				step = 0;
-				offset = 2.0 * (i - _colorCount * .5);
+				offset = (-.5 + i / (_colorCount - 1)) * 9.0;
 				for (var j:int = _segments.length - 1; j >= 0; j -= 1 ) {
 					s1 = Segment(_segments[j]);
 					if(s2){
@@ -78,11 +78,6 @@
 				}
 				s2 = null;
 			}
-		}
-		
-		private function getColor(percent:Number):uint {	
-			return Settings.COLOR_TRAIL;
-			//return ColorConverter.HSBtoUINT(percent + _colorOffset, 1, 1);
 		}
 		
 		private function get head():Segment {
