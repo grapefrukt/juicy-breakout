@@ -1,12 +1,14 @@
 package com.grapefrukt.games.juicy.gameobjects {
 	import com.grapefrukt.display.utilities.DrawGeometry;
 	import com.grapefrukt.games.general.gameobjects.GameObject;
+	import com.grapefrukt.games.juicy.effects.SliceEffect;
 	import com.grapefrukt.games.juicy.events.JuicyEvent;
 	import com.grapefrukt.games.juicy.Settings;
 	import com.gskinner.motion.easing.Back;
 	import com.gskinner.motion.easing.Quadratic;
 	import com.gskinner.motion.GTween;
 	import com.gskinner.motion.plugins.ColorTransformPlugin;
+	import flash.display.Shape;
 	import flash.geom.ColorTransform;
 	import flash.geom.Point;
 	/**
@@ -19,10 +21,16 @@ package com.grapefrukt.games.juicy.gameobjects {
 		protected var _collisionH:Number = Settings.BLOCK_H;
 		
 		protected var _collidable:Boolean = true;
+		protected var _gfx:Shape;
+		
+		private var _sliceEffect:SliceEffect;
 		
 		public function Block(x:Number, y:Number) {
 			this.x = x;
 			this.y = y;
+			
+			_gfx = new Shape();
+			addChild(_gfx);
 			
 			render(Settings.COLOR_BLOCK);
 		}
@@ -30,6 +38,7 @@ package com.grapefrukt.games.juicy.gameobjects {
 		public function collide(ball:Ball):void {
 			_collidable = false;
 			
+			// little hack to get the animation complete callback for all cominations of rotation/scaling
 			var delayDestruction:Boolean = false;
 			
 			if (Settings.EFFECT_BLOCK_DARKEN) transform.colorTransform = new ColorTransform(.7, .7, .8);
@@ -46,8 +55,17 @@ package com.grapefrukt.games.juicy.gameobjects {
 			// move block in front
 			parent.setChildIndex(this, parent.numChildren - 1);
 			
-			// little hack to get the animation complete callback for all cominations of rotation/scaling
-			var completeCallback:Function = handleRemoveTweenComplete;
+			if (Settings.EFFECT_BLOCK_SHATTER) {
+				_sliceEffect = new SliceEffect(_gfx, null);
+				_sliceEffect.slice(
+					new Point(ball.x - this.x - ball.velocityX * 10, ball.y - this.y - ball.velocityY * 10), 
+					new Point(ball.x - this.x + ball.velocityX * 10, ball.y - this.y + ball.velocityY * 10)
+				);
+				addChild(_sliceEffect);
+				_gfx.visible = false;
+				
+				delayDestruction = true;
+			}
 			
 			if (Settings.EFFECT_BLOCK_ROTATE) {
 				new GTween(this, .5, { rotation : Math.random() > .5 ? 90 : -90 }, { ease : Quadratic.easeIn } );
@@ -71,6 +89,9 @@ package com.grapefrukt.games.juicy.gameobjects {
 		
 		override public function update(timeDelta:Number = 1):void {
 			super.update(timeDelta);
+			
+			if (_sliceEffect) _sliceEffect.update(timeDelta);
+			
 			if (Settings.EFFECT_BLOCK_GRAVITY && !_collidable) {
 				velocityY += .4 * timeDelta;
 			}
@@ -81,10 +102,10 @@ package com.grapefrukt.games.juicy.gameobjects {
 		}
 		
 		protected function render(color:uint):void {
-			graphics.clear();
-			graphics.beginFill(color);
+			_gfx.graphics.clear();
+			_gfx.graphics.beginFill(color);
 			// 0,0 is at center of block to make effects easier
-			graphics.drawRect(-Settings.BLOCK_W / 2, -Settings.BLOCK_H / 2, Settings.BLOCK_W, Settings.BLOCK_H);
+			_gfx.graphics.drawRect(-Settings.BLOCK_W / 2, -Settings.BLOCK_H / 2, Settings.BLOCK_W, Settings.BLOCK_H);
 		}
 		
 		public function get collidable():Boolean {

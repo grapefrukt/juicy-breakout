@@ -75,7 +75,9 @@ package com.grapefrukt.games.juicy {
 			
 			_particles_impact.clear();
 			
-			_balls.add(new Ball(Settings.STAGE_W / 2, Settings.STAGE_H / 2));
+			for (var j:int = 0; j < Settings.NUM_BALLS; j++) {
+				_balls.add(new Ball(Settings.STAGE_W / 2, Settings.STAGE_H / 2));				
+			}
 			
 			for (var i:int = 0; i < 80; i++) {
 				var block:Block = new Block( 120 + (i % 10) * (Settings.BLOCK_W + 10), 47.5 + int(i / 10) * (Settings.BLOCK_H + 10));
@@ -134,8 +136,11 @@ package com.grapefrukt.games.juicy {
 							
 							// figure out which way to bounce
 							
+							// slicer powerup
+							if (Settings.POWERUP_SLICER_BALL && !(block is Paddle))
+							ball.collide(1, 1, block);
 							// top
-							if (ball.y <= block.y - block.collisionH / 2 && ball.velocityY > 0) ball.collide(1, -1, block);
+							else if (ball.y <= block.y - block.collisionH / 2 && ball.velocityY > 0) ball.collide(1, -1, block);
 							// bottom
 							else if (ball.y >= block.y + block.collisionH / 2 && ball.velocityY < 0) ball.collide(1, -1, block);
 							// left
@@ -161,17 +166,22 @@ package com.grapefrukt.games.juicy {
 		}
 		
 		private function handleBallCollide(e:JuicyEvent):void {
-			ParticleSpawn.burst(	e.ball.x, 
-									e.ball.y, 
-									5, 
-									90, 
-									-Math.atan2(e.ball.velocityX, e.ball.velocityY) * 180 / Math.PI, 
-									e.ball.velocity * 5, 
-									.5,
-									_particles_impact
-								);
-								
-			_screenshake.shake(-e.ball.velocityX * Settings.EFFECT_SCREEN_SHAKE_POWER, -e.ball.velocityY * Settings.EFFECT_SCREEN_SHAKE_POWER);
+			if (Settings.EFFECT_PARTICLE_BALL_COLLISION) {
+				ParticleSpawn.burst(	
+					e.ball.x, 
+					e.ball.y, 
+					5, 
+					90, 
+					-Math.atan2(e.ball.velocityX, e.ball.velocityY) * 180 / Math.PI, 
+					e.ball.velocity * 5, 
+					.5,
+					_particles_impact
+				);
+			}
+			
+			_screenshake.shake( -e.ball.velocityX * Settings.EFFECT_SCREEN_SHAKE_POWER, -e.ball.velocityY * Settings.EFFECT_SCREEN_SHAKE_POWER);
+			
+			e.ball.velocity = Settings.BALL_MAX_VELOCITY;
 		}
 		
 		private function handleBlockDestroyed(e:JuicyEvent):void {
