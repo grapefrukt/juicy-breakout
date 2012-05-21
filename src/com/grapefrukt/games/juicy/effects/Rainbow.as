@@ -15,7 +15,6 @@
 	 */
 	public class Rainbow extends Shape {
 		
-		private var maxLen		:Number = 	30;
 		private var _segments	:Vector.<Segment>;
 		
 		private static var _objectPool:ObjectPool;
@@ -39,7 +38,7 @@
 		public function addSegment(x:Number, y:Number):void {
 			var seg:Segment;
 			
-			while (_segments.length > maxLen) _objectPool.object = _segments.shift();
+			while (_segments.length > Settings.EFFECT_BALL_TRAIL_LENGTH) _objectPool.object = _segments.shift();
 			seg = _objectPool.object
 			seg.x = x;
 			seg.y = y;
@@ -49,7 +48,7 @@
 		
 		public function redrawSegments(offsetX:Number = 0, offsetY:Number = 0):void {
 			graphics.clear();
-			if (!Settings.EFFECT_BALL_DRAW_TRAILS) return;
+			if (Settings.EFFECT_BALL_TRAIL_LENGTH == 0) return;
 			
 			var ang		:Number;
 			var s1		:Segment;	// current segment
@@ -59,8 +58,9 @@
 			var sin		:Number = 0;
 			var cos		:Number = 0;
 			
-			
-			step = 0;
+			if (_verts.length != (_segments.length - 1) * 4) {
+				_verts.length = 0;
+			}
 			
 			for (var j:int = 0; j < _segments.length; ++j) {
 				s1 = Segment(_segments[j]);
@@ -71,7 +71,10 @@
 					cos = Math.cos(ang);
 					
 					for (var i:uint = 0; i < 2; ++i) {
-						offset = (-.5 + i / 1) * 9.0;
+						offset = ( -.5 + i / 1) * 9.0;
+						if (Settings.EFFECT_BALL_TRAIL_SCALE) {
+							offset *= j / _segments.length;
+						}
 						_verts[step++] = s1.x + cos * offset - offsetX;
 						_verts[step++] = s1.y + sin * offset - offsetY;
 					}

@@ -17,15 +17,18 @@ package com.grapefrukt.games.juicy {
 		[min("0")] [max("1")]
 		static public var EFFECT_SCREEN_SHAKE_POWER	:Number = 0;
 		
-		static public var EFFECT_BLOCK_TWEEN_SCALE	:Boolean = true;
-		static public var EFFECT_BLOCK_PUSH			:Boolean = true;
-		static public var EFFECT_BLOCK_ROTATE		:Boolean = true;
-		static public var EFFECT_BLOCK_GRAVITY		:Boolean = true;
-		static public var EFFECT_BLOCK_DARKEN		:Boolean = true;
+		static public var EFFECT_BLOCK_TWEEN_SCALE	:Boolean = false;
+		static public var EFFECT_BLOCK_PUSH			:Boolean = false;
+		static public var EFFECT_BLOCK_ROTATE		:Boolean = false;
+		static public var EFFECT_BLOCK_GRAVITY		:Boolean = false;
+		static public var EFFECT_BLOCK_DARKEN		:Boolean = false;
 			
 		static public var EFFECT_BALL_ROTATE		:Boolean = true;
 		static public var EFFECT_BALL_STRETCH		:Boolean = true;
-		static public var EFFECT_BALL_DRAW_TRAILS	:Boolean = true;
+		
+		[min("0")] [max("100")]
+		static public var EFFECT_BALL_TRAIL_LENGTH	:int = 0;
+		static public var EFFECT_BALL_TRAIL_SCALE	:Boolean = false;
 		
 		static public const BALL_MAX_VELOCITY		:Number = 5;
 		static public const BALL_MIN_VELOCITY		:Number = 4;
