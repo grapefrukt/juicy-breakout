@@ -78,8 +78,6 @@ package com.grapefrukt.games.juicy {
 		static public const COLOR_TRAIL			:uint = 0x8a9b0f;
 		static public const COLOR_SPARK			:uint = 0xffffff;
 		static public const COLOR_BOUNCY_LINES	:uint = 0xbd1550;
-		static public const EFFECTS_BALL_GLOW:String = "effectsBallGlow";
-
 	}
 
 }
