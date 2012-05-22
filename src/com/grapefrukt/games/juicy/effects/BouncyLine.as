@@ -134,10 +134,11 @@ package com.grapefrukt.games.juicy.effects
 		public function checkCollision( ball:Ball ):void {
 			
 			if ( collisionCounter > 0 ) return;
-			var col:Point = lineIntersectLine( pos1, pos2, new Point( ball.x, ball.y ), new Point( ball.exX, ball.exY ) );
+			var dist:Number = distanceFromLine( pos1, pos2, new Point( ball.x, ball.y ) );
+			// var col:Point = lineIntersectLine( pos1, pos2, new Point( ball.x, ball.y ), new Point( ball.exX, ball.exY ) );
 			
 			// we collided
-			if ( col != null ) {
+			if ( dist <= 15 ) {
 				
 				// this wobble
 				wobble( ball.x + Settings.EFFECT_BOUNCY_LINES_STRENGHT  * ball.velocityX, ball.y + Settings.EFFECT_BOUNCY_LINES_STRENGHT * ball.velocityY );
@@ -166,6 +167,45 @@ package com.grapefrukt.games.juicy.effects
 				collisionCounter = 2;
 			}
 		}
+
+		public function closestPointOnLineSegment( a:Point, b:Point, p:Point ):Point
+		{
+			var c:Point = new Point( p.x - a.x, p.y - a.y );
+			var v:Point = new Point( b.x - a.x, b.y - a.y );
+			var distance:Number = v.length;
+			
+			// optimized normalized
+			// v = v.Normalise();
+			if( distance != 0 )
+			{
+				v.x /= distance;
+				v.y /= distance;
+			}
+
+			var t:Number = v.x * c.x + v.y * c.y;
+			// float t = Dot( v, c );
+
+			if (t < 0)
+				return a.clone();
+
+			if (t > distance )
+				return b.clone();
+
+			v.x *= t;
+			v.y *= t;
+		
+			return a.add( v );
+		}
+		
+		public function distanceFromLine( a:Point, b:Point, p:Point ):Number
+		{
+			var delta:Point = closestPointOnLineSegment( a, b, p );
+			delta.x = delta.x - p.x;
+			delta.y = delta.y - p.y;
+			
+			return delta.length;
+		}
+
 
 		// Stolen from http://keith-hair.net/blog/2008/08/04/find-intersection-point-of-two-lines-in-as3/
 		//---------------------------------------------------------------

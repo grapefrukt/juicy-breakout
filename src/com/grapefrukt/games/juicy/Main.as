@@ -145,11 +145,12 @@ package com.grapefrukt.games.juicy {
 			}
 			_paddle.x = mouseX;
 			
+			var screen_buffer:Number = 15;
 			for each(var ball:Ball in _balls.collection) {
-				if (ball.x < 0 && ball.velocityX < 0) ball.collide(-1, 1);
-				if (ball.x > Settings.STAGE_W && ball.velocityX > 0) ball.collide( -1, 1);
-				if (ball.y < 0 && ball.velocityY < 0) ball.collide(1, -1);
-				if (ball.y > Settings.STAGE_H && ball.velocityY > 0) ball.collide(1, -1);
+				if (ball.x < screen_buffer 						&& ball.velocityX < 0) ball.collide(-1, 1);
+				if (ball.x > Settings.STAGE_W - screen_buffer 	&& ball.velocityX > 0) ball.collide( -1, 1);
+				if (ball.y < screen_buffer 						&& ball.velocityY < 0) ball.collide(1, -1);
+				if (ball.y > Settings.STAGE_H 					&& ball.velocityY > 0) ball.collide(1, -1);
 				
 				// line ball collision
 				for each ( var line:BouncyLine in _lines.collection) {
