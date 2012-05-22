@@ -223,7 +223,10 @@ package com.grapefrukt.games.juicy {
 		}
 		
 		private function handleBallCollide(e:JuicyEvent):void {
-			_backgroundGlitchForce = 0.05;
+			
+			if( e.block != null && e.block != _paddle )
+				_backgroundGlitchForce = 0.05;
+				
 			if (Settings.EFFECT_PARTICLE_BALL_COLLISION) {
 				ParticleSpawn.burst(	
 					e.ball.x, 
