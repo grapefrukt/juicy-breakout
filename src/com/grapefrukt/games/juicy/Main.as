@@ -266,7 +266,7 @@ package com.grapefrukt.games.juicy {
 					5, 
 					45, 
 					-Math.atan2(e.ball.velocityX, e.ball.velocityY) * 180 / Math.PI, 
-					e.ball.velocity * 10, 
+					50 + e.ball.velocity * 10, 
 					.5,
 					_particles_shatter
 				);
