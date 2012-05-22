@@ -41,6 +41,11 @@ package com.grapefrukt.games.juicy {
 		public function Main() {
 			ColorTransformPlugin.install();
 			
+			SoundManager.init();
+			SoundManager.soundControl.addEventListener(Event.INIT, handleInit);
+		}
+		
+		private function handleInit(e:Event):void {
 			_blocks = new GameObjectCollection();
 			_blocks.addEventListener(JuicyEvent.BLOCK_DESTROYED, handleBlockDestroyed, true);
 			addChild(_blocks);
@@ -212,6 +217,8 @@ package com.grapefrukt.games.juicy {
 			}
 			
 			e.ball.velocity = Settings.BALL_MAX_VELOCITY;
+			
+			SoundManager.play("attack");
 		}
 		
 		private function handleBlockDestroyed(e:JuicyEvent):void {
