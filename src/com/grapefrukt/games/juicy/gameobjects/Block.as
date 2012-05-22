@@ -11,6 +11,7 @@ package com.grapefrukt.games.juicy.gameobjects {
 	import com.gskinner.motion.GTween;
 	import com.gskinner.motion.plugins.ColorTransformPlugin;
 	import flash.display.Shape;
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.TimerEvent;
 	import flash.geom.ColorTransform;
@@ -27,7 +28,7 @@ package com.grapefrukt.games.juicy.gameobjects {
 		protected var _collisionH:Number = Settings.BLOCK_H;
 		
 		protected var _collidable:Boolean = true;
-		protected var _gfx:Shape;
+		protected var _gfx:Sprite;
 		
 		private var _sliceEffect:SliceEffect;
 		
@@ -35,7 +36,7 @@ package com.grapefrukt.games.juicy.gameobjects {
 			this.x = x;
 			this.y = y;
 			
-			_gfx = new Shape();
+			_gfx = new Sprite;
 			addChild(_gfx);
 			
 			render(Settings.COLOR_BLOCK);

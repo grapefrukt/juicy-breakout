@@ -137,6 +137,8 @@ package com.grapefrukt.games.juicy {
 			_lines.update(_timestep.timeDelta);
 			_screenshake.update(_timestep.timeDelta);
 			
+			_paddle.lookAt(Ball(_balls.collection[0]));
+			
 			if (Settings.EFFECT_PADDLE_STRETCH) {
 				_paddle.scaleX = 1 + Math.abs(_paddle.x - mouseX) / 100;
 				_paddle.scaleY = 1.5 - _paddle.scaleX * .5;
@@ -279,6 +281,10 @@ package com.grapefrukt.games.juicy {
 			if (e.keyCode == Keyboard.S) _screenshake.shakeRandom(4);
 			if (e.keyCode == Keyboard.NUMBER_1) _toggler.setAll(true);
 			if (e.keyCode == Keyboard.NUMBER_2) _toggler.setAll(false);
+			if (e.keyCode == Keyboard.P) {
+				var b:Ball = _balls.collection[0] as Ball;
+				ParticleSpawn.burst(b.x, b.y, 10, 360, Math.atan2(b.velocityY, b.velocityX) * 180 / Math.PI, 100, .1, _particles_impact);
+			}
 		}
 		
 		private function handleMouseToggle(e:MouseEvent):void {

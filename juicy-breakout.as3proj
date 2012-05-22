@@ -52,7 +52,7 @@
   </includeLibraries>
   <!-- SWC Libraries -->
   <libraryPaths>
-    <!-- example: <element path="..." /> -->
+    <element path="assets\juicy-face.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

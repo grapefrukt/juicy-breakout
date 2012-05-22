@@ -46,6 +46,10 @@ package com.grapefrukt.games.juicy {
 		static public var EFFECT_BALL_TRAIL_SCALE			:Boolean = false;
 		
 		static public var EFFECT_PADDLE_STRETCH				:Boolean = false;
+		static public var EFFECT_PADDLE_FACE				:Boolean = false;
+		[min("1")] [max("100")]
+		static public var EFFECT_PADDLE_SMILE				:int = 1;
+		static public var EFFECT_PADDLE_LOOK_AT_BALL		:Boolean = false;
 		
 		static public var EFFECT_PARTICLE_BALL_COLLISION	:Boolean = true;
 		static public var EFFECT_PARTICLE_BLOCK_SHATTER		:Boolean = true;
@@ -61,7 +65,7 @@ package com.grapefrukt.games.juicy {
 		
 		static public var POWERUP_SLICER_BALL 		:Boolean = false;
 		
-		static public var SOUNDS					:Boolean = false;
+		static public var SOUNDS					:Boolean = true;
 		
 		static public const NUM_BALLS				:uint = 1;
 		static public const BALL_MAX_VELOCITY		:Number = 5;
@@ -73,8 +77,8 @@ package com.grapefrukt.games.juicy {
 		
 		static public const COLOR_BACKGROUND	:uint = 0x490a3d;
 		static public const COLOR_BLOCK			:uint = 0xbd1550;
-		static public const COLOR_BALL			:uint = 0xe97f02;
-		static public const COLOR_PADDLE		:uint = 0xf8ca00;
+		static public const COLOR_BALL			:uint = 0xf8ca00;
+		static public const COLOR_PADDLE		:uint = 0xe97f02;
 		static public const COLOR_TRAIL			:uint = 0x8a9b0f;
 		static public const COLOR_SPARK			:uint = 0xffffff;
 		static public const COLOR_BOUNCY_LINES	:uint = 0xbd1550;
