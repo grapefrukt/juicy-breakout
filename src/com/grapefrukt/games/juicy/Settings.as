@@ -49,6 +49,8 @@ package com.grapefrukt.games.juicy {
 		static public var EFFECT_PADDLE_FACE				:Boolean = false;
 		[min("1")] [max("100")]
 		static public var EFFECT_PADDLE_SMILE				:int = 1;
+		[min("1")] [max("300")]
+		static public var EFFECT_PADDLE_EYE_SIZE			:int = 1;
 		static public var EFFECT_PADDLE_LOOK_AT_BALL		:Boolean = false;
 		
 		static public var EFFECT_PARTICLE_BALL_COLLISION	:Boolean = true;
