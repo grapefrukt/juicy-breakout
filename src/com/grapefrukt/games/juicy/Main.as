@@ -217,7 +217,7 @@ package com.grapefrukt.games.juicy {
 				);
 			}
 			
-			_screenshake.shake( -e.ball.velocityX * Settings.EFFECT_SCREEN_SHAKE_POWER, -e.ball.velocityY * Settings.EFFECT_SCREEN_SHAKE_POWER);
+			if (Settings.EFFECT_SCREEN_SHAKE) _screenshake.shake( -e.ball.velocityX * Settings.EFFECT_SCREEN_SHAKE_POWER, -e.ball.velocityY * Settings.EFFECT_SCREEN_SHAKE_POWER);
 			
 			if (Settings.EFFECT_BLOCK_JELLY) {
 				for each (var block:Block in _blocks.collection) {
@@ -230,7 +230,14 @@ package com.grapefrukt.games.juicy {
 			
 			e.ball.velocity = Settings.BALL_MAX_VELOCITY;
 			
-			//SoundManager.play("attack");
+			// wall collision
+			if (e.block is Paddle) {
+				SoundManager.play("ball-paddle");
+			} else if (e.block) {
+				SoundManager.play("ball-block");
+			} else {
+				SoundManager.play("ball-wall");
+			}		
 		}
 		
 		private function handleBlockDestroyed(e:JuicyEvent):void {
@@ -252,6 +259,8 @@ package com.grapefrukt.games.juicy {
 			if (e.keyCode == Keyboard.SPACE) reset();
 			if (e.keyCode == Keyboard.B) addBall();
 			if (e.keyCode == Keyboard.S) _screenshake.shakeRandom(4);
+			if (e.keyCode == Keyboard.NUMBER_1) _toggler.setAll(true);
+			if (e.keyCode == Keyboard.NUMBER_2) _toggler.setAll(false);
 		}
 		
 		private function handleMouseToggle(e:MouseEvent):void {
