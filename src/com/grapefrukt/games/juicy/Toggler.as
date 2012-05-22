@@ -1,4 +1,5 @@
 package com.grapefrukt.games.juicy {
+	import com.bit101.components.Accordion;
 	import com.bit101.components.CheckBox;
 	import com.bit101.components.HBox;
 	import com.bit101.components.HSlider;
@@ -7,6 +8,7 @@ package com.grapefrukt.games.juicy {
 	import com.bit101.components.Panel;
 	import com.bit101.components.VBox;
 	import com.bit101.components.Window;
+	import flash.display.DisplayObjectContainer;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
@@ -57,12 +59,30 @@ package com.grapefrukt.games.juicy {
 			
 			_properties.sort(_sort);
 			
-			var panel:Window = new Window(this, 10, 10);
-			panel.width = 250;
-			panel.height = _properties.length * 28;
-			var container:VBox = new VBox(panel, 10, 10);
+			while (numChildren) removeChildAt(0);
+			
+			var settingWindow:Window = new Window(this, 10, 10);
+			settingWindow.title = "JUICEATRON 5000 X";
+			settingWindow.width = 250;
+			settingWindow.height = Settings.STAGE_H - 50;
+			
+			var accordion:Accordion = new Accordion(settingWindow);
+			var window:Window;
+			
 			for each (property in _properties) {
-				var row:HBox = new HBox(container);
+				var groupName:String = getGroupName(property.name);
+				trace(window ? window.title : "null", groupName);
+				if (!window || window.title != groupName) {
+					if (window) {
+						window.content.getChildAt(0).height = DisplayObjectContainer(window.content.getChildAt(0)).numChildren * 30;
+					}
+					
+					accordion.addWindowAt(groupName, accordion.numWindows);
+					window = accordion.getWindowAt(accordion.numWindows - 1);
+					var container:VBox = new VBox(window.content, 10, 10);
+				}
+				
+				var row:HBox = new HBox(DisplayObjectContainer(window.content.getChildAt(0)));
 				var label:Label = new Label(row, 0, 0, prettify(property.name));
 				label.autoSize = false;
 				label.width = 120;
@@ -81,6 +101,9 @@ package com.grapefrukt.games.juicy {
 				}
 			}
 			
+			accordion.height = Settings.STAGE_H - 50 - 20;
+			accordion.width = 250;
+			
 		}
 		
 		public function setAll(value:Boolean):void {
@@ -91,7 +114,12 @@ package com.grapefrukt.games.juicy {
 		}
 		
 		private function prettify(name:String):String {
-			return name.replace("EFFECT", "").replace(/_/g, " ");
+			return name.replace("EFFECT_", "").replace(/_/g, " ");
+		}
+		
+		private function getGroupName(name:String):String {
+			name = name.replace("EFFECT_", "");
+			return name.replace(/_[A-Z].*/, "");
 		}
 		
 		private function getToggleClosure(field:String):Function {
