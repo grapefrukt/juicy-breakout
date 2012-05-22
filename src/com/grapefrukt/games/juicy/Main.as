@@ -229,7 +229,14 @@ package com.grapefrukt.games.juicy {
 			
 			e.ball.velocity = Settings.BALL_MAX_VELOCITY;
 			
-			//SoundManager.play("attack");
+			// wall collision
+			if (e.block is Paddle) {
+				SoundManager.play("ball-paddle");
+			} else if (e.block) {
+				SoundManager.play("ball-block");
+			} else {
+				SoundManager.play("ball-wall");
+			}		
 		}
 		
 		private function handleBlockDestroyed(e:JuicyEvent):void {

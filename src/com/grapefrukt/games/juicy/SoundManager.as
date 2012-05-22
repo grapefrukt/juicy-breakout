@@ -20,6 +20,7 @@ package com.grapefrukt.games.juicy {
 		}
 		
 		static public function play(id:String):void {
+			if (!Settings.SOUNDS) return;
 			_sound_control.play(id);
 		}
 		
