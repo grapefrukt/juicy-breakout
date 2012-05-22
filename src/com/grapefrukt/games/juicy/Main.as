@@ -52,12 +52,13 @@ package com.grapefrukt.games.juicy {
 			_blocks.addEventListener(JuicyEvent.BLOCK_DESTROYED, handleBlockDestroyed, true);
 			addChild(_blocks);
 			
+			// we want to draw these under the ball, that's why it's added here
+			_lines = new GameObjectCollection();
+			addChild( _lines );
+
 			_balls = new GameObjectCollection();
 			_balls.addEventListener(JuicyEvent.BALL_COLLIDE, handleBallCollide, true);
 			addChild(_balls);
-			
-			_lines = new GameObjectCollection();
-			addChild( _lines );
 			
 			_particles_impact = new ParticlePool(BallImpactParticle, 20);
 			addChild(_particles_impact);

@@ -140,8 +140,9 @@ package com.grapefrukt.games.juicy.effects
 			if ( col != null ) {
 				
 				// this wobble
-				wobble( ball.x + 10 * ball.velocityX, ball.y + 10 * ball.velocityY );
+				wobble( ball.x + Settings.EFFECT_BOUNCY_LINES_STRENGHT  * ball.velocityX, ball.y + Settings.EFFECT_BOUNCY_LINES_STRENGHT * ball.velocityY );
 				
+				/*
 				var v:Point = new Point( ball.velocityX, ball.velocityY );
 				var n:Point = pos2.subtract( pos1 ); // ( GetPaddleMaxPos() - GetPaddleMinPos() );
 			
@@ -160,6 +161,7 @@ package com.grapefrukt.games.juicy.effects
 				ball.collideSet( v.x - n.x, v.y - n.y ); 
 				// types::vector2 mvn = v - n;
 				// ball_velocity = 1.0f *  mvn;
+				*/
 				
 				collisionCounter = 2;
 			}

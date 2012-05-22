@@ -49,6 +49,9 @@ package com.grapefrukt.games.juicy {
 		static public var EFFECT_PARTICLE_BLOCK_SHATTER		:Boolean = true;
 		
 		static public var EFFECT_BOUNCY_LINES_ENABLED		:Boolean = false;
+		[min("0")] [max("100")]
+		static public var EFFECT_BOUNCY_LINES_STRENGHT		:Number = 10;
+	
 		
 		static public var POWERUP_SLICER_BALL 		:Boolean = false;
 		
