@@ -24,6 +24,11 @@ package com.grapefrukt.games.juicy {
 			_sound_control.play(id);
 		}
 		
+		static public function playSoundId(id:String, sound_id:int):void {
+			if (!Settings.SOUNDS) return;
+			_sound_control.playSoundId(id, sound_id);
+		}
+		
 		private static function handleSoundControlInit(e:Event):void {
 			_sound_control.removeEventListener(Event.INIT, handleSoundControlInit);
 		}	

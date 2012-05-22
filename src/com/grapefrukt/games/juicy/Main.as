@@ -41,6 +41,8 @@ package com.grapefrukt.games.juicy {
 		private var _toggler	:Toggler;
 		
 		private var _backgroundGlitchForce		:Number;
+		private var _soundBlockHitCounter		:int;
+		private var _soundLastTimeHit			:int;
 		
 		public function Main() {
 			ColorTransformPlugin.install();
@@ -101,6 +103,7 @@ package com.grapefrukt.games.juicy {
 		
 		public function reset():void {
 			
+			_soundBlockHitCounter = 0;
 			drawBackground();
 			
 			_blocks.clear();
@@ -129,6 +132,8 @@ package com.grapefrukt.games.juicy {
 		
 		private function handleEnterFrame(e:Event):void {
 			_timestep.tick();
+			
+			_soundLastTimeHit++;
 			
 			drawBackground();
 			
@@ -257,7 +262,14 @@ package com.grapefrukt.games.juicy {
 			if (e.block is Paddle) {
 				SoundManager.play("ball-paddle");
 			} else if (e.block) {
-				SoundManager.play("ball-block");
+				// SoundManager.play("ball-block");	
+				_soundBlockHitCounter++;
+
+				if ( _soundLastTimeHit > 60 ) 
+					_soundBlockHitCounter = 0;
+					
+				_soundLastTimeHit = 0;
+				SoundManager.playSoundId( "ball-block", _soundBlockHitCounter );
 			} else {
 				SoundManager.play("ball-wall");
 			}		

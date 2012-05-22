@@ -70,6 +70,15 @@ package de.pixelate.pelikan.sound
 			var sound:SoundObject = getSoundObjectFromDictionary(id);
 			sound.play();
 		}
+
+		public function playSoundId(id:String, sound_id:int ):void {
+			if (_mute || !loaded) return;
+			var group:Array = _groups[id];
+			if (group) id = group[int(sound_id % group.length)].id;
+			
+			var sound:SoundObject = getSoundObjectFromDictionary(id);
+			sound.play();
+		}
 		
 		public function stopSound(id:String):void {
 			var sound:SoundObject = getSoundObjectFromDictionary(id);
