@@ -86,14 +86,13 @@ package com.grapefrukt.games.juicy.gameobjects {
 				delayDestruction = true;
 			}
 			
+			dispatchEvent(new JuicyEvent(JuicyEvent.BLOCK_DESTROYED, ball, this));
 			// if no animation is used, remove instantly
 			if (!delayDestruction) {
 				remove();
 			} else {
 				new GTween(this, Settings.EFFECT_BLOCK_DESTRUCTION_DURATION, null, { onComplete : handleRemoveTweenComplete } );
 			}
-			
-			dispatchEvent(new JuicyEvent(JuicyEvent.BLOCK_DESTROYED));
 		}
 		
 		public function jellyEffect(strength:Number = .2, delay:Number = 0):void {
