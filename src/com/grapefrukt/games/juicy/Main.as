@@ -120,6 +120,12 @@ package com.grapefrukt.games.juicy {
 			_lines.update(_timestep.timeDelta);
 			_screenshake.update(_timestep.timeDelta);
 			
+			if (Settings.EFFECT_PADDLE_STRETCH) {
+				_paddle.scaleX = 1 + Math.abs(_paddle.x - mouseX) / 100;
+				_paddle.scaleY = 1.5 - _paddle.scaleX * .5;
+			} else {
+				_paddle.scaleX = _paddle.scaleY = 1;
+			}
 			_paddle.x = mouseX;
 			
 			for each(var ball:Ball in _balls.collection) {

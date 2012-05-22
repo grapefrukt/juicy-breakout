@@ -96,11 +96,11 @@ package com.grapefrukt.games.juicy.gameobjects {
 		}
 		
 		public function jellyEffect(strength:Number = .2, delay:Number = 0):void {
-			new GTween(this, .05, { scaleX : 1 + strength }, { delay : delay, ease : Quadratic.easeInOut, onComplete : function(gt:GTween ):void {
+			new GTween(_gfx, .05, { scaleX : 1 + strength }, { delay : delay, ease : Quadratic.easeInOut, onComplete : function(gt:GTween ):void {
 				new GTween(gt.target, .6, { scaleX : 1 }, { ease : Elastic.easeOut } );
 			}} );
 			
-			new GTween(this, .05, { scaleY : 1 + strength }, { delay : delay + .05, ease : Quadratic.easeInOut, onComplete : function(gt:GTween ):void {
+			new GTween(_gfx, .05, { scaleY : 1 + strength }, { delay : delay + .05, ease : Quadratic.easeInOut, onComplete : function(gt:GTween ):void {
 				new GTween(gt.target, .6, { scaleY : 1 }, { ease : Elastic.easeOut } );
 			}} );
 		}

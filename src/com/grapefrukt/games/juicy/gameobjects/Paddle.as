@@ -18,11 +18,15 @@ package com.grapefrukt.games.juicy.gameobjects {
 			//super.collide(ball);
 		}
 		
+		override public function update(timeDelta:Number = 1):void {
+			super.update(timeDelta);
+		}
+		
 		override protected function render(color:uint):void {
-			graphics.clear();
-			graphics.beginFill(color);
+			_gfx.graphics.clear();
+			_gfx.graphics.beginFill(color);
 			// 0,0 is at center of block to make effects easier
-			graphics.drawRect(-Settings.PADDLE_W / 2, -Settings.PADDLE_H / 2, Settings.PADDLE_W, Settings.PADDLE_H);
+			_gfx.graphics.drawRect(-Settings.PADDLE_W / 2, -Settings.PADDLE_H / 2, Settings.PADDLE_W, Settings.PADDLE_H);
 		}
 		
 	}
