@@ -54,6 +54,7 @@ package com.grapefrukt.games.juicy {
 		[min("0")] [max("100")]
 		static public var EFFECT_BOUNCY_LINES_STRENGHT		:Number = 10;
 	
+		static public var EFFECT_BACKGROUND_COLOR_GLITCH	:Boolean = false;
 		
 		static public var POWERUP_SLICER_BALL 		:Boolean = false;
 		

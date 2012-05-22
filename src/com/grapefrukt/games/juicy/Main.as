@@ -40,6 +40,9 @@ package com.grapefrukt.games.juicy {
 
 		private var _toggler	:Toggler;
 		
+		private var _backgroundGlitchCounter	:Number;
+		private var _backgroundGlitchForce		:Number;
+		
 		public function Main() {
 			ColorTransformPlugin.install();
 			
@@ -83,11 +86,23 @@ package com.grapefrukt.games.juicy {
 			
 			reset();
 		}
+
+		public function drawBackground():void {
+			graphics.clear();
+			if ( Settings.EFFECT_BACKGROUND_COLOR_GLITCH && _backgroundGlitchForce > 0.01 ) {
+				graphics.beginFill(Settings.COLOR_BACKGROUND * ( 3 * Math.random() ) );
+				_backgroundGlitchForce *= 0.8;
+			}
+			else 
+			{
+				graphics.beginFill(Settings.COLOR_BACKGROUND );
+			}
+			graphics.drawRect(5, 5, Settings.STAGE_W-10, Settings.STAGE_H);
+		}
 		
 		public function reset():void {
-			graphics.clear();
-			graphics.beginFill(Settings.COLOR_BACKGROUND);
-			graphics.drawRect(0, 0, Settings.STAGE_W, Settings.STAGE_H);
+			
+			drawBackground();
 			
 			_blocks.clear();
 			_balls.clear();
@@ -115,6 +130,8 @@ package com.grapefrukt.games.juicy {
 		
 		private function handleEnterFrame(e:Event):void {
 			_timestep.tick();
+			
+			drawBackground();
 			
 			_balls.update(_timestep.timeDelta);
 			_blocks.update(_timestep.timeDelta);
@@ -204,6 +221,7 @@ package com.grapefrukt.games.juicy {
 		}
 		
 		private function handleBallCollide(e:JuicyEvent):void {
+			_backgroundGlitchForce = 0.05;
 			if (Settings.EFFECT_PARTICLE_BALL_COLLISION) {
 				ParticleSpawn.burst(	
 					e.ball.x, 
