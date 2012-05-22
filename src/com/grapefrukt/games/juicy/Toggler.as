@@ -20,6 +20,7 @@ package com.grapefrukt.games.juicy {
 	public class Toggler extends Sprite {
 		
 		private var _targetClass:Class;
+		private var _properties:Vector.<Property>;
 		
 		public function Toggler(targetClass:Class, visible:Boolean = false) {
 			_targetClass = targetClass;
@@ -31,7 +32,7 @@ package com.grapefrukt.games.juicy {
 		private function reset():void {
 			var typeXML:XML = describeType(_targetClass);
 			
-			var properties:Vector.<Property> = new Vector.<Property>();
+			_properties = new Vector.<Property>();
 			var property:Property;
 			var tag:XML
 			
@@ -51,16 +52,16 @@ package com.grapefrukt.games.juicy {
 				for each (tag in variable.metadata.(@name == "max")) property.max = tag.arg.@value;
 				for each (tag in variable.metadata.(@name == "min")) property.min = tag.arg.@value;
 				
-				properties.push(property);
+				_properties.push(property);
 			}
 			
-			properties.sort(_sort);
+			_properties.sort(_sort);
 			
 			var panel:Window = new Window(this, 10, 10);
 			panel.width = 250;
-			panel.height = properties.length * 28;
+			panel.height = _properties.length * 28;
 			var container:VBox = new VBox(panel, 10, 10);
-			for each (property in properties) {
+			for each (property in _properties) {
 				var row:HBox = new HBox(container);
 				var label:Label = new Label(row, 0, 0, prettify(property.name));
 				label.autoSize = false;
@@ -78,10 +79,15 @@ package com.grapefrukt.games.juicy {
 						slider.value = property.value;
 						break;
 				}
-				
-				
 			}
 			
+		}
+		
+		public function setAll(value:Boolean):void {
+			for each (var property:Property in _properties) {
+				if (property.type == "Boolean") _targetClass[property.name] = value;
+			}
+			reset();
 		}
 		
 		private function prettify(name:String):String {

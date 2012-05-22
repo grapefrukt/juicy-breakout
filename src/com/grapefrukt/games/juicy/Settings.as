@@ -14,11 +14,12 @@ package com.grapefrukt.games.juicy {
 		static public const PADDLE_W:Number = 100;
 		static public const PADDLE_H:Number = 30;
 		
+		static public var EFFECT_SCREEN_SHAKE		:Boolean = false;
 		[min("0")] [max("1")]
-		static public var EFFECT_SCREEN_SHAKE_POWER	:Number = 0;
+		static public var EFFECT_SCREEN_SHAKE_POWER	:Number = .5;
 		
 		[min("0")] [max("3")]
-		static public var EFFECT_BLOCK_DESTRUCTION_DURATION:Number = .5;
+		static public var EFFECT_BLOCK_DESTRUCTION_DURATION:Number = 2;
 		static public var EFFECT_BLOCK_SCALE		:Boolean = false;
 		static public var EFFECT_BLOCK_PUSH			:Boolean = false;
 		static public var EFFECT_BLOCK_ROTATE		:Boolean = false;
@@ -39,9 +40,10 @@ package com.grapefrukt.games.juicy {
 		static public var EFFECT_BALL_GLOW					:Boolean = false;
 		static public var EFFECT_BALL_EXTRA_SCALE			:Boolean = false;
 		
-		[min("0")] [max("100")]
-		static public var EFFECT_BALL_TRAIL_LENGTH	:int = 0;
-		static public var EFFECT_BALL_TRAIL_SCALE	:Boolean = false;
+		static public var EFFECT_BALL_TRAIL					:Boolean = false;
+		[min("5")] [max("100")]
+		static public var EFFECT_BALL_TRAIL_LENGTH			:int = 30;
+		static public var EFFECT_BALL_TRAIL_SCALE			:Boolean = false;
 		
 		static public var EFFECT_PADDLE_STRETCH				:Boolean = false;
 		

@@ -48,7 +48,7 @@
 		
 		public function redrawSegments(offsetX:Number = 0, offsetY:Number = 0):void {
 			graphics.clear();
-			if (Settings.EFFECT_BALL_TRAIL_LENGTH == 0) return;
+			if (!Settings.EFFECT_BALL_TRAIL) return;
 			
 			var ang		:Number;
 			var s1		:Segment;	// current segment
