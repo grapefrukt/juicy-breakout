@@ -30,8 +30,11 @@ package com.grapefrukt.games.juicy.gameobjects {
 			super.update(timeDelta);
 			_face.visible = Settings.EFFECT_PADDLE_FACE;
 			_face.mouth.gotoAndStop(Settings.EFFECT_PADDLE_SMILE);
+
 			
 			_happyExtraScale *= 0.95;
+			_face.eye_l.scaleX = _face.eye_l.scaleY = 1 + Settings.EFFECT_PADDLE_EYE_SIZE / 100;
+			_face.eye_r.scaleX = _face.eye_r.scaleY = 1 + Settings.EFFECT_PADDLE_EYE_SIZE / 100;
 		}
 		
 		public function lookAt(ball:Ball):void {

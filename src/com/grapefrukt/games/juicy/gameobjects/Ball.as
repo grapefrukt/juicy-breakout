@@ -32,6 +32,8 @@ package com.grapefrukt.games.juicy.gameobjects {
 		public var exX:Number;
 		public var exY:Number;
 		
+		private var _trailCooldown:Number = .5;
+		
 		public function Ball(x:Number, y:Number) {
 			this.x = x;
 			this.y = y;
@@ -124,15 +126,14 @@ package com.grapefrukt.games.juicy.gameobjects {
 			} else {
 				_ball_extra_scale = 0;
 			}
-		}
-		
-		
-		
-		public function updateTrail():void {
-			_trail.addSegment(x, y);
+			
+			if ((_trailCooldown -= timeDelta) < 0) {
+				_trail.addSegment(x, y);
+				_trailCooldown = 3;
+			}
 			_trail.redrawSegments(x, y);
 		}
-		
+
 		private function doCollisionEffects( block:Block = null ):void {
 			dispatchEvent(new JuicyEvent(JuicyEvent.BALL_COLLIDE, this, block));
 			_ball_shakiness = 0.1;
