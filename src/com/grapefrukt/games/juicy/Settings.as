@@ -48,6 +48,8 @@ package com.grapefrukt.games.juicy {
 		static public var EFFECT_PARTICLE_BALL_COLLISION	:Boolean = true;
 		static public var EFFECT_PARTICLE_BLOCK_SHATTER		:Boolean = true;
 		
+		static public var EFFECT_BOUNCY_LINES_ENABLED		:Boolean = false;
+		
 		static public var POWERUP_SLICER_BALL 		:Boolean = false;
 		
 		static public const NUM_BALLS				:uint = 1;

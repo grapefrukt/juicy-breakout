@@ -97,7 +97,10 @@ package com.grapefrukt.games.juicy.effects
 			
 			graphics.moveTo( pos1.x, pos1.y );
 			var m:Point = middle;
-			graphics.curveTo( m.x, m.y, pos2.x, pos2.y );
+			if( Settings.EFFECT_BOUNCY_LINES_ENABLED ) 
+				graphics.curveTo( m.x, m.y, pos2.x, pos2.y );
+			else
+				graphics.lineTo( pos2.x, pos2.y );
 			
 			if ( collisionCounter > 0  ) collisionCounter--;
 			
