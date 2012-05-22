@@ -40,7 +40,6 @@ package com.grapefrukt.games.juicy {
 
 		private var _toggler	:Toggler;
 		
-		private var _backgroundGlitchCounter	:Number;
 		private var _backgroundGlitchForce		:Number;
 		
 		public function Main() {
