@@ -118,7 +118,7 @@ package com.grapefrukt.games.juicy {
 				_blocks.add(block);
 			}
 			
-			var buffer:Number = 5;
+			var buffer:Number = Settings.EFFECT_BOUNCY_LINES_DISTANCE_FROM_WALLS;
 			_lines.add( new BouncyLine( buffer, buffer, 						Settings.STAGE_W - buffer, buffer ) );
 			_lines.add( new BouncyLine( buffer, buffer, 						buffer, Settings.STAGE_H ) );
 			_lines.add( new BouncyLine( Settings.STAGE_W - buffer, 	buffer, 	Settings.STAGE_W - buffer, Settings.STAGE_H ) );
@@ -145,7 +145,7 @@ package com.grapefrukt.games.juicy {
 			}
 			_paddle.x = mouseX;
 			
-			var screen_buffer:Number = 15;
+			var screen_buffer:Number = 0.5 * Settings.EFFECT_BOUNCY_LINES_WIDTH + Settings.EFFECT_BOUNCY_LINES_DISTANCE_FROM_WALLS;
 			for each(var ball:Ball in _balls.collection) {
 				if (ball.x < screen_buffer 						&& ball.velocityX < 0) ball.collide(-1, 1);
 				if (ball.x > Settings.STAGE_W - screen_buffer 	&& ball.velocityX > 0) ball.collide( -1, 1);

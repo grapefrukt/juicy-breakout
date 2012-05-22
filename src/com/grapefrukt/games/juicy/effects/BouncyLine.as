@@ -93,7 +93,7 @@ package com.grapefrukt.games.juicy.effects
 			*/
 			
 			graphics.clear();
-			graphics.lineStyle( 20, Settings.COLOR_BLOCK, 1, false, "normal", CapsStyle.SQUARE  );
+			graphics.lineStyle( Settings.EFFECT_BOUNCY_LINES_WIDTH, Settings.COLOR_BOUNCY_LINES, 1, false, "normal", CapsStyle.SQUARE  );
 			
 			graphics.moveTo( pos1.x, pos1.y );
 			var m:Point = middle;
@@ -137,8 +137,9 @@ package com.grapefrukt.games.juicy.effects
 			var dist:Number = distanceFromLine( pos1, pos2, new Point( ball.x, ball.y ) );
 			// var col:Point = lineIntersectLine( pos1, pos2, new Point( ball.x, ball.y ), new Point( ball.exX, ball.exY ) );
 			
+			var max_distance:Number = 0.5 * Settings.EFFECT_BOUNCY_LINES_WIDTH + Settings.EFFECT_BOUNCY_LINES_DISTANCE_FROM_WALLS;
 			// we collided
-			if ( dist <= 15 ) {
+			if ( dist <= max_distance ) {
 				
 				// this wobble
 				wobble( ball.x + Settings.EFFECT_BOUNCY_LINES_STRENGHT  * ball.velocityX, ball.y + Settings.EFFECT_BOUNCY_LINES_STRENGHT * ball.velocityY );
