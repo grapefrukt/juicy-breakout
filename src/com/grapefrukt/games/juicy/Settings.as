@@ -42,7 +42,8 @@ package com.grapefrukt.games.juicy {
 		static public var EFFECT_BALL_TRAIL_LENGTH	:int = 0;
 		static public var EFFECT_BALL_TRAIL_SCALE	:Boolean = false;
 		
-		static public var EFFECT_PARTICLE_BALL_COLLISION:Boolean = false
+		static public var EFFECT_PARTICLE_BALL_COLLISION	:Boolean = true;
+		static public var EFFECT_PARTICLE_BLOCK_SHATTER		:Boolean = true;
 		
 		static public var POWERUP_SLICER_BALL 		:Boolean = false;
 		

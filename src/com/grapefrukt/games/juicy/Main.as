@@ -4,6 +4,7 @@ package com.grapefrukt.games.juicy {
 	import com.grapefrukt.games.general.particles.ParticleSpawn;
 	import com.grapefrukt.games.juicy.effects.BouncyLine;
 	import com.grapefrukt.games.juicy.effects.particles.BallImpactParticle;
+	import com.grapefrukt.games.juicy.effects.particles.BlockShatterParticle;
 	import com.grapefrukt.games.juicy.events.JuicyEvent;
 	import com.grapefrukt.games.juicy.gameobjects.Ball;
 	import com.grapefrukt.games.juicy.gameobjects.Block;
@@ -32,6 +33,7 @@ package com.grapefrukt.games.juicy {
 		private var _paddle		:Paddle;
 		
 		private var _particles_impact:ParticlePool;
+		private var _particles_shatter:ParticlePool;
 		
 		private var _mouseDown	:Boolean;
 		private var _mouseVector:Point;
@@ -59,6 +61,9 @@ package com.grapefrukt.games.juicy {
 			
 			_particles_impact = new ParticlePool(BallImpactParticle, 20);
 			addChild(_particles_impact);
+			
+			_particles_shatter = new ParticlePool(BlockShatterParticle, 20);
+			addChild(_particles_shatter);
 			
 			addEventListener(Event.ENTER_FRAME, handleEnterFrame);
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, handleKeyDown);
@@ -218,11 +223,22 @@ package com.grapefrukt.games.juicy {
 			
 			e.ball.velocity = Settings.BALL_MAX_VELOCITY;
 			
-			SoundManager.play("attack");
+			//SoundManager.play("attack");
 		}
 		
 		private function handleBlockDestroyed(e:JuicyEvent):void {
-			
+			if (Settings.EFFECT_PARTICLE_BLOCK_SHATTER) {
+				ParticleSpawn.burst(	
+					e.ball.x, 
+					e.ball.y, 
+					5, 
+					45, 
+					-Math.atan2(e.ball.velocityX, e.ball.velocityY) * 180 / Math.PI, 
+					e.ball.velocity * 10, 
+					.5,
+					_particles_shatter
+				);
+			}
 		}
 		
 		private function handleKeyDown(e:KeyboardEvent):void {
