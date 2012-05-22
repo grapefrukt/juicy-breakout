@@ -67,15 +67,15 @@ package com.grapefrukt.games.juicy.effects {
 			//_container.opaqueBackground = 0xff00ff;
 		}
 		
-		public function update( delta:Number ) : void {
+		public function update( timeDelta:Number ) : void {
 			for each (var slice:LineSliceObject in _slices){
-				slice.x += slice.velocity.x;
-				slice.y += slice.velocity.y;
-				slice.rotation += slice.velocityR;
+				slice.x += slice.velocity.x * timeDelta;
+				slice.y += slice.velocity.y * timeDelta;
+				slice.rotation += slice.velocityR * timeDelta;
 				
-				slice.velocity.x *= 0.99;
-				slice.velocity.y *= 0.99;
-				slice.velocityR *= 0.95;
+				slice.velocity.x -= slice.velocity.x * 0.01 * timeDelta;
+				slice.velocity.y -= slice.velocity.y * 0.01 * timeDelta;
+				slice.velocityR -= slice.velocityR * 0.01 * timeDelta;
 			}
 		}
 		

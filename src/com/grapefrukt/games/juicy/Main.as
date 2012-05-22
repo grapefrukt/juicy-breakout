@@ -9,13 +9,16 @@ package com.grapefrukt.games.juicy {
 	import com.grapefrukt.games.juicy.gameobjects.Ball;
 	import com.grapefrukt.games.juicy.gameobjects.Block;
 	import com.grapefrukt.games.juicy.gameobjects.Paddle;
+	import com.grapefrukt.input.LazyKeyboard;
 	import com.grapefrukt.Timestep;
+	import com.gskinner.motion.GTween;
 	import com.gskinner.motion.plugins.ColorTransformPlugin;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
+	import flash.media.SoundChannel;
 	import flash.ui.Keyboard;
 	
 	/**
@@ -41,6 +44,8 @@ package com.grapefrukt.games.juicy {
 		private var _toggler	:Toggler;
 		
 		private var _backgroundGlitchForce		:Number;
+		
+		private var _keyboard	:LazyKeyboard;
 		
 		public function Main() {
 			ColorTransformPlugin.install();
@@ -83,7 +88,11 @@ package com.grapefrukt.games.juicy {
 			_toggler = new Toggler(Settings);
 			parent.addChild(_toggler);
 			
+			_keyboard = new LazyKeyboard(stage);
+			
 			reset();
+			
+			SoundManager.play("music");
 		}
 
 		public function drawBackground():void {
@@ -129,6 +138,16 @@ package com.grapefrukt.games.juicy {
 		
 		private function handleEnterFrame(e:Event):void {
 			_timestep.tick();
+			
+			if (_keyboard.keyIsDown(Keyboard.CONTROL)) {
+				_timestep.gameSpeed = 0;
+			} else if (_keyboard.keyIsDown(Keyboard.SHIFT)) {
+				_timestep.gameSpeed = .1;
+			} else {
+				_timestep.gameSpeed = 1;
+			}
+			
+			GTween.timeScaleAll = _timestep.gameSpeed;
 			
 			drawBackground();
 			
@@ -212,8 +231,6 @@ package com.grapefrukt.games.juicy {
 							break; // only collide with one block per update
 						}
 				}
-				
-				ball.updateTrail();
 			}
 		}
 		
