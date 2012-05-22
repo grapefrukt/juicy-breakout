@@ -37,6 +37,7 @@ package com.grapefrukt.games.juicy {
 		static public var EFFECT_BALL_STRETCH				:Boolean = false;
 		static public var EFFECT_BALL_STRETCH_ANIMATED		:Boolean = false;
 		static public var EFFECT_BALL_GLOW					:Boolean = false;
+		static public var EFFECT_BALL_EXTRA_SCALE			:Boolean = false;
 		
 		[min("0")] [max("100")]
 		static public var EFFECT_BALL_TRAIL_LENGTH	:int = 0;

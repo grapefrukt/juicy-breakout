@@ -24,6 +24,7 @@ package com.grapefrukt.games.juicy.gameobjects {
 		private var _ball_shakiness:Number;
 		private var _ball_shakiness_vel:Number;
 		private var _ball_rotation:Number;
+		private var _ball_extra_scale:Number;
 		
 		private var _ball_color:uint;
 		private var _tween_brightness:GTween;
@@ -49,6 +50,7 @@ package com.grapefrukt.games.juicy.gameobjects {
 			_ball_shakiness = 0;
 			_ball_shakiness_vel = 0;
 			_ball_rotation = 0;
+			_ball_extra_scale = 0;
 		}
 		
 		private function drawBall():void {
@@ -107,10 +109,24 @@ package com.grapefrukt.games.juicy.gameobjects {
 					_gfx.scaleY = MathUtil.clamp( _gfx.scaleY, 1.35, 0.85 );
 				}
 				
+				
 			} else {
-				_gfx.scaleX = scaleY = 1;
+				_gfx.scaleX = _gfx.scaleY = 1;
+			}
+			
+			if (Settings.EFFECT_BALL_EXTRA_SCALE ) {
+				if ( _ball_extra_scale > 0.01 ) {
+					_gfx.scaleX += _ball_extra_scale;
+					_gfx.scaleY += _ball_extra_scale;
+					
+					_ball_extra_scale *= 0.65;
+				}
+			} else {
+				_ball_extra_scale = 0;
 			}
 		}
+		
+		
 		
 		public function updateTrail():void {
 			_trail.addSegment(x, y);
@@ -121,6 +137,7 @@ package com.grapefrukt.games.juicy.gameobjects {
 			dispatchEvent(new JuicyEvent(JuicyEvent.BALL_COLLIDE, this, block));
 			_ball_shakiness = 0.1;
 			_ball_shakiness_vel = 2.5;
+			_ball_extra_scale += 1.5;
 			
 			if ( Settings.EFFECT_BALL_GLOW )
 			{
