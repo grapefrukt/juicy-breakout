@@ -1,6 +1,3 @@
 [submodule "grapelib"]
 	path = grapelib
 	url = https://grapefrukt@github.com/grapefrukt/grapelib.git
-[submodule "minimalcomps"]
-	path = minimalcomps
-	url = https://github.com/minimalcomps/minimalcomps

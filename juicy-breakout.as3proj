@@ -18,7 +18,6 @@
     <class path="src" />
     <class path="lib" />
     <class path="grapelib" />
-    <class path="minimalcomps\src" />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -36,7 +35,7 @@
     <option showDeprecationWarnings="True" />
     <option showUnusedTypeSelectorWarnings="True" />
     <option strict="True" />
-    <option useNetwork="True" />
+    <option useNetwork="False" />
     <option useResourceBundleMetadata="True" />
     <option warnings="True" />
     <option verboseStackTraces="False" />
