@@ -114,15 +114,15 @@ package com.grapefrukt.games.juicy.gameobjects {
 				_gfx.scaleX = _gfx.scaleY = 1;
 			}
 			
-			if (Settings.EFFECT_BALL_EXTRA_SCALE ) 
-			{
-				if ( _ball_extra_scale > 0 ) 
-				{
+			if (Settings.EFFECT_BALL_EXTRA_SCALE ) {
+				if ( _ball_extra_scale > 0.01 ) {
 					_gfx.scaleX += _ball_extra_scale;
 					_gfx.scaleY += _ball_extra_scale;
 					
 					_ball_extra_scale *= 0.65;
 				}
+			} else {
+				_ball_extra_scale = 0;
 			}
 		}
 		
