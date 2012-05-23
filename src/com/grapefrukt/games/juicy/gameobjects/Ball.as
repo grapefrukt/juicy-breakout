@@ -70,7 +70,7 @@ package com.grapefrukt.games.juicy.gameobjects {
 			if (Settings.EFFECT_BALL_ROTATE) {
 				
 				var target_rotation:Number = Math.atan2(velocityY, velocityX) / Math.PI * 180;
-				_ball_rotation += ( target_rotation - _ball_rotation ) * 0.5;
+				_ball_rotation += ( target_rotation - _ball_rotation ) * timeDelta * 0.5;
 				
 				if ( Settings.EFFECT_BALL_ROTATE_ANIMATED == false ) 
 					_ball_rotation = target_rotation;
@@ -81,10 +81,10 @@ package com.grapefrukt.games.juicy.gameobjects {
 			}
 			
 			if( Math.abs( _ball_shakiness ) > 0 ) {
-				_ball_shakiness_vel += -0.25 * _ball_shakiness;
-				_ball_shakiness_vel *= 0.90;
+				_ball_shakiness_vel += timeDelta * -0.25 * _ball_shakiness;
+				_ball_shakiness_vel -= timeDelta * _ball_shakiness_vel * 0.10;
 
-				_ball_shakiness += _ball_shakiness_vel; 
+				_ball_shakiness += timeDelta * _ball_shakiness_vel; 
 			}
 
 			
@@ -121,7 +121,7 @@ package com.grapefrukt.games.juicy.gameobjects {
 					_gfx.scaleX += _ball_extra_scale;
 					_gfx.scaleY += _ball_extra_scale;
 					
-					_ball_extra_scale *= 0.65;
+					_ball_extra_scale -= timeDelta * _ball_extra_scale * 0.35;
 				}
 			} else {
 				_ball_extra_scale = 0;
