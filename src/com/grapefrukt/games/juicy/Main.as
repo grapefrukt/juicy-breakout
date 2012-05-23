@@ -120,7 +120,7 @@ package com.grapefrukt.games.juicy {
 
 		public function drawBackground():void {
 			_background.graphics.clear();
-			if ( Settings.EFFECT_SCREEN_BACKGROUND_COLOR_GLITCH && _backgroundGlitchForce > 0.01 ) {
+			if ( Settings.EFFECT_SCREEN_COLOR_GLITCH && _backgroundGlitchForce > 0.01 ) {
 				_background.graphics.beginFill(Settings.COLOR_BACKGROUND * ( 3 * Math.random() ) );
 				_backgroundGlitchForce *= 0.8;
 			}

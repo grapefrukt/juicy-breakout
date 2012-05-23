@@ -53,6 +53,9 @@ package com.grapefrukt.games.juicy {
 				for each (tag in variable.metadata.(@name == "comment")) property.comment = tag.arg.@value;
 				for each (tag in variable.metadata.(@name == "max")) property.max = tag.arg.@value;
 				for each (tag in variable.metadata.(@name == "min")) property.min = tag.arg.@value;
+				for each (tag in variable.metadata.(@name == "o")) {
+					property.order = tag.arg.@value;
+				}
 				
 				_properties.push(property);
 			}
@@ -70,7 +73,8 @@ package com.grapefrukt.games.juicy {
 			var window:Window;
 			
 			for each (property in _properties) {
-				var groupName:String = getGroupName(property.name);
+				//var groupName:String = getGroupName(property.name);
+				var groupName:String = property.order.substr(0, 1);
 				//trace(window ? window.title : "null", groupName);
 				if (!window || window.title != groupName) {
 					if (window) {
@@ -146,6 +150,12 @@ package com.grapefrukt.games.juicy {
 		}
 		
 		private function _sort(p1:Property, p2:Property):Number {
+			if (p1.order == "" && p2.order != "") return 1;
+			if (p1.order != "" && p2.order == "") return -1;
+			
+			if (p1.order < p2.order) return -1;
+			if (p1.order > p2.order) return 1;
+			
 			if (p1.name < p2.name) return -1;
 			if (p1.name > p2.name) return 1;
 			return 0;
@@ -161,4 +171,5 @@ class Property {
 	public var value:*;
 	public var max:Number;
 	public var min:Number;
+	public var order:String = "";
 }
