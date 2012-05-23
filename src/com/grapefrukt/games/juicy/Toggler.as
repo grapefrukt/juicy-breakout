@@ -53,9 +53,8 @@ package com.grapefrukt.games.juicy {
 				for each (tag in variable.metadata.(@name == "comment")) property.comment = tag.arg.@value;
 				for each (tag in variable.metadata.(@name == "max")) property.max = tag.arg.@value;
 				for each (tag in variable.metadata.(@name == "min")) property.min = tag.arg.@value;
-				for each (tag in variable.metadata.(@name == "o")) {
-					property.order = tag.arg.@value;
-				}
+				for each (tag in variable.metadata.(@name == "o")) property.order = tag.arg.@value;
+				for each (tag in variable.metadata.(@name == "header")) property.header = tag.arg.@value;
 				
 				_properties.push(property);
 			}
@@ -74,14 +73,14 @@ package com.grapefrukt.games.juicy {
 			
 			for each (property in _properties) {
 				//var groupName:String = getGroupName(property.name);
-				var groupName:String = property.order.substr(0, 1);
+				//var groupName:String = property.order.substr(0, 1);
 				//trace(window ? window.title : "null", groupName);
-				if (!window || window.title != groupName) {
+				if (!window || window.title != property.header && property.header != "") {
 					if (window) {
 						window.content.getChildAt(0).height = DisplayObjectContainer(window.content.getChildAt(0)).numChildren * 30;
 					}
 					
-					accordion.addWindowAt(groupName, accordion.numWindows);
+					accordion.addWindowAt(property.header, accordion.numWindows);
 					window = accordion.getWindowAt(accordion.numWindows - 1);
 					var container:VBox = new VBox(window.content, 10, 10);
 				}
@@ -172,4 +171,5 @@ class Property {
 	public var max:Number;
 	public var min:Number;
 	public var order:String = "";
+	public var header:String = "";
 }

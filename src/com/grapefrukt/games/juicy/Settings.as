@@ -14,8 +14,10 @@ package com.grapefrukt.games.juicy {
 		static public const PADDLE_W:Number = 100;
 		static public const PADDLE_H:Number = 30;
 		
+		[header("Colors")] 
 		[o("91")] static public var EFFECT_SCREEN_COLORS				:Boolean = false;
 		
+		[header("Tweening")] 
 		[o("A1")] static public var EFFECT_TWEENIN_ENABLED				:Boolean = false;
 		[o("A2")] static public var EFFECT_TWEENIN_PROPERTY_Y			:Boolean = true;
 		[o("A3")] static public var EFFECT_TWEENIN_PROPERTY_ROTATION	:Boolean = false;
@@ -27,6 +29,7 @@ package com.grapefrukt.games.juicy {
 		[min("0")] [max("3")]
 		[o("A7")] static public var EFFECT_TWEENIN_EQUATION				:int = 0;
 		
+		[header("Stretch and squeeze")] 
 		[o("B1")] static public var EFFECT_PADDLE_STRETCH				:Boolean = false;
 		
 		[o("B2")] static public var EFFECT_BALL_EXTRA_SCALE				:Boolean = false;
@@ -39,10 +42,12 @@ package com.grapefrukt.games.juicy {
 		[o("C1")] static public var EFFECT_BLOCK_JELLY					:Boolean = false;
 		[o("C2")] static public var EFFECT_BOUNCY_LINES_ENABLED			:Boolean = false;
 		
+		[header("Sounds")] 
 		[o("E1")] static public var SOUND_WALL							:Boolean = false;
 		[o("E2")] static public var SOUND_BLOCK							:Boolean = false;
 		[o("E3")] static public var SOUND_PADDLE						:Boolean = false;
 		
+		[header("Particles")] 
 		[o("G0")] static public var EFFECT_PARTICLE_BALL_COLLISION		:Boolean = false;
 		
 		[min("0")] [max("3")]
@@ -62,10 +67,12 @@ package com.grapefrukt.games.juicy {
 		[o("G11")] static public var EFFECT_BALL_TRAIL_SCALE			:Boolean = false;
 		[o("G12")] static public var EFFECT_BALL_TRAIL_LENGTH			:int = 30;
 		
+		[header("Screen shake")] 
 		[o("H0")] static public var EFFECT_SCREEN_SHAKE					:Boolean = false;
 		[min("0")] [max("1")]
 		[o("H1")] static public var EFFECT_SCREEN_SHAKE_POWER			:Number = .5;
 		
+		[header("Personality")] 
 		[o("I1")] static public var EFFECT_PADDLE_FACE					:Boolean = false;
 		[o("I2")] static public var EFFECT_PADDLE_LOOK_AT_BALL			:Boolean = false;
 		[min("1")] [max("100")]
@@ -75,9 +82,14 @@ package com.grapefrukt.games.juicy {
 		[min("10")] [max("60")]
 		[o("I5")] static public var EFFECT_PADDLE_EYE_SEPARATION		:int = 25;
 		
+		[header("Finish him")] 
 		[o("J1")] static public var EFFECT_SCREEN_COLOR_GLITCH			:Boolean = false;
 		[o("J2")] static public var POWERUP_SLICER_BALL 				:Boolean = false;
 		[o("J3")] static public var SOUND_MUSIC							:Boolean = false;
+		
+		[header("Other")] 
+		[min("0")] [max("1")]
+		static public var NUM_BALLS										:int = 1;
 		
 		[min("0")] [max("20")]
 		static public const EFFECT_BLOCK_SHATTER_ROTATION		:Number = 5;
@@ -90,8 +102,6 @@ package com.grapefrukt.games.juicy {
 		[min("1")] [max("100")]
 		static public const EFFECT_BOUNCY_LINES_WIDTH		:Number = 20;
 		
-		[min("0")] [max("1")]
-		static public var NUM_BALLS							:int = 1;
 		static public const BALL_MAX_VELOCITY				:Number = 5;
 		static public const BALL_MIN_VELOCITY				:Number = 4;
 		

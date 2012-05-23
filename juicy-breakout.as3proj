@@ -42,7 +42,7 @@
     <option linkReport="" />
     <option loadExterns="" />
     <option staticLinkRSL="True" />
-    <option additional="-keep-as3-metadata min max o" />
+    <option additional="-keep-as3-metadata min max o header" />
     <option compilerConstants="" />
     <option minorVersion="" />
   </build>
