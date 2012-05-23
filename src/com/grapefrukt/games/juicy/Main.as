@@ -10,7 +10,9 @@ package com.grapefrukt.games.juicy {
 	import com.grapefrukt.games.juicy.gameobjects.Ball;
 	import com.grapefrukt.games.juicy.gameobjects.Block;
 	import com.grapefrukt.games.juicy.gameobjects.Paddle;
+	import flash.display.Shape;
 	import flash.events.TimerEvent;
+	import flash.geom.ColorTransform;
 	import flash.utils.Timer;
 
 	import com.grapefrukt.input.LazyKeyboard;
@@ -53,7 +55,9 @@ package com.grapefrukt.games.juicy {
 		private var _soundLastTimeHit			:int;
 		
 		private var _keyboard	:LazyKeyboard;
-		private var _slides:Slides;
+		private var _slides		:Slides;
+		private var _background	:Shape;
+		private var _useColors:Boolean;
 		
 		public function Main() {
 			ColorTransformPlugin.install();
@@ -97,6 +101,9 @@ package com.grapefrukt.games.juicy {
 			
 			_screenshake = new Shaker(this);
 			
+			_background = new Shape;
+			parent.addChildAt(_background, 0);
+			
 			_toggler = new Toggler(Settings);
 			parent.addChild(_toggler);
 			
@@ -106,20 +113,22 @@ package com.grapefrukt.games.juicy {
 			
 			_keyboard = new LazyKeyboard(stage);
 			
+			updateColorUse();
+			
 			reset();
 		}
 
 		public function drawBackground():void {
-			graphics.clear();
-			if ( Settings.EFFECT_BACKGROUND_COLOR_GLITCH && _backgroundGlitchForce > 0.01 ) {
-				graphics.beginFill(Settings.COLOR_BACKGROUND * ( 3 * Math.random() ) );
+			_background.graphics.clear();
+			if ( Settings.EFFECT_SCREEN_BACKGROUND_COLOR_GLITCH && _backgroundGlitchForce > 0.01 ) {
+				_background.graphics.beginFill(Settings.COLOR_BACKGROUND * ( 3 * Math.random() ) );
 				_backgroundGlitchForce *= 0.8;
 			}
 			else 
 			{
-				graphics.beginFill(Settings.COLOR_BACKGROUND );
+				_background.graphics.beginFill(Settings.COLOR_BACKGROUND );
 			}
-			graphics.drawRect(5, 5, Settings.STAGE_W-10, Settings.STAGE_H);
+			_background.graphics.drawRect(5, 5, Settings.STAGE_W-10, Settings.STAGE_H);
 		}
 		
 		public function reset():void {
@@ -155,6 +164,10 @@ package com.grapefrukt.games.juicy {
 			_timestep.tick();
 			
 			_soundLastTimeHit++;
+			
+			if (Settings.EFFECT_SCREEN_COLORS != _useColors) {
+				updateColorUse();
+			}
 			
 			if (!Settings.SOUND_MUSIC) {
 				SoundManager.soundControl.stopSound("music-0");
@@ -358,6 +371,18 @@ package com.grapefrukt.games.juicy {
 		
 		private function addBall():void {
 			_balls.add(new Ball(Settings.STAGE_W / 2, Settings.STAGE_H / 2 + 100));
+		}
+		
+		private function updateColorUse():void {
+			if (Settings.EFFECT_SCREEN_COLORS) {
+				transform.colorTransform = new ColorTransform();
+				_background.transform.colorTransform = new ColorTransform();
+			} else {
+				transform.colorTransform = new ColorTransform(1, 1, 1, 1, 255, 255, 255);
+				_background.transform.colorTransform = new ColorTransform(0, 0, 0);
+			}
+			
+			_useColors = Settings.EFFECT_SCREEN_COLORS;
 		}
 		
 	}

@@ -14,9 +14,11 @@ package com.grapefrukt.games.juicy {
 		static public const PADDLE_W:Number = 100;
 		static public const PADDLE_H:Number = 30;
 		
-		static public var EFFECT_SCREEN_SHAKE		:Boolean = false;
+		static public var EFFECT_SCREEN_SHAKE				:Boolean = false;
 		[min("0")] [max("1")]
-		static public var EFFECT_SCREEN_SHAKE_POWER	:Number = .5;
+		static public var EFFECT_SCREEN_SHAKE_POWER			:Number = .5;
+		static public var EFFECT_SCREEN_COLORS				:Boolean = false;
+		static public var EFFECT_SCREEN_BACKGROUND_COLOR_GLITCH	:Boolean = false;
 		
 		[min("0")] [max("3")]
 		static public var EFFECT_BLOCK_DESTRUCTION_DURATION:Number = 2;
@@ -65,8 +67,6 @@ package com.grapefrukt.games.juicy {
 		static public const EFFECT_BOUNCY_LINES_DISTANCE_FROM_WALLS	:Number = 5;
 		[min("1")] [max("100")]
 		static public var 	EFFECT_BOUNCY_LINES_WIDTH				:Number = 20;
-	
-		static public var EFFECT_BACKGROUND_COLOR_GLITCH	:Boolean = false;
 		
 		static public var POWERUP_SLICER_BALL 		:Boolean = false;
 		
@@ -100,6 +100,7 @@ package com.grapefrukt.games.juicy {
 		static public const COLOR_TRAIL			:uint = 0x8a9b0f;
 		static public const COLOR_SPARK			:uint = 0xffffff;
 		static public const COLOR_BOUNCY_LINES	:uint = 0xbd1550;
+		
 	}
 
 }
