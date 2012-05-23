@@ -5,6 +5,7 @@ package com.grapefrukt.games.juicy {
 	import com.grapefrukt.games.juicy.effects.BouncyLine;
 	import com.grapefrukt.games.juicy.effects.particles.BallImpactParticle;
 	import com.grapefrukt.games.juicy.effects.particles.BlockShatterParticle;
+	import com.grapefrukt.games.juicy.effects.particles.ConfettiParticle;
 	import com.grapefrukt.games.juicy.events.JuicyEvent;
 	import com.grapefrukt.games.juicy.gameobjects.Ball;
 	import com.grapefrukt.games.juicy.gameobjects.Block;
@@ -38,6 +39,7 @@ package com.grapefrukt.games.juicy {
 		
 		private var _particles_impact:ParticlePool;
 		private var _particles_shatter:ParticlePool;
+		private var _particles_confetti:ParticlePool;
 		
 		private var _mouseDown	:Boolean;
 		private var _mouseVector:Point;
@@ -59,6 +61,9 @@ package com.grapefrukt.games.juicy {
 		}
 		
 		private function handleInit(e:Event):void {
+			_particles_confetti = new ParticlePool(ConfettiParticle);
+			addChild(_particles_confetti);
+			
 			_blocks = new GameObjectCollection();
 			_blocks.addEventListener(JuicyEvent.BLOCK_DESTROYED, handleBlockDestroyed, true);
 			addChild(_blocks);
@@ -71,11 +76,12 @@ package com.grapefrukt.games.juicy {
 			_balls.addEventListener(JuicyEvent.BALL_COLLIDE, handleBallCollide, true);
 			addChild(_balls);
 			
-			_particles_impact = new ParticlePool(BallImpactParticle, 20);
+			_particles_impact = new ParticlePool(BallImpactParticle);
 			addChild(_particles_impact);
 			
-			_particles_shatter = new ParticlePool(BlockShatterParticle, 20);
+			_particles_shatter = new ParticlePool(BlockShatterParticle);
 			addChild(_particles_shatter);
+			
 			
 			addEventListener(Event.ENTER_FRAME, handleEnterFrame);
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, handleKeyDown);
@@ -93,6 +99,7 @@ package com.grapefrukt.games.juicy {
 			parent.addChild(_toggler);
 			
 			_slides = new Slides();
+			_slides.visible = false;
 			parent.addChild(_slides);
 			
 			_keyboard = new LazyKeyboard(stage);
@@ -287,6 +294,21 @@ package com.grapefrukt.games.juicy {
 			// wall collision
 			if (e.block is Paddle) {
 				SoundManager.play("ball-paddle");
+				
+				
+				if (Settings.EFFECT_PARTICLE_PADDLE_COLLISION) {
+					ParticleSpawn.burst(	
+						e.ball.x, 
+						e.ball.y, 
+						20, 
+						90, 
+						-180, 
+						600, 
+						1,
+						_particles_confetti
+					);
+				}
+				
 			} else if (e.block) {
 				// SoundManager.play("ball-block");	
 				_soundBlockHitCounter++;
