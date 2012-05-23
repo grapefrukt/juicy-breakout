@@ -33,7 +33,7 @@
 				particle.x = spawnX; 
 				particle.y = spawnY;
 				
-				speedRnd = Math.random() * speedVariance - speedVariance / 2
+				speedRnd = Math.random() * speedVariance - speedVariance / 2;
 				spreadRnd = Math.random() * spread - spread / 2;
 				
 				angleVector.x = Math.sin((-baseAngle + spreadRnd) / 180 * Math.PI) * speed * (1 + speedRnd);

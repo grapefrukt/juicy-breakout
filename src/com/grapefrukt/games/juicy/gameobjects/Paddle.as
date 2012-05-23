@@ -30,7 +30,9 @@ package com.grapefrukt.games.juicy.gameobjects {
 			super.update(timeDelta);
 			_face.visible = Settings.EFFECT_PADDLE_FACE;
 			_face.mouth.gotoAndStop(Settings.EFFECT_PADDLE_SMILE);
-
+			
+			_face.eye_l.x = -Settings.EFFECT_PADDLE_EYE_SEPARATION;
+			_face.eye_r.x = Settings.EFFECT_PADDLE_EYE_SEPARATION;
 			
 			_happyExtraScale *= 0.95;
 			_face.eye_l.scaleX = _face.eye_l.scaleY = 1 + Settings.EFFECT_PADDLE_EYE_SIZE / 100;

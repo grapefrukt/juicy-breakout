@@ -71,7 +71,7 @@ package com.grapefrukt.games.juicy {
 			
 			for each (property in _properties) {
 				var groupName:String = getGroupName(property.name);
-				trace(window ? window.title : "null", groupName);
+				//trace(window ? window.title : "null", groupName);
 				if (!window || window.title != groupName) {
 					if (window) {
 						window.content.getChildAt(0).height = DisplayObjectContainer(window.content.getChildAt(0)).numChildren * 30;

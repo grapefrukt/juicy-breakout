@@ -48,13 +48,16 @@ package com.grapefrukt.games.juicy {
 		static public var EFFECT_PADDLE_STRETCH				:Boolean = false;
 		static public var EFFECT_PADDLE_FACE				:Boolean = false;
 		[min("1")] [max("100")]
-		static public var EFFECT_PADDLE_SMILE				:int = 1;
+		static public var EFFECT_PADDLE_SMILE				:int = 50;
 		[min("1")] [max("300")]
 		static public var EFFECT_PADDLE_EYE_SIZE			:int = 1;
+		[min("10")] [max("60")]
+		static public var EFFECT_PADDLE_EYE_SEPARATION		:int = 25;
 		static public var EFFECT_PADDLE_LOOK_AT_BALL		:Boolean = false;
 		
 		static public var EFFECT_PARTICLE_BALL_COLLISION	:Boolean = true;
 		static public var EFFECT_PARTICLE_BLOCK_SHATTER		:Boolean = true;
+		static public var EFFECT_PARTICLE_PADDLE_COLLISION	:Boolean = true;
 		
 		static public var 	EFFECT_BOUNCY_LINES_ENABLED				:Boolean = false;
 		[min("0")] [max("100")]
@@ -67,7 +70,8 @@ package com.grapefrukt.games.juicy {
 		
 		static public var POWERUP_SLICER_BALL 		:Boolean = false;
 		
-		static public var SOUNDS					:Boolean = true;
+		static public var SOUND_EFFECTS				:Boolean = false;
+		static public var SOUND_MUSIC				:Boolean = false;
 		
 		static public const NUM_BALLS				:uint = 1;
 		static public const BALL_MAX_VELOCITY		:Number = 5;

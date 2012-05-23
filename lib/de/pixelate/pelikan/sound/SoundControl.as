@@ -67,7 +67,7 @@ package de.pixelate.pelikan.sound
 			var group:Array = _groups[id];
 			if (group) id = group[int(Math.random() * group.length)].id;
 			
-			var sound:SoundObject = getSoundObjectFromDictionary(id);
+			var sound:SoundObject = getSound(id);
 			sound.play();
 		}
 
@@ -76,12 +76,12 @@ package de.pixelate.pelikan.sound
 			var group:Array = _groups[id];
 			if (group) id = group[int(sound_id % group.length)].id;
 			
-			var sound:SoundObject = getSoundObjectFromDictionary(id);
+			var sound:SoundObject = getSound(id);
 			sound.play();
 		}
 		
 		public function stopSound(id:String):void {
-			var sound:SoundObject = getSoundObjectFromDictionary(id);
+			var sound:SoundObject = getSound(id);
 			sound.stop();
 		}
 		
@@ -122,7 +122,7 @@ package de.pixelate.pelikan.sound
 			}
 		}
 		
-		private function getSoundObjectFromDictionary(id:String):SoundObject {
+		public function getSound(id:String):SoundObject {
 			if (_sounds[id] == null) throw new Error("Sound with id \"" + id + "\" does not exist.");
 			return SoundObject(_sounds[id]);
 		}
