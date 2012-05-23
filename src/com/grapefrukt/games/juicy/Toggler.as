@@ -93,10 +93,12 @@ package com.grapefrukt.games.juicy {
 						break;
 					case "Number" : 
 					case "int" :
-						var slider:HSlider = new HSlider(row, 0, 0, getSliderClosure(property.name));
+						var slider:HUISlider = new HUISlider(row, 0, 0, "", getSliderClosure(property.name));
+						slider.width = 130;
 						slider.minimum = property.min;
 						slider.maximum = property.max;
 						slider.value = property.value;
+						if (property.type == "int") slider.tick = 1;
 						break;
 				}
 			}
@@ -130,7 +132,7 @@ package com.grapefrukt.games.juicy {
 		
 		private function getSliderClosure(field:String):Function {
 			return function(e:Event):void {
-				_targetClass[field] = HSlider(e.target).value;
+				_targetClass[field] = HUISlider(e.target).value;
 			}
 		}
 		

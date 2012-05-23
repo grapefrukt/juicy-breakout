@@ -10,6 +10,8 @@ package com.grapefrukt.games.juicy {
 	import com.grapefrukt.games.juicy.gameobjects.Ball;
 	import com.grapefrukt.games.juicy.gameobjects.Block;
 	import com.grapefrukt.games.juicy.gameobjects.Paddle;
+	import flash.events.TimerEvent;
+	import flash.utils.Timer;
 
 	import com.grapefrukt.input.LazyKeyboard;
 	import com.grapefrukt.Timestep;
@@ -177,7 +179,7 @@ package com.grapefrukt.games.juicy {
 			_lines.update(_timestep.timeDelta);
 			_screenshake.update(_timestep.timeDelta);
 			
-			_paddle.lookAt(Ball(_balls.collection[0]));
+			if (_balls.collection.length) _paddle.lookAt(Ball(_balls.collection[0]));
 			
 			if (Settings.EFFECT_PADDLE_STRETCH) {
 				_paddle.scaleX = 1 + Math.abs(_paddle.x - mouseX) / 100;
@@ -342,7 +344,7 @@ package com.grapefrukt.games.juicy {
 			if (e.keyCode == Keyboard.SPACE) reset();
 			if (e.keyCode == Keyboard.B) addBall();
 			if (e.keyCode == Keyboard.S) _screenshake.shakeRandom(4);
-			if (e.keyCode == Keyboard.NUMBER_1) _toggler.setAll(true);
+			if (e.keyCode == Keyboard.ENTER) _toggler.setAll(true);
 			if (e.keyCode == Keyboard.NUMBER_2) _toggler.setAll(false);
 			if (e.keyCode == Keyboard.P) {
 				var b:Ball = _balls.collection[0] as Ball;
@@ -355,7 +357,7 @@ package com.grapefrukt.games.juicy {
 		}
 		
 		private function addBall():void {
-			_balls.add(new Ball(Settings.STAGE_W / 2, Settings.STAGE_H / 2));
+			_balls.add(new Ball(Settings.STAGE_W / 2, Settings.STAGE_H / 2 + 100));
 		}
 		
 	}

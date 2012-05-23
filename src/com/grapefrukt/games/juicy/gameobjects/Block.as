@@ -6,7 +6,9 @@ package com.grapefrukt.games.juicy.gameobjects {
 	import com.grapefrukt.games.juicy.Settings;
 	import com.grapefrukt.Timestep;
 	import com.gskinner.motion.easing.Back;
+	import com.gskinner.motion.easing.Bounce;
 	import com.gskinner.motion.easing.Elastic;
+	import com.gskinner.motion.easing.Linear;
 	import com.gskinner.motion.easing.Quadratic;
 	import com.gskinner.motion.GTween;
 	import com.gskinner.motion.plugins.ColorTransformPlugin;
@@ -40,6 +42,21 @@ package com.grapefrukt.games.juicy.gameobjects {
 			addChild(_gfx);
 			
 			render(Settings.COLOR_BLOCK);
+
+			if (Settings.EFFECT_TWEENIN_ENABLED) {
+				if (Settings.EFFECT_TWEENIN_PROPERTY_Y)			_gfx.y = -500;
+				if (Settings.EFFECT_TWEENIN_PROPERTY_ROTATION)	_gfx.rotation = Math.random() * 90 - 45;
+				if (Settings.EFFECT_TWEENIN_PROPERTY_SCALE)		_gfx.scaleX = _gfx.scaleX = .2;
+				var t:GTween = new GTween(_gfx, Settings.EFFECT_TWEENIN_DURATION);
+				t.proxy.y = 0;
+				t.proxy.rotation = 0;
+				t.proxy.scaleX = 1;
+				t.proxy.scaleY = 1;
+				t.delay = Math.random() * Settings.EFFECT_TWEENIN_DELAY;
+				
+				var easing:Array = [ Linear.easeNone, Quadratic.easeOut, Back.easeOut, Bounce.easeOut ];
+				t.ease = easing[Settings.EFFECT_TWEENIN_EQUATION];
+			}
 		}
 		
 		public function collide(ball:Ball):void {

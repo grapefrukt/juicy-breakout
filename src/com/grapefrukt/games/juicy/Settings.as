@@ -55,9 +55,9 @@ package com.grapefrukt.games.juicy {
 		static public var EFFECT_PADDLE_EYE_SEPARATION		:int = 25;
 		static public var EFFECT_PADDLE_LOOK_AT_BALL		:Boolean = false;
 		
-		static public var EFFECT_PARTICLE_BALL_COLLISION	:Boolean = true;
-		static public var EFFECT_PARTICLE_BLOCK_SHATTER		:Boolean = true;
-		static public var EFFECT_PARTICLE_PADDLE_COLLISION	:Boolean = true;
+		static public var EFFECT_PARTICLE_BALL_COLLISION	:Boolean = false;
+		static public var EFFECT_PARTICLE_BLOCK_SHATTER		:Boolean = false;
+		static public var EFFECT_PARTICLE_PADDLE_COLLISION	:Boolean = false;
 		
 		static public var 	EFFECT_BOUNCY_LINES_ENABLED				:Boolean = false;
 		[min("0")] [max("100")]
@@ -70,10 +70,22 @@ package com.grapefrukt.games.juicy {
 		
 		static public var POWERUP_SLICER_BALL 		:Boolean = false;
 		
+		static public var EFFECT_TWEENIN_ENABLED			:Boolean = false;
+		static public var EFFECT_TWEENIN_PROPERTY_Y			:Boolean = false;
+		static public var EFFECT_TWEENIN_PROPERTY_ROTATION	:Boolean = false;
+		static public var EFFECT_TWEENIN_PROPERTY_SCALE		:Boolean = false;
+		[min("0")] [max("1")]
+		static public var EFFECT_TWEENIN_DELAY				:Number = 0;
+		[min("0.01")] [max("3")]
+		static public var EFFECT_TWEENIN_DURATION			:Number = .7;
+		[min("0")] [max("3")]
+		static public var EFFECT_TWEENIN_EQUATION			:int = 0;
+		
 		static public var SOUND_EFFECTS				:Boolean = false;
 		static public var SOUND_MUSIC				:Boolean = false;
 		
-		static public const NUM_BALLS				:uint = 1;
+		[min("0")] [max("100")]
+		static public var NUM_BALLS					:int = 1;
 		static public const BALL_MAX_VELOCITY		:Number = 5;
 		static public const BALL_MIN_VELOCITY		:Number = 4;
 		
