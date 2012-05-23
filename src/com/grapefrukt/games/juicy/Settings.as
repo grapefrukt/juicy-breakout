@@ -71,7 +71,7 @@ package com.grapefrukt.games.juicy {
 		static public var POWERUP_SLICER_BALL 		:Boolean = false;
 		
 		static public var EFFECT_TWEENIN_ENABLED			:Boolean = false;
-		static public var EFFECT_TWEENIN_PROPERTY_Y			:Boolean = false;
+		static public var EFFECT_TWEENIN_PROPERTY_Y			:Boolean = true;
 		static public var EFFECT_TWEENIN_PROPERTY_ROTATION	:Boolean = false;
 		static public var EFFECT_TWEENIN_PROPERTY_SCALE		:Boolean = false;
 		[min("0")] [max("1")]
@@ -81,7 +81,9 @@ package com.grapefrukt.games.juicy {
 		[min("0")] [max("3")]
 		static public var EFFECT_TWEENIN_EQUATION			:int = 0;
 		
-		static public var SOUND_EFFECTS				:Boolean = false;
+		static public var SOUND_BLOCK				:Boolean = false;
+		static public var SOUND_PADDLE				:Boolean = false;
+		static public var SOUND_WALL				:Boolean = false;
 		static public var SOUND_MUSIC				:Boolean = false;
 		
 		[min("0")] [max("100")]

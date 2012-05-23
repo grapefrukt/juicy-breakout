@@ -308,8 +308,7 @@ package com.grapefrukt.games.juicy {
 			
 			// wall collision
 			if (e.block is Paddle) {
-				SoundManager.play("ball-paddle");
-				
+				if (Settings.SOUND_PADDLE) SoundManager.play("ball-paddle");
 				
 				if (Settings.EFFECT_PARTICLE_PADDLE_COLLISION) {
 					ParticleSpawn.burst(	
@@ -332,9 +331,9 @@ package com.grapefrukt.games.juicy {
 					_soundBlockHitCounter = 0;
 					
 				_soundLastTimeHit = 0;
-				SoundManager.playSoundId( "ball-block", _soundBlockHitCounter );
+				if (Settings.SOUND_BLOCK) SoundManager.playSoundId( "ball-block", _soundBlockHitCounter );
 			} else {
-				SoundManager.play("ball-wall");
+				if (Settings.SOUND_WALL) SoundManager.play("ball-wall");
 			}		
 		}
 		
