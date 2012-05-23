@@ -53,6 +53,7 @@
   <!-- SWC Libraries -->
   <libraryPaths>
     <element path="assets\juicy-face.swc" />
+    <element path="assets\slides.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

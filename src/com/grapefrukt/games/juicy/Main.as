@@ -49,6 +49,7 @@ package com.grapefrukt.games.juicy {
 		private var _soundLastTimeHit			:int;
 		
 		private var _keyboard	:LazyKeyboard;
+		private var _slides:Slides;
 		
 		public function Main() {
 			ColorTransformPlugin.install();
@@ -91,11 +92,12 @@ package com.grapefrukt.games.juicy {
 			_toggler = new Toggler(Settings);
 			parent.addChild(_toggler);
 			
+			_slides = new Slides();
+			parent.addChild(_slides);
+			
 			_keyboard = new LazyKeyboard(stage);
 			
 			reset();
-			
-			SoundManager.play("music");
 		}
 
 		public function drawBackground():void {
@@ -145,7 +147,13 @@ package com.grapefrukt.games.juicy {
 			
 			_soundLastTimeHit++;
 			
-			if (_keyboard.keyIsDown(Keyboard.CONTROL)) {
+			if (!Settings.SOUND_MUSIC) {
+				SoundManager.soundControl.stopSound("music-0");
+			} else if (!SoundManager.soundControl.getSound("music-0").isPlaying) {
+				SoundManager.play("music");
+			}
+			
+			if (_keyboard.keyIsDown(Keyboard.CONTROL) || _slides.visible) {
 				_timestep.gameSpeed = 0;
 			} else if (_keyboard.keyIsDown(Keyboard.SHIFT)) {
 				_timestep.gameSpeed = .1;

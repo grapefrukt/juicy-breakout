@@ -67,7 +67,8 @@ package com.grapefrukt.games.juicy {
 		
 		static public var POWERUP_SLICER_BALL 		:Boolean = false;
 		
-		static public var SOUNDS					:Boolean = true;
+		static public var SOUND_EFFECTS				:Boolean = false;
+		static public var SOUND_MUSIC				:Boolean = false;
 		
 		static public const NUM_BALLS				:uint = 1;
 		static public const BALL_MAX_VELOCITY		:Number = 5;

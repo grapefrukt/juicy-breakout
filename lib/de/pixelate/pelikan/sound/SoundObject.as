@@ -89,7 +89,9 @@ package de.pixelate.pelikan.sound {
 		}
 		
 		public function stop():void	{
+			if (!_sound_channel) return;
 			_sound_channel.stop();
+			_sound_channel = null;
 		}
 		
 		private function handleSoundLoaded(event: Event):void {
@@ -106,5 +108,9 @@ package de.pixelate.pelikan.sound {
 		
 		public function get bytesTotal():int { return _sound.bytesTotal; }
 		public function get bytesLoaded():int { return _sound.bytesLoaded; }
+		
+		public function get isPlaying():Boolean {
+			return _sound_channel != null;
+		}
 	}
 }
