@@ -108,11 +108,19 @@ package com.grapefrukt.games.juicy {
 			
 			accordion.height = Settings.STAGE_H - 50 - 20;
 			accordion.width = 250;
-			
 		}
 		
 		public function setAll(value:Boolean):void {
 			for each (var property:Property in _properties) {
+				if (property.name == "EFFECT_SCREEN_COLORS") continue;
+				if (property.name == "EFFECT_PADDLE_SMILE") {
+					if (value) {
+						_targetClass[property.name] = 100;
+					} else {
+						_targetClass[property.name] = 0;
+					}
+					
+				}
 				if (property.type == "Boolean") _targetClass[property.name] = value;
 			}
 			reset();
