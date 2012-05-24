@@ -356,7 +356,10 @@ package com.grapefrukt.games.juicy {
 			if (e.keyCode == Keyboard.SPACE) reset();
 			if (e.keyCode == Keyboard.B) addBall();
 			if (e.keyCode == Keyboard.S) _screenshake.shakeRandom(4);
-			if (e.keyCode == Keyboard.ENTER) _toggler.setAll(true);
+			if (e.keyCode == Keyboard.ENTER) {
+				_toggler.setAll(true);
+				Settings.EFFECT_SCREEN_COLORS = true;
+			}
 			if (e.keyCode == Keyboard.NUMBER_2) _toggler.setAll(false);
 			if (e.keyCode == Keyboard.P) {
 				var b:Ball = _balls.collection[0] as Ball;
