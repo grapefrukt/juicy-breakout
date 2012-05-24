@@ -3,6 +3,8 @@ Juicy Breakout
 
 An example that we made for a talk at Nordic Game Indie Night: http://www.youtube.com/watch?v=Fy0aCDmgnxg
 
+You can try the game here: http://grapefrukt.com/f/games/juicy-breakout/
+
 A juicy game feels alive and responds to everything you do
 tons of cascading action and response for minimal user input. 
 
