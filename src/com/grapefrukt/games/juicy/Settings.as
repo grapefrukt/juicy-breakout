@@ -34,7 +34,7 @@ package com.grapefrukt.games.juicy {
 		
 		[o("B2")] static public var EFFECT_BALL_EXTRA_SCALE				:Boolean = false;
 		[o("B3")] static public var EFFECT_BALL_ROTATE					:Boolean = false;
-		[o("B4")] static public var EFFECT_BALL_ROTATE_ANIMATED			:Boolean = false;
+		[o("B4")] static public const EFFECT_BALL_ROTATE_ANIMATED		:Boolean = false;
 		[o("B5")] static public var EFFECT_BALL_STRETCH					:Boolean = false;
 		[o("B6")] static public var EFFECT_BALL_STRETCH_ANIMATED		:Boolean = false;
 		[o("B7")] static public var EFFECT_BALL_GLOW					:Boolean = false;
@@ -46,26 +46,27 @@ package com.grapefrukt.games.juicy {
 		[o("E1")] static public var SOUND_WALL							:Boolean = false;
 		[o("E2")] static public var SOUND_BLOCK							:Boolean = false;
 		[o("E3")] static public var SOUND_PADDLE						:Boolean = false;
+		[o("E4")] static public var SOUND_MUSIC							:Boolean = false;
 		
 		[header("Particles")] 
 		[o("G0")] static public var EFFECT_PARTICLE_BALL_COLLISION		:Boolean = false;
 		
 		[min("0")] [max("3")]
-		[o("G1")] static public var EFFECT_BLOCK_DESTRUCTION_DURATION	:Number = 2;
-		[o("G2")] static public var EFFECT_BLOCK_SCALE					:Boolean = false;
-		[o("G3")] static public var EFFECT_BLOCK_GRAVITY				:Boolean = false;
-		[o("G4")] static public var EFFECT_BLOCK_PUSH					:Boolean = false;
-		[o("G5")] static public var EFFECT_BLOCK_ROTATE					:Boolean = false;
-		[o("G6")] static public var EFFECT_BLOCK_DARKEN					:Boolean = false;
-		[o("G7")] static public var EFFECT_BLOCK_SHATTER				:Boolean = false;
+		[o("G01")] static public var EFFECT_BLOCK_DESTRUCTION_DURATION	:Number = 2;
+		[o("G02")] static public var EFFECT_BLOCK_SCALE					:Boolean = false;
+		[o("G03")] static public var EFFECT_BLOCK_GRAVITY				:Boolean = false;
+		[o("G04")] static public var EFFECT_BLOCK_PUSH					:Boolean = false;
+		[o("G05")] static public var EFFECT_BLOCK_ROTATE				:Boolean = false;
+		[o("G06")] static public var EFFECT_BLOCK_DARKEN				:Boolean = false;
+		[o("G07")] static public var EFFECT_BLOCK_SHATTER				:Boolean = false;
 		
-		[o("G8")] static public var EFFECT_PARTICLE_BLOCK_SHATTER		:Boolean = false;
-		[o("G9")] static public var EFFECT_PARTICLE_PADDLE_COLLISION	:Boolean = false;
+		[o("G08")] static public var EFFECT_PARTICLE_BLOCK_SHATTER		:Boolean = false;
+		[o("G09")] static public var EFFECT_PARTICLE_PADDLE_COLLISION	:Boolean = false;
 		
 		[o("G10")] static public var EFFECT_BALL_TRAIL					:Boolean = false;
 		[min("5")] [max("100")]
-		[o("G11")] static public var EFFECT_BALL_TRAIL_SCALE			:Boolean = false;
-		[o("G12")] static public var EFFECT_BALL_TRAIL_LENGTH			:int = 30;
+		[o("G11")] static public const EFFECT_BALL_TRAIL_SCALE			:Boolean = true;
+		[o("G12")] static public const EFFECT_BALL_TRAIL_LENGTH			:int = 30;
 		
 		[header("Screen shake")] 
 		[o("H0")] static public var EFFECT_SCREEN_SHAKE					:Boolean = false;
@@ -76,7 +77,7 @@ package com.grapefrukt.games.juicy {
 		[o("I1")] static public var EFFECT_PADDLE_FACE					:Boolean = false;
 		[o("I2")] static public var EFFECT_PADDLE_LOOK_AT_BALL			:Boolean = false;
 		[min("1")] [max("100")]
-		[o("I3")] static public var EFFECT_PADDLE_SMILE					:int = 50;
+		[o("I3")] static public var EFFECT_PADDLE_SMILE					:int = 0;
 		[min("1")] [max("300")]
 		[o("I4")] static public var EFFECT_PADDLE_EYE_SIZE				:int = 1;
 		[min("10")] [max("60")]
@@ -84,8 +85,7 @@ package com.grapefrukt.games.juicy {
 		
 		[header("Finish him")] 
 		[o("J1")] static public var EFFECT_SCREEN_COLOR_GLITCH			:Boolean = false;
-		[o("J2")] static public var POWERUP_SLICER_BALL 				:Boolean = false;
-		[o("J3")] static public var SOUND_MUSIC							:Boolean = false;
+		[o("J2")] static public const POWERUP_SLICER_BALL 				:Boolean = false;
 		
 		[header("Other")] 
 		[min("0")] [max("1")]
