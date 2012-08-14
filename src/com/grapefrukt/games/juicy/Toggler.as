@@ -153,7 +153,7 @@ package com.grapefrukt.games.juicy {
 		}
 		
 		private function handleKeyDown(e:KeyboardEvent):void {
-			if (e.keyCode == 27) visible = !visible;
+			if (e.keyCode == Keyboard.TAB) visible = !visible;
 		}
 		
 		private function _sort(p1:Property, p2:Property):Number {

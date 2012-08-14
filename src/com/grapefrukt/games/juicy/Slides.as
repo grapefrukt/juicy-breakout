@@ -29,7 +29,12 @@ package com.grapefrukt.games.juicy {
 		}
 		
 		private function handleKeyDown(e:KeyboardEvent):void {
-			// if (e.keyCode == Keyboard.TAB) visible = !visible;
+			 if (e.keyCode == Keyboard.S) visible = !visible;
+			 if (e.keyCode == Keyboard.TAB) visible = false;
+			 //if (e.keyCode == Keyboard.TAB) visible = !visible;
+			
+			 if (!visible && _slides.currentFrame == 6) _slides.gotoAndStop(5);
+			
 			if (!visible) return;
 			
 			if (e.keyCode == Keyboard.LEFT) _slides.gotoAndStop(_slides.currentFrame - 1);

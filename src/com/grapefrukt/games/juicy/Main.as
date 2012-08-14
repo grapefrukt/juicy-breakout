@@ -366,7 +366,7 @@ package com.grapefrukt.games.juicy {
 		private function handleKeyDown(e:KeyboardEvent):void {
 			if (e.keyCode == Keyboard.SPACE) reset();
 			if (e.keyCode == Keyboard.B) addBall();
-			if (e.keyCode == Keyboard.S) _screenshake.shakeRandom(4);
+			//if (e.keyCode == Keyboard.S) _screenshake.shakeRandom(4);
 			if (e.keyCode == Keyboard.ENTER) {
 				_toggler.setAll(true);
 				Settings.EFFECT_SCREEN_COLORS = true;
