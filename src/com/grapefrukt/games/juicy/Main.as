@@ -1,4 +1,5 @@
 package com.grapefrukt.games.juicy {
+	import com.grapefrukt.debug.TXT;
 	import com.grapefrukt.games.general.collections.GameObjectCollection;
 	import com.grapefrukt.games.general.particles.ParticlePool;
 	import com.grapefrukt.games.general.particles.ParticleSpawn;
@@ -58,15 +59,25 @@ package com.grapefrukt.games.juicy {
 		private var _slides		:Slides;
 		private var _background	:Shape;
 		private var _useColors:Boolean;
+		private var _preload:TXT;
 		
 		public function Main() {
 			ColorTransformPlugin.install();
 			
 			SoundManager.init();
 			SoundManager.soundControl.addEventListener(Event.INIT, handleInit);
+			
+			_preload = new TXT();
+			_preload.setText("Loading sounds...");
+			addChild(_preload);
+			
+			stage.tabEnabled = false;
+			stage.tabChildren = false;
 		}
 		
 		private function handleInit(e:Event):void {
+			removeChild(_preload);
+			
 			_particles_confetti = new ParticlePool(ConfettiParticle);
 			addChild(_particles_confetti);
 			
