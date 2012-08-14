@@ -64,7 +64,7 @@ package com.grapefrukt.games.juicy {
 			while (numChildren) removeChildAt(0);
 			
 			var settingWindow:Window = new Window(this, 10, 10);
-			settingWindow.title = "JUICEATRON 5000 X";
+			settingWindow.title = "JUICEATRON 5002 XX";
 			settingWindow.width = 250;
 			settingWindow.height = Settings.STAGE_H - 50;
 			
