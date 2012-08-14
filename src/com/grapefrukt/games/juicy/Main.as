@@ -135,7 +135,7 @@ package com.grapefrukt.games.juicy {
 				_background.graphics.beginFill(Settings.COLOR_BACKGROUND * ( 3 * Math.random() ) );
 				_backgroundGlitchForce *= 0.8;
 			}
-			else 
+			else
 			{
 				_background.graphics.beginFill(Settings.COLOR_BACKGROUND );
 			}
@@ -292,13 +292,13 @@ package com.grapefrukt.games.juicy {
 				_backgroundGlitchForce = 0.05;
 				
 			if (Settings.EFFECT_PARTICLE_BALL_COLLISION) {
-				ParticleSpawn.burst(	
-					e.ball.x, 
-					e.ball.y, 
-					5, 
-					90, 
-					-Math.atan2(e.ball.velocityX, e.ball.velocityY) * 180 / Math.PI, 
-					e.ball.velocity * 5, 
+				ParticleSpawn.burst(
+					e.ball.x,
+					e.ball.y,
+					5,
+					90,
+					-Math.atan2(e.ball.velocityX, e.ball.velocityY) * 180 / Math.PI,
+					e.ball.velocity * 5,
 					.5,
 					_particles_impact
 				);
@@ -322,41 +322,41 @@ package com.grapefrukt.games.juicy {
 				if (Settings.SOUND_PADDLE) SoundManager.play("ball-paddle");
 				
 				if (Settings.EFFECT_PARTICLE_PADDLE_COLLISION) {
-					ParticleSpawn.burst(	
-						e.ball.x, 
-						e.ball.y, 
-						20, 
-						90, 
-						-180, 
-						600, 
+					ParticleSpawn.burst(
+						e.ball.x,
+						e.ball.y,
+						20,
+						90,
+						-180,
+						600,
 						1,
 						_particles_confetti
 					);
 				}
 				
 			} else if (e.block) {
-				// SoundManager.play("ball-block");	
+				// SoundManager.play("ball-block");
 				_soundBlockHitCounter++;
 
-				if ( _soundLastTimeHit > 60 ) 
+				if ( _soundLastTimeHit > 60 )
 					_soundBlockHitCounter = 0;
 					
 				_soundLastTimeHit = 0;
 				if (Settings.SOUND_BLOCK) SoundManager.playSoundId( "ball-block", _soundBlockHitCounter );
 			} else {
 				if (Settings.SOUND_WALL) SoundManager.play("ball-wall");
-			}		
+			}
 		}
 		
 		private function handleBlockDestroyed(e:JuicyEvent):void {
 			if (Settings.EFFECT_PARTICLE_BLOCK_SHATTER) {
-				ParticleSpawn.burst(	
-					e.ball.x, 
-					e.ball.y, 
-					5, 
-					45, 
-					-Math.atan2(e.ball.velocityX, e.ball.velocityY) * 180 / Math.PI, 
-					50 + e.ball.velocity * 10, 
+				ParticleSpawn.burst(
+					e.ball.x,
+					e.ball.y,
+					5,
+					45,
+					-Math.atan2(e.ball.velocityX, e.ball.velocityY) * 180 / Math.PI,
+					50 + e.ball.velocity * 10,
 					.5,
 					_particles_shatter
 				);

@@ -91,7 +91,7 @@ package com.grapefrukt.games.juicy.gameobjects {
 			if (Settings.EFFECT_BLOCK_SHATTER) {
 				_sliceEffect.slice(
 					new Point(ball.x - this.x + ball.velocityX * 10, ball.y - this.y + ball.velocityY * 10),
-					new Point(ball.x - this.x - ball.velocityX * 10, ball.y - this.y - ball.velocityY * 10) 
+					new Point(ball.x - this.x - ball.velocityX * 10, ball.y - this.y - ball.velocityY * 10)
 				);
 				delayDestruction = true;
 			}

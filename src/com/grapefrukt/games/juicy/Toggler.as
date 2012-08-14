@@ -94,7 +94,7 @@ package com.grapefrukt.games.juicy {
 						var checkbox:CheckBox = new CheckBox(row, 0, 0, "", getToggleClosure(property.name));
 						checkbox.selected = property.value;
 						break;
-					case "Number" : 
+					case "Number" :
 					case "int" :
 						var slider:HUISlider = new HUISlider(row, 0, 0, "", getSliderClosure(property.name));
 						slider.width = 130;
