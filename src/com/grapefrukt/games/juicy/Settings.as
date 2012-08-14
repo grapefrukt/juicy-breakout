@@ -109,13 +109,13 @@ package com.grapefrukt.games.juicy {
 		static public const MOUSE_GRAVITY_MAX		:Number = .05;
 		static public const BALL_VELOCITY_LOSS		:Number = .01;
 		
-		static public const COLOR_BACKGROUND	:uint = 0x490a3d;
-		static public const COLOR_BLOCK			:uint = 0xbd1550;
-		static public const COLOR_BALL			:uint = 0xf8ca00;
-		static public const COLOR_PADDLE		:uint = 0xe97f02;
-		static public const COLOR_TRAIL			:uint = 0x8a9b0f;
-		static public const COLOR_SPARK			:uint = 0xffffff;
-		static public const COLOR_BOUNCY_LINES	:uint = 0xbd1550;
+		static public const COLOR_BACKGROUND	:uint = 0xF8F2B3;
+		static public const COLOR_BLOCK			:uint = 0x62bd84;
+		static public const COLOR_BALL			:uint = 0xd26635;
+		static public const COLOR_PADDLE		:uint = 0xCF3746;
+		static public const COLOR_TRAIL			:uint = 0xf7d37a;
+		static public const COLOR_SPARK			:uint = 0xeba17f;
+		static public const COLOR_BOUNCY_LINES	:uint = 0x88D1A3;
 		
 	}
 
