@@ -33,7 +33,7 @@ package com.grapefrukt.games.juicy {
 			 if (e.keyCode == Keyboard.TAB) visible = false;
 			 //if (e.keyCode == Keyboard.TAB) visible = !visible;
 			
-			 if (!visible && _slides.currentFrame == 6) _slides.gotoAndStop(5);
+			 if (!visible && _slides.currentFrame == 7) _slides.gotoAndStop(6);
 			
 			if (!visible) return;
 			
