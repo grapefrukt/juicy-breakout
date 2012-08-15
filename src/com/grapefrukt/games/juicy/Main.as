@@ -127,6 +127,13 @@ package com.grapefrukt.games.juicy {
 			updateColorUse();
 			
 			reset();
+			
+			// hack to set focus to stage all the time
+			var t:Timer = new Timer(50, 0);
+			t.addEventListener(TimerEvent.TIMER, function(e:Event):void {
+				stage.focus = stage;
+			});
+			t.start();
 		}
 
 		public function drawBackground():void {
