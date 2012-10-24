@@ -79,16 +79,8 @@
 					_indices[k * 6 + 5] = k * 2 + 3;
 				}
 				
-				
-				//graphics.lineStyle(1, Settings.COLOR_TRAIL, 1, false, LineScaleMode.NORMAL, CapsStyle.SQUARE);
 				graphics.beginFill(Settings.COLOR_TRAIL);
 				graphics.drawTriangles(_verts, _indices);
-				
-				//graphics.moveTo(_verts[0], _verts[1]);
-				//for (var k:int = 0; k < _verts.length; k += 2) {
-					//graphics.lineTo(_verts[k + 0], _verts[k + 1]);
-				//}
-				
 			}
 			
 		}
