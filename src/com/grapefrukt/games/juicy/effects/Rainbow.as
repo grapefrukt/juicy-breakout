@@ -1,13 +1,7 @@
 ﻿package com.grapefrukt.games.juicy.effects {
 	
-	import com.grapefrukt.display.utilities.ColorConverter;
-	import com.grapefrukt.games.general.gameobjects.GameObject;
 	import com.grapefrukt.games.juicy.Settings;
-	import de.polygonal.core.ObjectPool;
 	import flash.display.Shape;
-	import flash.geom.Point;
-	import flash.display.CapsStyle;
-	import flash.display.LineScaleMode;
 	
 	/**
 	 * ...
@@ -16,30 +10,19 @@
 	public class Rainbow extends Shape {
 		
 		private var _segments	:Vector.<Segment>;
-		
-		private static var _objectPool:ObjectPool;
-		
-		private var _verts:Vector.<Number>;
-		private var _indices:Vector.<int>;
-		
-		public static function init():void { 
-			_objectPool = new ObjectPool(true);
-			_objectPool.allocate(Segment, 100);
-		}
-		
+		private var _verts		:Vector.<Number>;
+		private var _indices	:Vector.<int>;
+	
 		public function Rainbow() {
 			_segments = new Vector.<Segment>;
 			_verts = new Vector.<Number>();
 			_indices = new Vector.<int>();
-			
-			if (!_objectPool) init();
 		}
 		
 		public function addSegment(x:Number, y:Number):void {
 			var seg:Segment;
-			
-			while (_segments.length > Settings.EFFECT_BALL_TRAIL_LENGTH) _objectPool.object = _segments.shift();
-			seg = _objectPool.object
+			while (_segments.length > Settings.EFFECT_BALL_TRAIL_LENGTH) seg = _segments.shift();
+			if (!seg) seg = new Segment;
 			seg.x = x;
 			seg.y = y;
 			
