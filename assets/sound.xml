@@ -1,0 +1,55 @@
+<soundConfig embedSounds="false">
+	<!-- 
+	Possible parameters : 
+	volume 	   	- adjusts volume, 0 = silent, 1 = normal, 2 = twice normal
+	pan 		- adjusts pan, -1 = left, 1 = right
+	startTime 	- skips ahead in the sound on start, useful for sounds with silence at the beginning
+	loops 		- number of times to repeat the sound
+
+	
+	plays sound at half volume:
+	<sound id="loot_start">
+		<file>loot_jump.mp3</file>
+		<volume>.5</volume>
+	</sound>
+	
+	randomly pick sounds one of three sounds
+	<sound id="attack">
+		<file>attack01.mp3</file>
+		<file>attack02.mp3</file>
+		<file>attack03.mp3</file>
+	</sound>
+	
+	-->
+	
+	
+	<sound id="music">
+		<file>super-sfx/juicy_breakout-theme.mp3</file>
+		<volume>.8</volume>
+		<loops>9999999</loops>
+	</sound>
+	
+	<sound id="ball-paddle">
+		<file>super-sfx/ball-paddle.mp3</file>
+	</sound>
+	
+	<sound id="ball-wall">
+		<file>super-sfx/ball-wall.mp3</file>
+	</sound>
+	
+	<sound id="ball-block">
+		<file>super-sfx/pling1.mp3</file>
+		<file>super-sfx/pling2.mp3</file>
+		<file>super-sfx/pling3.mp3</file>
+		<file>super-sfx/pling4.mp3</file>
+		<file>super-sfx/pling5.mp3</file>
+		<file>super-sfx/pling6.mp3</file>
+		<file>super-sfx/pling7.mp3</file>
+		<file>super-sfx/pling8.mp3</file>
+		<file>super-sfx/pling9.mp3</file>
+		<file>super-sfx/pling10.mp3</file>
+		<file>super-sfx/pling11.mp3</file>
+		<file>super-sfx/pling12.mp3</file>
+	</sound>
+
+</soundConfig>
