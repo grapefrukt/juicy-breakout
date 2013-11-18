@@ -71,8 +71,8 @@ package com.grapefrukt.games.juicy {
 			_preload.setText("Loading sounds...");
 			addChild(_preload);
 			
-			stage.tabEnabled = false;
-			stage.tabChildren = false;
+			tabEnabled = false;
+			tabChildren = false;
 		}
 		
 		private function handleInit(e:Event):void {
