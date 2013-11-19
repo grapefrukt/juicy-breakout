@@ -38,6 +38,8 @@ package com.grapefrukt.games.juicy {
 		[o("B5")] static public var EFFECT_BALL_STRETCH					:Boolean = false;
 		[o("B6")] static public var EFFECT_BALL_STRETCH_ANIMATED		:Boolean = false;
 		[o("B7")] static public var EFFECT_BALL_GLOW					:Boolean = false;
+		[min("0")] [max("20")]
+		[o("B8")] static public var BALL_GRAVITY						:Number = 0;
 		
 		[o("C1")] static public var EFFECT_BLOCK_JELLY					:Boolean = false;
 		[o("C2")] static public var EFFECT_BOUNCY_LINES_ENABLED			:Boolean = false;

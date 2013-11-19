@@ -227,6 +227,8 @@ package com.grapefrukt.games.juicy {
 				if (ball.y < screen_buffer 						&& ball.velocityY < 0) ball.collide(1, -1);
 				if (ball.y > Settings.STAGE_H 					&& ball.velocityY > 0) ball.collide(1, -1);
 				
+				ball.velocityY += Settings.BALL_GRAVITY / 100 * _timestep.timeDelta;
+				
 				// line ball collision
 				for each ( var line:BouncyLine in _lines.collection) {
 					line.checkCollision( ball );
