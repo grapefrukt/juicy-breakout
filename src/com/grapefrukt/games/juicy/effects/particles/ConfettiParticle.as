@@ -18,6 +18,7 @@ package com.grapefrukt.games.juicy.effects.particles {
 		private var _gfx:ConfettiParticleGfx;
 		private var _vectorX:Number;
 		private var _vectorY:Number;
+		private var _age:Number;
 		
 		public function ConfettiParticle(lifespan:Number=2) {
 			super(lifespan);
@@ -46,14 +47,19 @@ package com.grapefrukt.games.juicy.effects.particles {
 			_gtween.proxy.rotation = Math.random() * 360;
 			//_gtween.proxy.alpha = 0;
 			
-			_gfx.gotoAndPlay(int(Math.random() * _gfx.totalFrames));
+			_age = Math.random() * _gfx.totalFrames;
+			
 		}
 		
 		private function update(gt:GTween):void {
-			x += _vectorX / 100;
-			y += _vectorY / 100;
+			var timeDelta:Number = GTween.timeScaleAll;
 			
-			var timeDelta:Number = 1;
+			_age += timeDelta;
+			_gfx.gotoAndPlay(1 + (int(_age) % _gfx.totalFrames - 1));
+			
+			x += _vectorX / 100 * timeDelta;
+			y += _vectorY / 100 * timeDelta;
+			
 			_vectorY += 10 * timeDelta;
 			_vectorX -= _vectorX * .05 * timeDelta;
 			_vectorY -= _vectorY * .05 * timeDelta;

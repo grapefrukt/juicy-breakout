@@ -64,7 +64,7 @@ package com.grapefrukt.games.juicy {
 			while (numChildren) removeChildAt(0);
 			
 			var settingWindow:Window = new Window(this, 10, 10);
-			settingWindow.title = "JUICEATRON 5000 X";
+			settingWindow.title = "JUICEATRON 5002 XX";
 			settingWindow.width = 250;
 			settingWindow.height = Settings.STAGE_H - 50;
 			
@@ -94,7 +94,7 @@ package com.grapefrukt.games.juicy {
 						var checkbox:CheckBox = new CheckBox(row, 0, 0, "", getToggleClosure(property.name));
 						checkbox.selected = property.value;
 						break;
-					case "Number" : 
+					case "Number" :
 					case "int" :
 						var slider:HUISlider = new HUISlider(row, 0, 0, "", getSliderClosure(property.name));
 						slider.width = 130;
@@ -153,7 +153,7 @@ package com.grapefrukt.games.juicy {
 		}
 		
 		private function handleKeyDown(e:KeyboardEvent):void {
-			if (e.keyCode == 27) visible = !visible;
+			if (e.keyCode == Keyboard.TAB) visible = !visible;
 		}
 		
 		private function _sort(p1:Property, p2:Property):Number {

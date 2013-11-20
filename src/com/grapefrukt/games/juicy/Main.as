@@ -1,4 +1,5 @@
 package com.grapefrukt.games.juicy {
+	import com.grapefrukt.debug.TXT;
 	import com.grapefrukt.games.general.collections.GameObjectCollection;
 	import com.grapefrukt.games.general.particles.ParticlePool;
 	import com.grapefrukt.games.general.particles.ParticleSpawn;
@@ -58,15 +59,25 @@ package com.grapefrukt.games.juicy {
 		private var _slides		:Slides;
 		private var _background	:Shape;
 		private var _useColors:Boolean;
+		private var _preload:TXT;
 		
 		public function Main() {
 			ColorTransformPlugin.install();
 			
 			SoundManager.init();
 			SoundManager.soundControl.addEventListener(Event.INIT, handleInit);
+			
+			_preload = new TXT();
+			_preload.setText("Loading sounds...");
+			addChild(_preload);
+			
+			tabEnabled = false;
+			tabChildren = false;
 		}
 		
 		private function handleInit(e:Event):void {
+			removeChild(_preload);
+			
 			_particles_confetti = new ParticlePool(ConfettiParticle);
 			addChild(_particles_confetti);
 			
@@ -116,6 +127,13 @@ package com.grapefrukt.games.juicy {
 			updateColorUse();
 			
 			reset();
+			
+			// hack to set focus to stage all the time
+			var t:Timer = new Timer(50, 0);
+			t.addEventListener(TimerEvent.TIMER, function(e:Event):void {
+				stage.focus = stage;
+			});
+			t.start();
 		}
 
 		public function drawBackground():void {
@@ -124,7 +142,7 @@ package com.grapefrukt.games.juicy {
 				_background.graphics.beginFill(Settings.COLOR_BACKGROUND * ( 3 * Math.random() ) );
 				_backgroundGlitchForce *= 0.8;
 			}
-			else 
+			else
 			{
 				_background.graphics.beginFill(Settings.COLOR_BACKGROUND );
 			}
@@ -209,6 +227,8 @@ package com.grapefrukt.games.juicy {
 				if (ball.y < screen_buffer 						&& ball.velocityY < 0) ball.collide(1, -1);
 				if (ball.y > Settings.STAGE_H 					&& ball.velocityY > 0) ball.collide(1, -1);
 				
+				ball.velocityY += Settings.BALL_GRAVITY / 100 * _timestep.timeDelta;
+				
 				// line ball collision
 				for each ( var line:BouncyLine in _lines.collection) {
 					line.checkCollision( ball );
@@ -281,13 +301,13 @@ package com.grapefrukt.games.juicy {
 				_backgroundGlitchForce = 0.05;
 				
 			if (Settings.EFFECT_PARTICLE_BALL_COLLISION) {
-				ParticleSpawn.burst(	
-					e.ball.x, 
-					e.ball.y, 
-					5, 
-					90, 
-					-Math.atan2(e.ball.velocityX, e.ball.velocityY) * 180 / Math.PI, 
-					e.ball.velocity * 5, 
+				ParticleSpawn.burst(
+					e.ball.x,
+					e.ball.y,
+					5,
+					90,
+					-Math.atan2(e.ball.velocityX, e.ball.velocityY) * 180 / Math.PI,
+					e.ball.velocity * 5,
 					.5,
 					_particles_impact
 				);
@@ -311,41 +331,41 @@ package com.grapefrukt.games.juicy {
 				if (Settings.SOUND_PADDLE) SoundManager.play("ball-paddle");
 				
 				if (Settings.EFFECT_PARTICLE_PADDLE_COLLISION) {
-					ParticleSpawn.burst(	
-						e.ball.x, 
-						e.ball.y, 
-						20, 
-						90, 
-						-180, 
-						600, 
+					ParticleSpawn.burst(
+						e.ball.x,
+						e.ball.y,
+						20,
+						90,
+						-180,
+						600,
 						1,
 						_particles_confetti
 					);
 				}
 				
 			} else if (e.block) {
-				// SoundManager.play("ball-block");	
+				// SoundManager.play("ball-block");
 				_soundBlockHitCounter++;
 
-				if ( _soundLastTimeHit > 60 ) 
+				if ( _soundLastTimeHit > 60 )
 					_soundBlockHitCounter = 0;
 					
 				_soundLastTimeHit = 0;
 				if (Settings.SOUND_BLOCK) SoundManager.playSoundId( "ball-block", _soundBlockHitCounter );
 			} else {
 				if (Settings.SOUND_WALL) SoundManager.play("ball-wall");
-			}		
+			}
 		}
 		
 		private function handleBlockDestroyed(e:JuicyEvent):void {
 			if (Settings.EFFECT_PARTICLE_BLOCK_SHATTER) {
-				ParticleSpawn.burst(	
-					e.ball.x, 
-					e.ball.y, 
-					5, 
-					45, 
-					-Math.atan2(e.ball.velocityX, e.ball.velocityY) * 180 / Math.PI, 
-					50 + e.ball.velocity * 10, 
+				ParticleSpawn.burst(
+					e.ball.x,
+					e.ball.y,
+					5,
+					45,
+					-Math.atan2(e.ball.velocityX, e.ball.velocityY) * 180 / Math.PI,
+					50 + e.ball.velocity * 10,
 					.5,
 					_particles_shatter
 				);
@@ -355,7 +375,7 @@ package com.grapefrukt.games.juicy {
 		private function handleKeyDown(e:KeyboardEvent):void {
 			if (e.keyCode == Keyboard.SPACE) reset();
 			if (e.keyCode == Keyboard.B) addBall();
-			if (e.keyCode == Keyboard.S) _screenshake.shakeRandom(4);
+			//if (e.keyCode == Keyboard.S) _screenshake.shakeRandom(4);
 			if (e.keyCode == Keyboard.ENTER) {
 				_toggler.setAll(true);
 				Settings.EFFECT_SCREEN_COLORS = true;
