@@ -201,6 +201,8 @@ package com.grapefrukt.games.juicy {
 				_timestep.gameSpeed = 1;
 			}
 			
+			_timestep.gameSpeed *= Freezer.multiplier;
+			
 			GTween.timeScaleAll = _timestep.gameSpeed;
 			
 			drawBackground();

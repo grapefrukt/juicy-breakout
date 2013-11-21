@@ -75,6 +75,16 @@ package com.grapefrukt.games.juicy {
 		[min("0")] [max("1")]
 		[o("H1")] static public var EFFECT_SCREEN_SHAKE_POWER			:Number = .5;
 		
+		[header("Freeze/Sleep")]
+		[min("0")] [max("320")]
+		[o("H10")] static public var EFFECT_FREEZE_DURATION_MS			:int = 0;
+		[min("0")] [max("1")]
+		[o("H12")] static public var EFFECT_FREEZE_SPEED_MULTIPLIER		:Number = 0;
+		[min("0")] [max("160")]
+		[o("H14")] static public var EFFECT_FREEZE_FADE_IN_MS			:int = 0;
+		[min("0")] [max("160")]
+		[o("H16")] static public var EFFECT_FREEZE_FADE_OUT_MS			:int = 0;
+		
 		[header("Personality")]
 		[o("I1")] static public var EFFECT_PADDLE_FACE					:Boolean = false;
 		[o("I2")] static public var EFFECT_PADDLE_LOOK_AT_BALL			:Boolean = false;

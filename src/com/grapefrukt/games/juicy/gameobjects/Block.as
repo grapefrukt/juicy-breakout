@@ -3,6 +3,7 @@ package com.grapefrukt.games.juicy.gameobjects {
 	import com.grapefrukt.games.general.gameobjects.GameObject;
 	import com.grapefrukt.games.juicy.effects.SliceEffect;
 	import com.grapefrukt.games.juicy.events.JuicyEvent;
+	import com.grapefrukt.games.juicy.Freezer;
 	import com.grapefrukt.games.juicy.Settings;
 	import com.grapefrukt.Timestep;
 	import com.gskinner.motion.easing.Back;
@@ -82,6 +83,8 @@ package com.grapefrukt.games.juicy.gameobjects {
 			_sliceEffect = new SliceEffect(_gfx, null);
 			addChild(_sliceEffect);
 			_gfx.visible = false;
+			
+			Freezer.freeze();
 			
 			if (Settings.EFFECT_BLOCK_ROTATE && !Settings.EFFECT_BLOCK_SHATTER) {
 				_sliceEffect.slices[0].velocityR = Math.random() > .5 ? Settings.EFFECT_BLOCK_SHATTER_ROTATION : -Settings.EFFECT_BLOCK_SHATTER_ROTATION;
