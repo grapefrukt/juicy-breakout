@@ -16,6 +16,9 @@ http://www.gamasutra.com/view/feature/2438/how_to_prototype_a_game_in_under_7...
 Emily Short - Make it juicy!
 http://emshort.wordpress.com/2008/05/24/make-it-juicy/
 
+Casey Muratori - Interpolation
+http://mollyrocket.com/casey/stream_0018.html
+
 12 Principles of Animation
 http://minyos.its.rmit.edu.au/aim/a_notes/anim_principles.html
 
